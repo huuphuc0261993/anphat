@@ -1,21 +1,32 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <!-- <HeaderComponents v-bind:titleHeader = "title"/> -->
+    <p>{{ title }}</p>
+    
   </div>
 </template>
 
 <script>
+/* props -> truyen data tu Components cha vao Components con 
+-> cu phap giong thuoc tinh -> rang buoc thuoc tinh
+su dung v-bind
+*/
+// import HeaderComponents from './components/HeaderComponents'
+
 export default {
   data: function () {
     return {
-      message: "Hello Vue!"
+      title: "Hello word!"
     }
+  },
+  components: {
+    // HeaderComponents
   }
 }
 </script>
 
 <style scoped>
-p {
+#app {
   font-size: 2em;
   text-align: center;
 }
