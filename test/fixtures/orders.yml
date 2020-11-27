@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 
+  is_confirm: 
+  deleted_at: 2020-11-27
+  customer_id: one
+
+two:
+  total: 
+  is_confirm: 
+  deleted_at: 2020-11-27
+  customer_id: two
