@@ -1,11 +1,8 @@
 <template>
   <div>
-    <newsModals 
-    ref="child"
-    @saveDtb="save"
-    />
-    
-    <a-button type="primary" @click="show" :method = "save">
+    <newsModals ref="child" @saveDtb="save" />
+
+    <a-button type="primary" @click="show" :method="save">
       Thêm mới
     </a-button>
 
@@ -47,6 +44,7 @@ import newsModals from "../components/modals/news_modals";
 import axios from "axios";
 
 export default {
+  
   data() {
     return {
       dataNews: [],
@@ -59,6 +57,7 @@ export default {
         description: "",
         content: ""
       },
+
       columns: [
         {
           title: "Name",
@@ -67,6 +66,7 @@ export default {
         {
           title: "Image",
           dataIndex: "image"
+          // render: theImageURL => <img alt={theImageURL} src={theImageURL} />
         },
         {
           title: "Description",
@@ -86,29 +86,37 @@ export default {
   },
   methods: {
     // kich hoat su kien tu child
-    show(){
-     this.$refs.child.showModal()
+    show() {
+      this.$refs.child.showModal();
     },
-    save(item,index) {
-      if(index==-1){
+    save(item, index) {
+      if (index == -1) {
+        let formData = new FormData();
+        formData.append("news[title]", item.title);
+        formData.append("news[description]", item.description);
+        formData.append("news[content]", item.content);
+        formData.append("news[image]", item.image);
+        console.log(formData);
         axios
-        .post(`http://localhost:3000/api/news`, {
-          news: item
-        })
-        .then(response => {
-          console.log(response.data)
-          console.log(response)
-          console.log("Created!")
-          this.initialize()
-          this.$refs.child.close()
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      } else{
-          console.log(item)
-          console.log(item.id)
-          axios
+          .post(`http://localhost:3000/api/news`, formData, {
+            // news: item,
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then(response => {
+            console.log("Created!");
+            this.initialize();
+            this.$refs.child.close();
+            this.$message.success('Tạo bài viết thành công');
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        console.log(item);
+        console.log(item.id);
+        axios
           .put(`http://localhost:3000/api/news/${item.id}`, {
             id: item.id,
             title: item.title,
@@ -119,7 +127,8 @@ export default {
           .then(response => {
             console.log(response);
             this.initialize();
-            this.$refs.child.close()
+            this.$refs.child.close();
+            this.$message.success('Cập nhật bài viết thành công');
           })
           .catch(error => {
             console.log(error);
@@ -127,7 +136,7 @@ export default {
       }
     },
     editNews(item) {
-      this.$refs.child.edit(item)
+      this.$refs.child.edit(item);
     },
     initialize() {
       return axios

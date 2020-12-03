@@ -1,37 +1,62 @@
 <template>
   <div>
-    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close" >
-      <a-form-model-item label="Tiêu đề bài viết " prop="title">
-        <a-input placeholder="Tiêu đề bài viết" v-model="editedItem.title" />
-      </a-form-model-item>
+    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close">
+      <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
 
-      <a-form-model-item label="Mô tả" prop="description">
-        <a-input placeholder="Mô tả" v-model="editedItem.description" />
-      </a-form-model-item>
+        <a-form-model-item has-feedback label="Tiêu đề bài viết " prop="title">
+          <a-input placeholder="Tiêu đề bài viết" v-model="editedItem.title" />
+        </a-form-model-item>
 
-      <a-form-model-item label="Nội dung" prop="content">
-        <a-textarea placeholder="Nội dung" v-model="editedItem.content" />
-      </a-form-model-item>
+        <a-form-model-item has-feedback label="Mô tả" prop="description">
+          <a-input placeholder="Mô tả" v-model="editedItem.description" />
+        </a-form-model-item>
 
-      <a-button type="primary" @click="saveModal(editedItem)">
-        Submit
-      </a-button>
-      <upload />
+        <a-form-model-item has-feedback label="Nội dung" prop="content">
+          <a-textarea placeholder="Nội dung" v-model="editedItem.content" />
+        </a-form-model-item>
+
+        <a-button type="primary" @click="saveModal('editedItem')">
+          Submit
+        </a-button>
+        <br />
+        <!-- <upload /> -->
+        <input
+          type="file"
+          id="file"
+          ref="myFiles"
+          class="custom-file-input"
+          @change="takeFile"
+          multiple
+        />
+      </a-form-model>
     </a-modal>
   </div>
 </template>
 <script>
-import upload from "../modals/upload";
+// import upload from "../modals/upload";
 import axios from "axios";
 import news from "../../pages/news";
 export default {
-  props:{
+  props: {
     changShow: Boolean
   },
   data() {
+ 
+
     return {
+      rules: {
+        title: [
+          { required: true, message: 'Vui lòng nhập tiêu đề', trigger: 'blur' }
+        ],
+        description: [
+          { required: true, message: 'Vui lòng nhập mô tả', trigger: 'blur' }
+        ],
+        content: [
+          { required: true, message: 'Vui lòng nhập nội dung', trigger: 'blur' }
+        ]
+      },
       dataNews: [],
-      visible : false,
+      visible: false,
       editedIndex: -1,
       editedItem: {
         title: "",
@@ -45,14 +70,17 @@ export default {
         description: "",
         content: ""
       }
-
     };
   },
   methods: {
-     showModal() {
-        this.editedIndex = -1;
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.visible=true
+    takeFile(event) {
+      this.editedItem.image = this.$refs.myFiles.files[0];
+      console.log(this.editedItem.image);
+    },
+    showModal() {
+      this.editedIndex = -1;
+      this.editedItem = Object.assign({}, this.defaultItem);
+      this.visible = true;
     },
     close() {
       this.visible = false;
@@ -61,18 +89,26 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
-    saveModal(item){
-      this.$emit('saveDtb',item, this.editedIndex)
+    saveModal(item) {
+      this.$refs[item].validate(valid => {
+        if (valid) {
+          this.$emit("saveDtb", this.editedItem, this.editedIndex);
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
-    edit(item){
+    edit(item) {
+
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
+      this.$refs.editedItem.resetFields();
       this.visible = true;
     }
-    
   },
   components: {
-    upload
+    // upload
   },
   computed: {
     formTitle() {
