@@ -3,7 +3,7 @@ class CreateNews < ActiveRecord::Migration[6.0]
     create_table :news do |t|
       t.text :title
       t.text :content
-      t.date :deleted_at
+      t.datetime :deleted_at
       t.text :image
       t.text :description
 

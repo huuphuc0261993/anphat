@@ -1,5 +1,6 @@
-class NewsController < ApplicationController
+class Api::NewsController < ApplicationController
     def index
+    # @news = News.where(deleted_at: nil)
     @news = News.all
     render json: @news
     end
@@ -7,7 +8,7 @@ class NewsController < ApplicationController
     def create
     @news = News.new(news_params)
     if @news.save
-        render json: { status: :ok, message: 'Success' }
+        render json: @news    
     else
         render json: { json: @news.errors, status: :unprocessable_entity }
     end
@@ -35,10 +36,9 @@ class NewsController < ApplicationController
         render json: { json: @news.errors, status: :unprocessable_entity }
     end
     end
-
+    
     private
-
     def news_params
-    params.require(:news).permit(:id, :first_name, :last_name, :email, :phone,:address)
+    params.require(:news).permit(:id, :title, :content, :image, :description)
     end
 end

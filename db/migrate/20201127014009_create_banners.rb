@@ -3,7 +3,7 @@ class CreateBanners < ActiveRecord::Migration[6.0]
     create_table :banners do |t|
       t.text :name
       t.integer :banner_type
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
     end
