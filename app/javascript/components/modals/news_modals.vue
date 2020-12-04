@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- <upload /> -->
+
     <a-modal v-model="visible" v-bind:title="formTitle" @ok="close">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
 
@@ -19,7 +21,8 @@
           Submit
         </a-button>
         <br />
-        <!-- <upload /> -->
+        
+     
         <input
           type="file"
           id="file"
@@ -28,6 +31,7 @@
           @change="takeFile"
           multiple
         />
+
       </a-form-model>
     </a-modal>
   </div>
@@ -103,7 +107,7 @@ export default {
 
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
-      this.$refs.editedItem.resetFields();
+      // this.$refs.editedItem.resetFields();
       this.visible = true;
     }
   },

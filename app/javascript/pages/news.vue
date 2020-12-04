@@ -12,15 +12,20 @@
       :columns="columns"
       :row-key="record => record.id"
     >
-      <template slot="name" slot-scope="text, record">
-        <editable-cell
-          :text="text"
-          @change="onCellChange(record.key, 'name', $event)"
-        />
+      <template slot="image" slot-scope="image">
+        <span>
+          <a-avatar shape="square" :size="60" :src="image" />
+        </span>
       </template>
 
+ 
+
       <template slot="action" slot-scope="text, record">
-        <a-button @click="editNews(record)" :size="'small'" :type="'primary'"
+        <a-button
+          @click="editNews(record)"
+          class="editButton"
+          :type="'primary'"
+          style="width:50px"
           ><a-icon type="edit"
         /></a-button>
 
@@ -30,7 +35,7 @@
           cancel-text="Huỷ"
           @confirm="softdelted(record)"
         >
-          <a-button size="small" type="danger"
+          <a-button size="small" type="danger" style="width:50px"
             ><a-icon type="delete"
           /></a-button>
         </a-popconfirm>
@@ -44,7 +49,6 @@ import newsModals from "../components/modals/news_modals";
 import axios from "axios";
 
 export default {
-  
   data() {
     return {
       dataNews: [],
@@ -60,23 +64,35 @@ export default {
 
       columns: [
         {
-          title: "Name",
-          dataIndex: "title"
+          title: "Tiêu đề ",
+          dataIndex: "title",
+          className: "title",
+          width: "25%"
         },
         {
-          title: "Image",
-          dataIndex: "image"
-          // render: theImageURL => <img alt={theImageURL} src={theImageURL} />
+          title: "Hình ảnh",
+          dataIndex: "image",
+          scopedSlots: { customRender: "image" },
+          width: "10%",
+          align: "center"
         },
         {
-          title: "Description",
-          dataIndex: "description"
+          title: "Mô tả",
+          dataIndex: "description",
+          width: "40%"
+        },
+        {
+          title: "Ngày tạo",
+          dataIndex: "created_at",
+          width: "15%"
         },
         {
           title: "Action",
           dataIndex: "",
           key: "x",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          width: "10%",
+          align: "center"
         }
       ]
     };
@@ -108,27 +124,28 @@ export default {
             console.log("Created!");
             this.initialize();
             this.$refs.child.close();
-            this.$message.success('Tạo bài viết thành công');
+            this.$message.success("Tạo bài viết thành công");
           })
           .catch(error => {
             console.log(error);
           });
       } else {
-        console.log(item);
-        console.log(item.id);
+        let formData = new FormData();
+        formData.append("news[title]", item.title);
+        formData.append("news[description]", item.description);
+        formData.append("news[content]", item.content);
+        formData.append("news[image]", item.image);
         axios
-          .put(`http://localhost:3000/api/news/${item.id}`, {
-            id: item.id,
-            title: item.title,
-            image: item.image,
-            description: item.description,
-            content: item.content
+          .put(`http://localhost:3000/api/news/${item.id}`,formData, {
+            headers: {
+              "Content-Type": "application/json"
+            }
           })
           .then(response => {
             console.log(response);
             this.initialize();
             this.$refs.child.close();
-            this.$message.success('Cập nhật bài viết thành công');
+            this.$message.success("Cập nhật bài viết thành công");
           })
           .catch(error => {
             console.log(error);
@@ -144,6 +161,9 @@ export default {
         .then(response => {
           console.log(response.data);
           this.dataNews = response.data;
+          this.dataNews.forEach(element => {
+            element.image = element.image.url;
+          });
         })
         .catch(e => {
           console.log(e);
@@ -171,10 +191,5 @@ export default {
 .highlight {
   background-color: rgb(255, 192, 105);
   padding: 0px;
-}
-.buttonType {
-  width: 200px;
-  border: hidden;
-  margin-bottom: 20px;
 }
 </style>
