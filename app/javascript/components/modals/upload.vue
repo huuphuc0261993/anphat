@@ -1,72 +1,97 @@
 <template>
-  <a-table :row-selection="rowSelection" :columns="columns" :data-source="data">
-    <a slot="name" slot-scope="text">{{ text }}</a>
-  </a-table>
+
+  <div class="clearfix">
+    {{this.item}}
+    {{this.editedIndex}}
+    <a-upload
+      :before-upload="beforeUpload"
+      list-type="picture-card"
+      :file-list="fileList"
+      @preview="handlePreview"
+      @change="handleChange"
+      ref="upload"
+    >
+      <div v-if="fileList.length < 1">
+        <a-icon type="plus" />
+        <div class="ant-upload-text">
+          Upload
+        </div>
+      </div>
+    </a-upload>
+    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
+      <img alt="example" style="width: 100%" :src="previewImage" />
+    </a-modal>
+  </div>
 </template>
 <script>
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    scopedSlots: { customRender: 'name' },
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    age: 99,
-    address: 'Sidney No. 1 Lake Park',
-  },
-];
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
 
 export default {
+  mounted(){
+  
+}
+,
   data() {
     return {
-      data,
-      columns,
+      previewVisible: false,
+      previewImage: "",
+      fileList: this.$props.item,
+      empty:[],
     };
   },
-  computed: {
-    rowSelection() {
-      return {
-        onChange: (selectedRowKeys, selectedRows) => {
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        },
-        getCheckboxProps: record => ({
-          props: {
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-          },
-        }),
-      };
+  props: {
+    item: {
+      type: Array
     },
+    editedIndex: {
+      type: Number
+    },
+    visible:{
+      type: Boolean
+    }
   },
+  mounted() {
+
+  },
+  methods: {
+    handleCancel() {
+      this.previewVisible = false;
+    },
+    beforeUpload(file) {
+      this.fileList = [...this.fileList, file];
+      return false;
+    },
+    async handlePreview(file) {
+      if (!file.url && !file.preview) {
+        file.preview = await getBase64(file.originFileObj);
+      }
+      this.previewImage = file.url || file.preview;
+      this.previewVisible = true;
+    },
+    handleChange({ fileList }) {
+      this.fileList = fileList;
+      
+      this.$emit("uploadDtb", this.fileList);
+    }
+  }
 };
 </script>
+<style>
+/* you can make up upload button and sample style by using stylesheets */
+.ant-upload-select-picture-card i {
+  font-size: 32px;
+  color: #999;
+}
+
+.ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}
+</style>

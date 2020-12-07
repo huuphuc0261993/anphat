@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
 
   create_table "customers", force: :cascade do |t|
     t.text "name"
-    t.text "password"
     t.integer "phone"
     t.text "email"
     t.datetime "deleted_at"

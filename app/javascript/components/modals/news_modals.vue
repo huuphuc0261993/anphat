@@ -1,10 +1,9 @@
 <template>
   <div>
     <!-- <upload /> -->
-
+      
     <a-modal v-model="visible" v-bind:title="formTitle" @ok="close">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
-
         <a-form-model-item has-feedback label="Tiêu đề bài viết " prop="title">
           <a-input placeholder="Tiêu đề bài viết" v-model="editedItem.title" />
         </a-form-model-item>
@@ -17,27 +16,28 @@
           <a-textarea placeholder="Nội dung" v-model="editedItem.content" />
         </a-form-model-item>
 
-        <a-button type="primary" @click="saveModal('editedItem')">
+        <a-button
+          type="primary"
+          @click="saveModal('editedItem')"
+          :methods="uploadfile"
+        >
           Submit
         </a-button>
         <br />
-        
-     
-        <input
-          type="file"
-          id="file"
-          ref="myFiles"
-          class="custom-file-input"
-          @change="takeFile"
-          multiple
+        <upload
+          @uploadDtb="uploadfile"
+          ref="form"
+          :item="item"
+          :editedIndex="editedIndex"
+          :visible="visible"
+          
         />
-
       </a-form-model>
     </a-modal>
   </div>
 </template>
 <script>
-// import upload from "../modals/upload";
+import upload from "../modals/upload";
 import axios from "axios";
 import news from "../../pages/news";
 export default {
@@ -45,18 +45,16 @@ export default {
     changShow: Boolean
   },
   data() {
- 
-
     return {
       rules: {
         title: [
-          { required: true, message: 'Vui lòng nhập tiêu đề', trigger: 'blur' }
+          { required: true, message: "Vui lòng nhập tiêu đề", trigger: "blur" }
         ],
         description: [
-          { required: true, message: 'Vui lòng nhập mô tả', trigger: 'blur' }
+          { required: true, message: "Vui lòng nhập mô tả", trigger: "blur" }
         ],
         content: [
-          { required: true, message: 'Vui lòng nhập nội dung', trigger: 'blur' }
+          { required: true, message: "Vui lòng nhập nội dung", trigger: "blur" }
         ]
       },
       dataNews: [],
@@ -68,6 +66,23 @@ export default {
         description: "",
         content: ""
       },
+      empty:[],
+      item: [
+        {
+          uid: "-1",
+          name: "image.png",
+          status: "",
+          url: ""
+        }
+      ],
+      item1: [
+        {
+          uid: "-1",
+          name: "image.png",
+          status: "",
+          url: ""
+        }
+      ],
       defaultItem: {
         title: "",
         image: "",
@@ -77,14 +92,21 @@ export default {
     };
   },
   methods: {
-    takeFile(event) {
-      this.editedItem.image = this.$refs.myFiles.files[0];
-      console.log(this.editedItem.image);
+    uploadfile(fileList) {
+      let img = fileList[0];
+      //quan trong khi update, ko dc xoa
+      if(img != undefined){
+        this.editedItem.image = fileList[0].originFileObj
+      }   
+    },
+    reset() {
+      this.$refs.uploadEmtpy.resetupload();
     },
     showModal() {
       this.editedIndex = -1;
       this.editedItem = Object.assign({}, this.defaultItem);
       this.visible = true;
+      this.item = this.empty
     },
     close() {
       this.visible = false;
@@ -94,6 +116,8 @@ export default {
       }, 300);
     },
     saveModal(item) {
+      console.log("day la editItem")
+      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
@@ -103,16 +127,17 @@ export default {
         }
       });
     },
-    edit(item) {
-
+   edit(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
-      // this.$refs.editedItem.resetFields();
-      this.visible = true;
+      console.log(item.image.url)
+      this.item = this.item1
+      this.item[0].url=item.image.url
+      this.visible= true
     }
   },
   components: {
-    // upload
+    upload
   },
   computed: {
     formTitle() {

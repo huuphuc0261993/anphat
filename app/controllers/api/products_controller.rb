@@ -1,5 +1,4 @@
-module Api
-    class CustomersController < ApplicationController
+class Api::ProductsController < ApplicationController
     def index
     # @customers = Customer.where(deleted_at: nil)
     @customers = Customer.all
@@ -40,7 +39,7 @@ module Api
     
     private
     def customers_params
-        params.require(:customer).permit(:name, :phone, :email)
+        params.require(:product).permit(:name, :price, :description, :discount, :price_sale, :category_id)
     end
     end
 end

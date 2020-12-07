@@ -14,11 +14,9 @@
     >
       <template slot="image" slot-scope="image">
         <span>
-          <a-avatar shape="square" :size="60" :src="image" />
+          <a-avatar shape="square" :size="60" :src="image.url" />
         </span>
       </template>
-
- 
 
       <template slot="action" slot-scope="text, record">
         <a-button
@@ -30,7 +28,7 @@
         /></a-button>
 
         <a-popconfirm
-          title="Bạn muốn xoá cửa hàng này?"
+          title="Bạn muốn xoá News này?"
           ok-text="Xác nhận"
           cancel-text="Huỷ"
           @confirm="softdelted(record)"
@@ -61,7 +59,6 @@ export default {
         description: "",
         content: ""
       },
-
       columns: [
         {
           title: "Tiêu đề ",
@@ -106,16 +103,18 @@ export default {
       this.$refs.child.showModal();
     },
     save(item, index) {
+      console.log("day la item image")
+      console.log(item.image)
       if (index == -1) {
         let formData = new FormData();
         formData.append("news[title]", item.title);
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
         formData.append("news[image]", item.image);
-        console.log(formData);
+        console.log("day la file luu")
+        console.log(item.image)
         axios
           .post(`http://localhost:3000/api/news`, formData, {
-            // news: item,
             headers: {
               "Content-Type": "application/json"
             }
@@ -135,14 +134,14 @@ export default {
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
         formData.append("news[image]", item.image);
+        console.log(formData, "form data")
         axios
-          .put(`http://localhost:3000/api/news/${item.id}`,formData, {
+          .put(`http://localhost:3000/api/news/${item.id}`, formData, {
             headers: {
               "Content-Type": "application/json"
             }
           })
           .then(response => {
-            console.log(response);
             this.initialize();
             this.$refs.child.close();
             this.$message.success("Cập nhật bài viết thành công");
@@ -153,17 +152,20 @@ export default {
       }
     },
     editNews(item) {
+      this.dataNews.forEach(element => {
+        if (element.id == item.id) {
+          item.image = element.image;
+        }
+      });
       this.$refs.child.edit(item);
     },
+
     initialize() {
       return axios
         .get("http://localhost:3000/api/news")
         .then(response => {
           console.log(response.data);
-          this.dataNews = response.data;
-          this.dataNews.forEach(element => {
-            element.image = element.image.url;
-          });
+          this.dataNews = response.data;;
         })
         .catch(e => {
           console.log(e);
@@ -184,7 +186,8 @@ export default {
   },
   components: {
     newsModals
-  }
+  },
+  computed: {}
 };
 </script>
 <style scoped>

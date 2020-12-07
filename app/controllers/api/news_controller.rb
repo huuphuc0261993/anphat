@@ -7,7 +7,6 @@ class Api::NewsController < ApplicationController
 
     def create   
     @news = News.new(news_params)
-    puts()
     if @news.save
         render json: @news    
     else
