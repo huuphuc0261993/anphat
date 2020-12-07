@@ -1,28 +1,26 @@
 <template>
   <div>
     <categoriesModals ref="child" @saveDtb="save" />
-    <div class = "col-12">
-       <div class="col-4">
+    <div class="col-12">
+      <div class="col-4">
         <a-button type="primary" @click="show" :method="save">
           Thêm mới
         </a-button>
       </div>
-
       <div class="col-8">
         <a-input-search
           placeholder="input search text"
           enter-button="Search"
           size="large"
-          :data-source="editedItem"
+          v-model="search"
           
         />
       </div>
-     
     </div>
 
     <a-table
       bordered
-      :data-source="dataNews"
+      :data-source="onsearch"
       :columns="columns"
       :row-key="record => record.id"
     >
@@ -58,7 +56,7 @@ export default {
   data() {
     return {
       dataNews: [],
-
+      search: "",
       editedItem: {
         name: ""
       },
@@ -85,6 +83,7 @@ export default {
     this.initialize();
   },
   methods: {
+    
     // kich hoat su kien tu child
     show() {
       this.$refs.child.showModal();
@@ -161,7 +160,17 @@ export default {
   components: {
     categoriesModals
   },
-  computed: {}
+  computed: {  
+    onsearch(){
+      if(this.search){
+      return this.dataNews.filter((item)=>{
+        return this.search.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
+      })
+      }else{
+        return this.dataNews;
+      }
+    }
+  }
 };
 </script>
 <style scoped>

@@ -6,7 +6,7 @@
         <a-form-model-item has-feedback label="Tên " prop="name">
           <a-input placeholder="Category" v-model="editedItem.name" />
         </a-form-model-item>
-
+          
         <a-button
           type="primary"
           @click="saveModal('editedItem')"
