@@ -15,14 +15,14 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   create_table "banners", force: :cascade do |t|
     t.text "name"
     t.integer "banner_type"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "categories", force: :cascade do |t|
     t.text "name"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
     t.text "name"
     t.integer "phone"
     t.text "email"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   create_table "news", force: :cascade do |t|
     t.text "title"
     t.text "content"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.text "image"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   create_table "orders", force: :cascade do |t|
     t.integer "total"
     t.integer "is_confirm"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
 
   create_table "pictures", force: :cascade do |t|
     t.text "title"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
     t.text "description"
     t.integer "discount"
     t.integer "price_sale"
-    t.date "deleted_at"
+    t.datetime "deleted_at"
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

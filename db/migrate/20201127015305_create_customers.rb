@@ -4,7 +4,7 @@ class CreateCustomers < ActiveRecord::Migration[6.0]
       t.text :name
       t.integer :phone
       t.text :email
-      t.date :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

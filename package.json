@@ -7,13 +7,21 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "ant-design-vue": "^1.7.2",
+    "antd-img-crop": "^3.13.2",
+    "axios": "^0.21.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
-    "vue-template-compiler": "^2.6.12"
+    "vue-router": "^3.4.9",
+    "vue-template-compiler": "^2.6.12",
+    "vuetify": "^2.3.19"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.12.1",
+    "@babel/preset-react": "^7.12.7",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "tailwindcss": "^2.0.1",
     "webpack-dev-server": "^3.11.0"
   }
 }

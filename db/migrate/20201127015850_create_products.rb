@@ -6,7 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.text :description
       t.integer :discount
       t.integer :price_sale
-      t.date :deleted_at
+      t.datetime :deleted_at
       t.references :category, null: false, foreign_key: true
 
       t.timestamps
