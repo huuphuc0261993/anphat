@@ -87,8 +87,8 @@ export default {
         },
         {
           title: "Loại sản phẩm ",
-          dataIndex: "category_id",
-          className: "category_id",
+          dataIndex: "category.name",
+          className: "category",
           width: "30%"
         },
         {
@@ -111,11 +111,16 @@ export default {
       this.$refs.child.showModal();
     },
     save(item, index) {
-      console.log("day la item name");
-      console.log(item.name);
+      console.log("day la item");
+      console.log(item);
       if (index == -1) {
         let formData = new FormData();
-        formData.append("category[name]", item.name);
+        formData.append("product[name]", item.name);
+        formData.append("product[price]", item.price);
+        formData.append("product[description]", item.description);
+        formData.append("product[discount]", item.discount);
+        formData.append("product[price_sale]", item.price_sale);
+        formData.append("product[category_id]", item.category_id);
         axios
           .post(`http://localhost:3000/api/products`, formData, {
             headers: {
@@ -126,14 +131,19 @@ export default {
             console.log("Created!");
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Tạo category thành công");
+            this.$message.success("Tạo sản phẩm thành công");
           })
           .catch(error => {
             console.log(error);
           });
       } else {
         let formData = new FormData();
-        formData.append("category[name]", item.name);
+        formData.append("product[name]", item.name);
+        formData.append("product[price]", item.price);
+        formData.append("product[description]", item.description);
+        formData.append("product[discount]", item.discount);
+        formData.append("product[price_sale]", item.price_sale);
+        formData.append("product[category_id]", item.category_id);
         axios
           .put(`http://localhost:3000/api/products/${item.id}`, formData, {
             headers: {
@@ -157,6 +167,8 @@ export default {
       return axios
         .get("http://localhost:3000/api/products")
         .then(response => {
+          console.log("day la data tra ve")
+          console.log(response.data)
           this.dataNews = response.data;
         })
         .catch(e => {

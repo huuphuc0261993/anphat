@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-modal v-model="visible" @ok="close" v-bind:name="formTitle">
-      <a-form-model>
+      <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12"> <upload /> </a-col>
           <a-col :xs="12">
@@ -46,7 +46,11 @@
               </a-input>
             </a-form-model-item>
             <a-form-model-item label="Categories" prop="category_id">
-              <a-select default-value="--/--" style="width: 100%" v-model="editedItem.category_id">
+              <a-select
+                default-value="--/--"
+                style="width: 100%"
+                v-model="editedItem.category_id"
+              >
                 <a-select-option
                   v-for="category in categoriesChild"
                   :key="category.id"
@@ -57,7 +61,7 @@
             </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
-                <a-button type="primary" html-type="submit">
+                <a-button type="primary" @click="saveModal('editedItem')">
                   Lưu
                 </a-button>
               </a-form-model-item>
@@ -83,6 +87,20 @@ export default {
           {
             required: true,
             message: "Không được để trống tên",
+            trigger: "blur"
+          }
+        ],
+        price: [
+          {
+            required: true,
+            message: "Không được để trống giá",
+            trigger: "blur"
+          }
+        ],
+        category_id: [
+          {
+            required: true,
+            message: "Không được để trống",
             trigger: "blur"
           }
         ]
@@ -111,9 +129,8 @@ export default {
   methods: {
     discountedPrice() {
       this.editedItem.price_sale =
-        this.editedItem.price -
-        this.editedItem.price * (this.editedItem.discount / 100);
-      console.log(this.editedItem.price_sale);
+      this.editedItem.price -
+      this.editedItem.price * (this.editedItem.discount / 100);
       return this.editedItem.price_sale;
     },
     showModal() {
@@ -129,8 +146,6 @@ export default {
       }, 300);
     },
     saveModal(item) {
-      console.log("day la editItem");
-      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
@@ -150,7 +165,7 @@ export default {
         .get("http://localhost:3000/api/categories")
         .then(response => {
           this.categoriesChild = response.data;
-          console.log(this.categoriesChild);
+    
         })
         .catch(e => {
           console.log(e);
