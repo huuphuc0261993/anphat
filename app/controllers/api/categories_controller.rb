@@ -38,6 +38,7 @@ class Api::CategoriesController < ApplicationController
     end
     
     private
+    
     def categories_params
         params.require(:category).permit(:id, :name)
     end

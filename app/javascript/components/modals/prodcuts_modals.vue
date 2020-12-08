@@ -53,6 +53,7 @@
           </a-form-model-item>
           {{ this.editedItem.price }}
           {{ this.editedItem.discount }}
+          {{ this.editedItem.price_sale }}
           <a-row>
             <a-form-model-item class="float-right">
               <a-button type="primary" html-type="submit">
@@ -90,9 +91,9 @@ export default {
       editedIndex: -1,
       editedItem: {
         name: "",
-        price: "",
+        price: 0,
         description: "",
-        discount: "",
+        discount: 0,
         price_sale: "",
         category_id: ""
       },
