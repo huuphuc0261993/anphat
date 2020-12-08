@@ -32,7 +32,7 @@
           </a-form-model-item>
           <a-form-model-item label="Giá sau khi giảm" prop="price_sale">
             <a-input
-              placeholder="GGiá sau khi giảm"
+              placeholder="Giá sau khi giảm"
               type="number"
               min="0"
               v-model="editedItem.price_sale"
@@ -53,7 +53,7 @@
           </a-form-model-item>
           {{ this.editedItem.price }}
           {{ this.editedItem.discount }}
-          {{ this.editedItem.price_sale }}
+          {{ this.editedItem.price_sale}}
           <a-row>
             <a-form-model-item class="float-right">
               <a-button type="primary" html-type="submit">
