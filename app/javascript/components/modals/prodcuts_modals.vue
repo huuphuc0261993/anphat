@@ -5,38 +5,57 @@
         <a-col :xs="12"> <upload /> </a-col>
         <a-col :xs="12">
           <a-form-model-item label="Tên sản phẩm" prop="name">
-            <a-input placeholder="Tên sản phẩm" v-model="editedItem.name"/>
+            <a-input placeholder="Tên sản phẩm" v-model="editedItem.name" />
           </a-form-model-item>
           <a-form-model-item has-feedback label="Mô tả" prop="description">
             <a-textarea placeholder="Mô tả" v-model="editedItem.description" />
           </a-form-model-item>
           <a-form-model-item label="Giá nhập" prop="price">
-            <a-input placeholder="Giá nhập" type="number" min="0" v-model="editedItem.price">
+            <a-input
+              placeholder="Giá nhập"
+              type="number"
+              min="0"
+              v-model="editedItem.price"
+            >
               <span slot="addonAfter">VNĐ</span>
             </a-input>
           </a-form-model-item>
           <a-form-model-item label="Giảm giá" prop="discount">
-            <a-input placeholder="Giảm giá" type="number" min="0" v-model="editedItem.discount">
+            <a-input
+              placeholder="Giảm giá"
+              type="number"
+              min="0"
+              v-model="editedItem.discount"
+            >
               <span slot="addonAfter">%</span>
             </a-input>
           </a-form-model-item>
           <a-form-model-item label="Giá sau khi giảm" prop="price_sale">
-            <a-input placeholder="GGiá sau khi giảm" type="number" min="0" v-model="editedItem.price_sale">
+            <a-input
+              placeholder="GGiá sau khi giảm"
+              type="number"
+              min="0"
+              v-model="editedItem.price_sale"
+            >
               <span slot="addonAfter">VNĐ</span>
             </a-input>
           </a-form-model-item>
           <a-form-model-item label="Categories" prop="category_id">
-            <a-select default-value="--/--" style="width: 100%" >
-              <a-select-option v-for="p in categoriesChild" :key="p.id" v-model="editedItem.category_id">
+            <a-select default-value="--/--" style="width: 100%">
+              <a-select-option
+                v-for="p in categoriesChild"
+                :key="p.id"
+                v-model="editedItem.category_id"
+              >
                 {{ p.name }}
               </a-select-option>
             </a-select>
           </a-form-model-item>
-          {{this.editedItem.price}}
-          {{this.editedItem.discount}}
+          {{ this.editedItem.price }}
+          {{ this.editedItem.discount }}
           <a-row>
             <a-form-model-item class="float-right">
-              <a-button type="primary" html-type="submit" >
+              <a-button type="primary" html-type="submit">
                 Lưu
               </a-button>
             </a-form-model-item>
@@ -71,11 +90,11 @@ export default {
       editedIndex: -1,
       editedItem: {
         name: "",
-        price: 0,
+        price: "",
         description: "",
         discount: "",
-        price_sale: 0,
-        category_id: this.editedItem.price-(this.editedItem.price*this.editedItem.discount)
+        price_sale: "",
+        category_id: ""
       },
       empty: [],
       defaultItem: {
@@ -83,10 +102,9 @@ export default {
       }
     };
   },
-  mounted(){
-    this.categories()
-  }
-  ,
+  mounted() {
+    this.categories();
+  },
   methods: {
     showModal() {
       this.editedIndex = -1;
@@ -121,7 +139,7 @@ export default {
       return axios
         .get("http://localhost:3000/api/categories")
         .then(response => {
-          this.categoriesChild = response.data
+          this.categoriesChild = response.data;
           console.log(this.categoriesChild);
         })
         .catch(e => {

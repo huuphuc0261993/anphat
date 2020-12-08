@@ -1,8 +1,7 @@
 <template>
-
   <div class="clearfix">
-    {{this.item}}
-    {{this.editedIndex}}
+    {{ this.item }}
+    {{ this.editedIndex }}
     <a-upload
       :before-upload="beforeUpload"
       list-type="picture-card"
@@ -34,16 +33,13 @@ function getBase64(file) {
 }
 
 export default {
-  mounted(){
-  
-}
-,
+  mounted() {},
   data() {
     return {
       previewVisible: false,
       previewImage: "",
       fileList: this.$props.item,
-      empty:[],
+      empty: []
     };
   },
   props: {
@@ -53,13 +49,11 @@ export default {
     editedIndex: {
       type: Number
     },
-    visible:{
+    visible: {
       type: Boolean
     }
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     handleCancel() {
       this.previewVisible = false;
@@ -77,7 +71,7 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-      
+
       this.$emit("uploadDtb", this.fileList);
     }
   }

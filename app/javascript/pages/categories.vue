@@ -82,7 +82,6 @@ export default {
     this.initialize();
   },
   methods: {
-    
     // kich hoat su kien tu child
     show() {
       this.$refs.child.showModal();
@@ -157,13 +156,16 @@ export default {
   components: {
     categoriesModals
   },
-  computed: {  
-    onsearch(){
-      if(this.search){
-      return this.dataNews.filter((item)=>{
-        return this.search.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
-      })
-      }else{
+  computed: {
+    onsearch() {
+      if (this.search) {
+        return this.dataNews.filter(item => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every(v => item.name.toLowerCase().includes(v));
+        });
+      } else {
         return this.dataNews;
       }
     }
