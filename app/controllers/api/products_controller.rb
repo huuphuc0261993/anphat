@@ -1,45 +1,44 @@
 class Api::ProductsController < ApplicationController
     def index
-    # @customers = Customer.where(deleted_at: nil)
-    @customers = Customer.all
-    render json: @customers
+        # @products = Product.where(deleted_at: nil)
+        @products = Product.all
+        render json: @products
     end
 
     def create   
-    @customers = Customer.new(customers_params)
-    if @customers.save
-        render json: @customers 
-    else
-        render json: { json: @customers.errors, status: :unprocessable_entity }
-    end
+        @products = Product.new(products_params)
+        if @products.save
+            render json: @products 
+        else
+            render json: { json: @products.errors, status: :unprocessable_entity }
+        end
     end
 
     def show
-    @customers = Customer.find(params[:id])
-    render json: { data: @customers, status: :ok, message: 'Success' }
+        @products = Product.find(params[:id])
+        render json: { data: @products, status: :ok, message: 'Success' }
     end
 
     def update
-    @customers = Customer.find(params[:id])
-    if @customers.update(customers_params)
-        render json: { status: :ok, message: 'Success' }
-    else
-        render json: { json: @customers.error, status: :unprocessable_entity }
-    end
+        @products = Product.find(params[:id])
+        if @products.update(products_params)
+            render json: { status: :ok, message: 'Success' }
+        else
+            render json: { json: @products.error, status: :unprocessable_entity }
+        end
     end
 
     def destroy
-    @customers = Customer.find(params[:id])
-    if @customers.destroy
-        render json: { json: 'Customer was successfully deleted.'}
-    else
-        render json 
+        @products = Product.find(params[:id])
+        if @products.destroy
+            render json: { json: 'Product was successfully deleted.'}
+        else
+            render json 
+        end
     end
-    end
-    
+
     private
-    def customers_params
+    def products_params
         params.require(:product).permit(:name, :price, :description, :discount, :price_sale, :category_id)
-    end
-    end
+    end  
 end

@@ -13,7 +13,6 @@
           enter-button="Search"
           size="large"
           v-model="search"
-          
         />
       </div>
     </div>
@@ -136,8 +135,6 @@ export default {
       return axios
         .get("http://localhost:3000/api/categories")
         .then(response => {
-          console.log("day la restpost data ");
-          console.log(response.data);
           this.dataNews = response.data;
         })
         .catch(e => {

@@ -23,8 +23,8 @@
   </a-layout>
 </template>
 <script>
-import leftMenu from "./components/leftMenu.vue";
 
+import leftMenu from "./components/leftMenu.vue";
 export default {
   data() {
     return {

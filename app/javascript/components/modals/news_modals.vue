@@ -30,7 +30,6 @@
           :item="item"
           :editedIndex="editedIndex"
           :visible="visible"
-          
         />
       </a-form-model>
     </a-modal>
