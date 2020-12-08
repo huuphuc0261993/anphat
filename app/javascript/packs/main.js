@@ -10,16 +10,12 @@ import '../assets/css/tailwind.min.css'
 import App from '../app.vue'
 import VueRouter from 'vue-router'
 import routes from '../routes'
-import Antd from 'ant-design-vue';
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 
-
-import 'ant-design-vue/dist/antd.css';
-Vue.config.productionTip = false;
-
+Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Antd);
-// Vue.use(axios)
-
 
 const router = new VueRouter(
   {
