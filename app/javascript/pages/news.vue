@@ -49,6 +49,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      file: "",
       dataNews: [],
       searchText: "",
       searchInput: null,
@@ -103,16 +104,12 @@ export default {
       this.$refs.child.showModal();
     },
     save(item, index) {
-      console.log("day la item image");
-      console.log(item.image);
       if (index == -1) {
         let formData = new FormData();
         formData.append("news[title]", item.title);
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
-        formData.append("news[image]", item.image);
-        console.log("day la file luu");
-        console.log(item.image);
+        formData.append("news[image]", item.image.originFileObj);
         axios
           .post(`http://localhost:3000/api/news`, formData, {
             headers: {
@@ -133,8 +130,7 @@ export default {
         formData.append("news[title]", item.title);
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
-        formData.append("news[image]", item.image);
-        console.log(formData, "form data");
+        formData.append("news[image]", item.image.originFileObj);
         axios
           .put(`http://localhost:3000/api/news/${item.id}`, formData, {
             headers: {
@@ -152,11 +148,6 @@ export default {
       }
     },
     editNews(item) {
-      this.dataNews.forEach(element => {
-        if (element.id == item.id) {
-          item.image = element.image;
-        }
-      });
       this.$refs.child.edit(item);
     },
 
@@ -164,8 +155,8 @@ export default {
       return axios
         .get("http://localhost:3000/api/news")
         .then(response => {
-          console.log(response.data);
           this.dataNews = response.data;
+          this.dataNews = JSON.parse(JSON.stringify(this.dataNews));
         })
         .catch(e => {
           console.log(e);

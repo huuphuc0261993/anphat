@@ -71,7 +71,8 @@ export default {
           uid: "-1",
           name: "image.png",
           status: "",
-          url: ""
+          url: "",
+          image:""
         }
       ],
       item1: [
@@ -79,7 +80,8 @@ export default {
           uid: "-1",
           name: "image.png",
           status: "",
-          url: ""
+          url: "",
+          image:""
         }
       ],
       defaultItem: {
@@ -95,7 +97,8 @@ export default {
       let img = fileList[0];
       //quan trong khi update, ko dc xoa
       if(img != undefined){
-        this.editedItem.image = fileList[0].originFileObj
+        // this.editedItem.image = fileList[0].originFileObj
+        this.editedItem.image = fileList[0]
       }   
     },
     reset() {
@@ -115,8 +118,6 @@ export default {
       }, 300);
     },
     saveModal(item) {
-      console.log("day la editItem")
-      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
@@ -129,9 +130,11 @@ export default {
    edit(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
-      console.log(item.image.url)
+      
+      console.log(item)
       this.item = this.item1
       this.item[0].url=item.image.url
+      this.item[0].image = item.image
       this.visible= true
     }
   },

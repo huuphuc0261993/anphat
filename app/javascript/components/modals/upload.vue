@@ -29,6 +29,7 @@ function getBase64(file) {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
+
   });
 }
 
@@ -53,8 +54,8 @@ export default {
       type: Boolean
     }
   },
-  mounted() {},
   methods: {
+    
     handleCancel() {
       this.previewVisible = false;
     },
@@ -63,6 +64,7 @@ export default {
       return false;
     },
     async handlePreview(file) {
+      console.log(file)
       if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
       }

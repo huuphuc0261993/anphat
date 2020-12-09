@@ -3,7 +3,10 @@
     <a-modal v-model="visible" @ok="close" v-bind:name="formTitle">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
-          <a-col :xs="12"> <upload /> </a-col>
+          <a-col :xs="12">
+            <upload @uploadDtb="uploadfile"/>
+           
+          </a-col>
           <a-col :xs="12">
             <a-form-model-item label="Tên sản phẩm" prop="name">
               <a-input placeholder="Tên sản phẩm" v-model="editedItem.name" />
@@ -61,7 +64,7 @@
             </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
-                <a-button type="primary" @click="saveModal('editedItem')">
+                <a-button type="primary" @click="saveModal('editedItem')" :methods="uploadfile">
                   Lưu
                 </a-button>
               </a-form-model-item>
@@ -117,6 +120,7 @@ export default {
         price_sale: "",
         category_id: ""
       },
+      pictures:[],
       empty: [],
       defaultItem: {
         name: ""
@@ -127,10 +131,13 @@ export default {
     this.categories();
   },
   methods: {
+    uploadfile(fileList){ 
+      this.pictures = fileList;
+    },
     discountedPrice() {
       this.editedItem.price_sale =
-      this.editedItem.price -
-      this.editedItem.price * (this.editedItem.discount / 100);
+        this.editedItem.price -
+        this.editedItem.price * (this.editedItem.discount / 100);
       return this.editedItem.price_sale;
     },
     showModal() {
@@ -148,7 +155,7 @@ export default {
     saveModal(item) {
       this.$refs[item].validate(valid => {
         if (valid) {
-          this.$emit("saveDtb", this.editedItem, this.editedIndex);
+          this.$emit("saveDtb", this.editedItem, this.editedIndex, this.pictures);
         } else {
           console.log("error submit!!");
           return false;
@@ -165,7 +172,6 @@ export default {
         .get("http://localhost:3000/api/categories")
         .then(response => {
           this.categoriesChild = response.data;
-    
         })
         .catch(e => {
           console.log(e);

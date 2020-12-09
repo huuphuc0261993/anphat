@@ -8,7 +8,7 @@
       :multiple="true"
       :before-upload="beforeUpload"
     >
-      <div v-if="fileList.length < 8">
+      <div v-if="fileList.length < 3">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           Upload
@@ -34,14 +34,7 @@ export default {
     return {
       previewVisible: false,
       previewImage: "",
-      fileList: [
-        {
-          uid: "-1",
-          name: "image.png",
-          status: "done",
-          url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        }
-      ]
+      fileList: []
     };
   },
   methods: {
@@ -61,6 +54,7 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
+      this.$emit("uploadDtb", this.fileList);
     }
   }
 };

@@ -1,28 +1,31 @@
 <template>
   <div>
     <productsModals ref="child" @saveDtb="save" />
-    <div class="col-12">
-      <div class="col-4">
-        <a-row class="table-buttons">
-          <a-col :span="24" class="text-right">
-            <a-button type="primary" @click="show" :method="save">{{
-              "Thêm mới sản phẩm"
-            }}</a-button>
-            <a-button type="default" class="yellow-btn">
-              <a-icon type="reload"></a-icon>
-            </a-button>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="col-8">
-        <a-input-search
-          placeholder="input search text"
-          enter-button="Search"
-          size="large"
-          v-model="search"
-        />
-      </div>
-    </div>
+    <a-row>
+      <a-col :xs="12">
+        <div class="col-8">
+          <a-input-search
+            placeholder="input search text"
+            size="large"
+            v-model="search"
+          />
+        </div>
+      </a-col>
+      <a-col :xs="12">
+        <div class="col-4">
+          <a-row class="table-buttons">
+            <a-col :span="24" class="text-right">
+              <a-button type="primary" @click="show" :method="save">{{
+                "Thêm mới sản phẩm"
+              }}</a-button>
+              <a-button type="default" class="yellow-btn">
+                <a-icon type="reload"></a-icon>
+              </a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+    </a-row>
 
     <a-table
       bordered
@@ -110,9 +113,8 @@ export default {
     show() {
       this.$refs.child.showModal();
     },
-    save(item, index) {
-      console.log("day la item");
-      console.log(item);
+    save(item, index,image) {
+    
       if (index == -1) {
         let formData = new FormData();
         formData.append("product[name]", item.name);
@@ -121,6 +123,10 @@ export default {
         formData.append("product[discount]", item.discount);
         formData.append("product[price_sale]", item.price_sale);
         formData.append("product[category_id]", item.category_id);
+        image.forEach((element,index) => {
+          formData.append("pictures[title][]", element.originFileObj);
+        });
+        
         axios
           .post(`http://localhost:3000/api/products`, formData, {
             headers: {
@@ -167,8 +173,6 @@ export default {
       return axios
         .get("http://localhost:3000/api/products")
         .then(response => {
-          console.log("day la data tra ve")
-          console.log(response.data)
           this.dataNews = response.data;
         })
         .catch(e => {
@@ -195,10 +199,16 @@ export default {
     onsearch() {
       if (this.search) {
         return this.dataNews.filter(item => {
-          return this.search
-            .toLowerCase()
-            .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+          return (
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.category.name.toLowerCase().includes(v)) ||
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.name.toLowerCase().includes(v))
+          );
         });
       } else {
         return this.dataNews;
