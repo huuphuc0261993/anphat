@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <upload /> -->
-      
     <a-modal v-model="visible" v-bind:title="formTitle" @ok="close">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-form-model-item has-feedback label="Tiêu đề bài viết " prop="title">
@@ -65,11 +63,12 @@ export default {
         description: "",
         content: ""
       },
-      empty:[],
+      empty: [],
       item: [
         {
           uid: "-1",
-          name: "image.png",
+          id: "",
+          name: "Screenshot_from_2020-11-26_11-51-48.png",
           status: "",
           url: ""
         }
@@ -77,7 +76,7 @@ export default {
       item1: [
         {
           uid: "-1",
-          name: "image.png",
+          name: "Screenshot_from_2020-11-26_11-51-48.png",
           status: "",
           url: ""
         }
@@ -94,9 +93,9 @@ export default {
     uploadfile(fileList) {
       let img = fileList[0];
       //quan trong khi update, ko dc xoa
-      if(img != undefined){
-        this.editedItem.image = fileList[0].originFileObj
-      }   
+      if (img != undefined) {
+        this.editedItem.image = fileList[0];
+      }
     },
     reset() {
       this.$refs.uploadEmtpy.resetupload();
@@ -105,7 +104,7 @@ export default {
       this.editedIndex = -1;
       this.editedItem = Object.assign({}, this.defaultItem);
       this.visible = true;
-      this.item = this.empty
+      this.item = this.empty;
     },
     close() {
       this.visible = false;
@@ -115,8 +114,6 @@ export default {
       }, 300);
     },
     saveModal(item) {
-      console.log("day la editItem")
-      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
@@ -126,13 +123,14 @@ export default {
         }
       });
     },
-   edit(item) {
+    edit(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
-      console.log(item.image.url)
-      this.item = this.item1
-      this.item[0].url=item.image.url
-      this.visible= true
+      this.item = this.item1;
+      this.item[0].url = item.image.url;
+      this.item[0].id = item.id;
+      this.item[0].uid = item.id;
+      this.visible = true;
     }
   },
   components: {

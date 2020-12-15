@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   end
 
   create_table "pictures", force: :cascade do |t|
-    t.text "title"
+    t.text "image"
     t.datetime "deleted_at"
-    t.integer "product_id", null: false
+    t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_pictures_on_product_id"
@@ -91,6 +91,5 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"
-  add_foreign_key "pictures", "products"
   add_foreign_key "products", "categories"
 end

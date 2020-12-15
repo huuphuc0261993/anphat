@@ -1,14 +1,14 @@
 <template>
   <div class="clearfix">
     <a-upload
+      :multiple="true"
+      :action="imageUploadUrl"
       list-type="picture-card"
       :file-list="fileList"
       @preview="handlePreview"
       @change="handleChange"
-      :multiple="true"
-      :before-upload="beforeUpload"
     >
-      <div v-if="fileList.length < 8">
+      <div v-if="fileList.length < 3">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           Upload
@@ -29,28 +29,38 @@ function getBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
+import { URLS } from "../../utils/url";
 export default {
+  watch: {
+    product_pictures: {
+      handler: function() {
+        this.initFileList();
+      }
+    }
+  },
+  mounted() {
+    this.initFileList();
+  },
   data() {
     return {
       previewVisible: false,
+      imageUploadUrl: URLS.IMAGES,
       previewImage: "",
-      fileList: [
-        {
-          uid: "-1",
-          name: "image.png",
-          status: "done",
-          url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        }
-      ]
+      fileList: []
     };
   },
+  props: {
+    product_pictures: {
+      type: Array
+    }
+  },
   methods: {
-    beforeUpload(file) {
-      this.fileList = [...this.fileList, file];
-      return false;
+    initFileList() {
+      this.fileList = JSON.parse(JSON.stringify(this.$props.product_pictures));
     },
     handleCancel() {
       this.previewVisible = false;
+      this.updateImageIds()
     },
     async handlePreview(file) {
       if (!file.url && !file.preview) {
@@ -61,6 +71,20 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
+      this.updateImageIds()
+    },
+    updateImageIds() {
+      
+      let pictures_ids = this.fileList.map(object => {
+        if (object.status === "done") {
+          return object.response.id;
+
+        } else {
+          return object.id;
+        }
+      });
+
+      this.$emit("updatePicturesList", pictures_ids);
     }
   }
 };

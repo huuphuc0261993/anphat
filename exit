@@ -1,0 +1,22 @@
+=> [32m#<ImageUploader:0x000055baa207a050[0m
+ @cache_id[32m=[0m[1;36mnil[0m,
+ @file[32m=[0m
+  [32m#<CarrierWave::SanitizedFile:0x000055baa20791f0[0m
+   @content[32m=[0m[1;36mnil[0m,
+   @content_type[32m=[0m[1;36mnil[0m,
+   @file[32m=[0m[31m[1;31m"[0m[31m/home/phuc/Desktop/anphat/public/uploads/picture/image/28/123938331_371970477383422_4056083842711957079_n.png[1;31m"[0m[31m[0m,
+   @original_filename[32m=[0m[1;36mnil[0m[32m>[0m,
+ @filename[32m=[0m[1;36mnil[0m,
+ @identifier[32m=[0m[31m[1;31m"[0m[31m123938331_371970477383422_4056083842711957079_n.png[1;31m"[0m[31m[0m,
+ @model[32m=[0m
+  [32m#<Picture:0x000055baa207a5a0[0m
+   id: [1;34m28[0m,
+   image: [31m[1;31m"[0m[31m123938331_371970477383422_4056083842711957079_n.png[1;31m"[0m[31m[0m,
+   deleted_at: [1;36mnil[0m,
+   product_id: [1;36mnil[0m,
+   created_at: [1;34;4mFri[0m, [1;34m11[0m [1;34;4mDec[0m [1;34m2020[0m [1;34m08[0m:[1;34m56[0m:[1;34m51[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+   updated_at: [1;34;4mFri[0m, [1;34m11[0m [1;34;4mDec[0m [1;34m2020[0m [1;34m08[0m:[1;34m56[0m:[1;34m51[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+ @mounted_as[32m=[0m[33m:image[0m,
+ @staged[32m=[0m[1;36mfalse[0m,
+ @storage[32m=[0m[32m#<CarrierWave::Storage::File:0x000055baa2079cb8[0m @cache_called[32m=[0m[1;36mnil[0m, @uploader[32m=[0m[32m#<ImageUploader:0x000055baa207a050[0m ...[32m>[0m[32m>[0m,
+ @versions[32m=[0m{}[32m>[0m

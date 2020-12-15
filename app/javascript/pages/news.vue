@@ -45,10 +45,23 @@
 <script>
 import newsModals from "../components/modals/news_modals";
 import axios from "axios";
+import { URLS } from "../utils/url";
 
+function dataURLtoFile(dataurl, filename) {
+  var arr = dataurl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
 export default {
   data() {
     return {
+      file: "",
       dataNews: [],
       searchText: "",
       searchInput: null,
@@ -103,16 +116,12 @@ export default {
       this.$refs.child.showModal();
     },
     save(item, index) {
-      console.log("day la item image");
-      console.log(item.image);
       if (index == -1) {
         let formData = new FormData();
         formData.append("news[title]", item.title);
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
-        formData.append("news[image]", item.image);
-        console.log("day la file luu");
-        console.log(item.image);
+        formData.append("news[image]", item.image.originFileObj);
         axios
           .post(`http://localhost:3000/api/news`, formData, {
             headers: {
@@ -129,34 +138,68 @@ export default {
             console.log(error);
           });
       } else {
-        let formData = new FormData();
-        formData.append("news[title]", item.title);
-        formData.append("news[description]", item.description);
-        formData.append("news[content]", item.content);
-        formData.append("news[image]", item.image);
-        console.log(formData, "form data");
-        axios
-          .put(`http://localhost:3000/api/news/${item.id}`, formData, {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-          .then(response => {
-            this.initialize();
-            this.$refs.child.close();
-            this.$message.success("Cập nhật bài viết thành công");
-          })
-          .catch(error => {
-            console.log(error);
+        if (item.image.url) {
+          let url = item.image.url;
+          const toDataURL = url =>
+            fetch(url)
+              .then(response => response.blob())
+              .then(
+                blob =>
+                  new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                  })
+              );
+
+          toDataURL(url).then(dataUrl => {
+            let fileData = dataURLtoFile(dataUrl, item.title);
+
+            let formData = new FormData();
+            formData.append("news[title]", item.title);
+            formData.append("news[description]", item.description);
+            formData.append("news[content]", item.content);
+            formData.append("news[image]", fileData);
+            axios
+              .put(`http://localhost:3000/api/news/${item.id}`, formData, {
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              })
+              .then(response => {
+                this.initialize();
+                this.$refs.child.close();
+                this.$message.success("Cập nhật bài viết thành công");
+              })
+              .catch(error => {
+                console.log(error);
+              });
           });
+        } else {
+          let formData = new FormData();
+          formData.append("news[title]", item.title);
+          formData.append("news[description]", item.description);
+          formData.append("news[content]", item.content);
+          formData.append("news[image]", item.image.originFileObj);
+          axios
+            .put(`http://localhost:3000/api/news/${item.id}`, formData, {
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+            .then(response => {
+              this.initialize();
+              this.$refs.child.close();
+              this.$message.success("Cập nhật bài viết thành công");
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
       }
     },
     editNews(item) {
-      this.dataNews.forEach(element => {
-        if (element.id == item.id) {
-          item.image = element.image;
-        }
-      });
       this.$refs.child.edit(item);
     },
 
@@ -164,8 +207,8 @@ export default {
       return axios
         .get("http://localhost:3000/api/news")
         .then(response => {
-          console.log(response.data);
           this.dataNews = response.data;
+          this.dataNews = JSON.parse(JSON.stringify(this.dataNews));
         })
         .catch(e => {
           console.log(e);

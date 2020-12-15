@@ -1,7 +1,5 @@
 <template>
   <div class="clearfix">
-    {{ this.item }}
-    {{ this.editedIndex }}
     <a-upload
       :before-upload="beforeUpload"
       list-type="picture-card"
@@ -31,7 +29,6 @@ function getBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-
 export default {
   mounted() {},
   data() {
@@ -53,7 +50,6 @@ export default {
       type: Boolean
     }
   },
-  mounted() {},
   methods: {
     handleCancel() {
       this.previewVisible = false;
@@ -71,7 +67,6 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-
       this.$emit("uploadDtb", this.fileList);
     }
   }
@@ -83,7 +78,6 @@ export default {
   font-size: 32px;
   color: #999;
 }
-
 .ant-upload-select-picture-card .ant-upload-text {
   margin-top: 8px;
   color: #666;

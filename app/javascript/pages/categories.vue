@@ -1,21 +1,24 @@
 <template>
   <div>
     <categoriesModals ref="child" @saveDtb="save" />
-    <div class="col-12">
-      <div class="col-4">
-        <a-button type="primary" @click="show" :method="save">
-          Thêm mới
-        </a-button>
-      </div>
-      <div class="col-8">
-        <a-input-search
-          placeholder="input search text"
-          enter-button="Search"
-          size="large"
-          v-model="search"
-        />
-      </div>
-    </div>
+    <a-row>
+      <a-col :xs="12" >
+        <div class="col-4">
+          <a-button type="primary" @click="show" :method="save">
+            Thêm mới
+          </a-button>
+        </div>
+      </a-col>
+      <a-col :xs="12">
+        <div class="col-8">
+          <a-input-search
+            placeholder="input search text"
+            size="large"
+            v-model="search"
+          />
+        </div>
+      </a-col>
+    </a-row>
 
     <a-table
       bordered

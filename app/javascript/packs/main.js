@@ -16,7 +16,6 @@ import 'ant-design-vue/dist/antd.css'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Antd);
-
 const router = new VueRouter(
   {
     mode: 'history',

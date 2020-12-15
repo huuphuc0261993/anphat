@@ -1,28 +1,31 @@
 <template>
   <div>
     <productsModals ref="child" @saveDtb="save" />
-    <div class="col-12">
-      <div class="col-4">
-        <a-row class="table-buttons">
-          <a-col :span="24" class="text-right">
-            <a-button type="primary" @click="show" :method="save">{{
-              "Thêm mới sản phẩm"
-            }}</a-button>
-            <a-button type="default" class="yellow-btn">
-              <a-icon type="reload"></a-icon>
-            </a-button>
-          </a-col>
-        </a-row>
-      </div>
-      <div class="col-8">
-        <a-input-search
-          placeholder="input search text"
-          enter-button="Search"
-          size="large"
-          v-model="search"
-        />
-      </div>
-    </div>
+    <a-row>
+      <a-col :xs="12">
+        <div class="col-8">
+          <a-input-search
+            placeholder="input search text"
+            size="large"
+            v-model="search"
+          />
+        </div>
+      </a-col>
+      <a-col :xs="12">
+        <div class="col-4">
+          <a-row class="table-buttons">
+            <a-col :span="24" class="text-right">
+              <a-button type="primary" @click="show" :method="save">{{
+                "Thêm mới sản phẩm"
+              }}</a-button>
+              <a-button type="default" class="yellow-btn">
+                <a-icon type="reload"></a-icon>
+              </a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+    </a-row>
 
     <a-table
       bordered
@@ -30,9 +33,13 @@
       :columns="columns"
       :row-key="record => record.id"
     >
+      <template slot="picture" slot-scope="picture">
+        <a-avatar :src="picture" />
+      </template>
+
       <template slot="action" slot-scope="text, record">
         <a-button
-          @click="editNews(record)"
+          @click="editProduct(record)"
           class="editButton"
           :type="'primary'"
           style="width:100px"
@@ -55,51 +62,24 @@
 </template>
 
 <script>
-import productsModals from "../components/modals/prodcuts_modals";
+import productsModals from "../components/modals/products_modals";
 import axios from "axios";
-
+import { ProductColumns } from "../utils/columns/product";
+import { URLS } from "../utils/url";
 export default {
   data() {
     return {
       dataNews: [],
       categories: [],
       search: "",
-      editedItem: {
-        name: "",
-        price: "",
-        description: "",
-        discount: "",
-        price_sale: "",
-        category_id: ""
-      },
-      columns: [
+      picture_attributes: [
         {
-          title: "Tên sản phẩm",
-          dataIndex: "name",
-          className: "name",
-          width: "30%"
-        },
-        {
-          title: "Giá ",
-          dataIndex: "price",
-          className: "price",
-          width: "20%"
-        },
-        {
-          title: "Loại sản phẩm ",
-          dataIndex: "category_id",
-          className: "category_id",
-          width: "30%"
-        },
-        {
-          title: "Action",
-          dataIndex: "",
-          key: "x",
-          scopedSlots: { customRender: "action" },
-          width: "20%",
-          align: "center"
+          id: "",
+          url: ""
         }
-      ]
+      ],
+      editedItem: {},
+      columns: ProductColumns.cols
     };
   },
   mounted() {
@@ -110,52 +90,42 @@ export default {
     show() {
       this.$refs.child.showModal();
     },
-    save(item, index) {
-      console.log("day la item name");
-      console.log(item.name);
+    save(product, index) {
       if (index == -1) {
-        let formData = new FormData();
-        formData.append("category[name]", item.name);
         axios
-          .post(`http://localhost:3000/api/products`, formData, {
-            headers: {
-              "Content-Type": "application/json"
-            }
+          .post(URLS.PRODUCTS(), {
+            product: product
           })
           .then(response => {
             console.log("Created!");
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Tạo category thành công");
+            this.$message.success("Tạo sản phẩm thành công");
           })
           .catch(error => {
             console.log(error);
           });
       } else {
-        let formData = new FormData();
-        formData.append("category[name]", item.name);
-        axios
-          .put(`http://localhost:3000/api/products/${item.id}`, formData, {
-            headers: {
-              "Content-Type": "application/json"
-            }
+        axios 
+          .put(URLS.PRODUCT(product.id), {
+            product: product
           })
           .then(response => {
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Cập nhật category thành công");
+            this.$message.success("Cập nhật bài viết thành công");
           })
           .catch(error => {
             console.log(error);
           });
       }
     },
-    editNews(item) {
+    editProduct(item) {
       this.$refs.child.edit(item);
     },
     initialize() {
       return axios
-        .get("http://localhost:3000/api/products")
+        .get(URLS.PRODUCTS())
         .then(response => {
           this.dataNews = response.data;
         })
@@ -166,7 +136,7 @@ export default {
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(`http://localhost:3000/api/products/` + id)
+        .delete(URLS.PRODUCT(id))
         .then(response => {
           this.initialize();
         })
@@ -183,10 +153,16 @@ export default {
     onsearch() {
       if (this.search) {
         return this.dataNews.filter(item => {
-          return this.search
-            .toLowerCase()
-            .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+          return (
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.category.name.toLowerCase().includes(v)) ||
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.name.toLowerCase().includes(v))
+          );
         });
       } else {
         return this.dataNews;
