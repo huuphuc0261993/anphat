@@ -1,14 +1,14 @@
 <template>
   <div class="clearfix">
     <a-upload
-      :before-upload="beforeUpload"
+      :multiple="true"
+      :action="imageUploadUrl"
       list-type="picture-card"
       :file-list="fileList"
       @preview="handlePreview"
       @change="handleChange"
-      ref="upload"
     >
-      <div v-if="fileList.length < 1">
+      <div v-if="fileList.length < 3">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           Upload
@@ -27,42 +27,42 @@ function getBase64(file) {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-
   });
 }
-
+import { URLS } from "../../utils/url";
 export default {
-  mounted() {},
+  watch: {
+    product_pictures: {
+      handler: function() {
+        this.initFileList();
+      }
+    }
+  },
+  mounted() {
+    this.initFileList();
+  },
   data() {
     return {
       previewVisible: false,
+      imageUploadUrl: URLS.IMAGES,
       previewImage: "",
-      fileList: this.$props.item,
-      empty: []
+      fileList: []
     };
   },
   props: {
-    item: {
+    product_pictures: {
       type: Array
-    },
-    editedIndex: {
-      type: Number
-    },
-    visible: {
-      type: Boolean
     }
   },
   methods: {
-    
+    initFileList() {
+      this.fileList = JSON.parse(JSON.stringify(this.$props.product_pictures));
+    },
     handleCancel() {
       this.previewVisible = false;
-    },
-    beforeUpload(file) {
-      this.fileList = [...this.fileList, file];
-      return false;
+      this.updateImageIds()
     },
     async handlePreview(file) {
-      console.log(file)
       if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
       }
@@ -71,7 +71,20 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-      this.$emit("uploadDtb", this.fileList);
+      this.updateImageIds()
+    },
+    updateImageIds() {
+      
+      let pictures_ids = this.fileList.map(object => {
+        if (object.status === "done") {
+          return object.response.id;
+
+        } else {
+          return object.id;
+        }
+      });
+
+      this.$emit("updatePicturesList", pictures_ids);
     }
   }
 };

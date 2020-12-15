@@ -45,6 +45,7 @@
 <script>
 import newsModals from "../components/modals/news_modals";
 import axios from "axios";
+import { URLS } from "../utils/url";
 
 function dataURLtoFile(dataurl, filename) {
   var arr = dataurl.split(","),

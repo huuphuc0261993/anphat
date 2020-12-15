@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import productsModals from "../components/modals/prodcuts_modals";
+import productsModals from "../components/modals/products_modals";
 import axios from "axios";
 import { ProductColumns } from "../utils/columns/product";
 import { URLS } from "../utils/url";
@@ -93,7 +93,7 @@ export default {
     save(product, index) {
       if (index == -1) {
         axios
-          .post(`http://localhost:3000/api/products`, {
+          .post(URLS.PRODUCTS(), {
             product: product
           })
           .then(response => {
@@ -106,8 +106,8 @@ export default {
             console.log(error);
           });
       } else {
-        axios
-          .put(`http://localhost:3000/api/products/${product.id}`, {
+        axios 
+          .put(URLS.PRODUCT(product.id), {
             product: product
           })
           .then(response => {
@@ -125,7 +125,7 @@ export default {
     },
     initialize() {
       return axios
-        .get("http://localhost:3000/api/products")
+        .get(URLS.PRODUCTS())
         .then(response => {
           this.dataNews = response.data;
         })
@@ -136,7 +136,7 @@ export default {
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(`http://localhost:3000/api/products/` + id)
+        .delete(URLS.PRODUCT(id))
         .then(response => {
           this.initialize();
         })
