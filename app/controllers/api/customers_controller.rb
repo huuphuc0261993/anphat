@@ -1,7 +1,6 @@
 module Api
   class CustomersController < ApplicationController
     def index
-      # @customers = Customer.where(deleted_at: nil)
       @customers = Customer.all
       render json: @customers
     end

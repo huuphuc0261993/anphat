@@ -27,10 +27,8 @@ function getBase64(file) {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-
   });
 }
-
 export default {
   mounted() {},
   data() {
@@ -53,7 +51,6 @@ export default {
     }
   },
   methods: {
-    
     handleCancel() {
       this.previewVisible = false;
     },
@@ -62,7 +59,6 @@ export default {
       return false;
     },
     async handlePreview(file) {
-      console.log(file)
       if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
       }
@@ -82,7 +78,6 @@ export default {
   font-size: 32px;
   color: #999;
 }
-
 .ant-upload-select-picture-card .ant-upload-text {
   margin-top: 8px;
   color: #666;

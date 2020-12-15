@@ -5,6 +5,4 @@ class Picture < ApplicationRecord
   def url
     image.url
   end
-
-  
 end

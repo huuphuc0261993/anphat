@@ -8,7 +8,6 @@
       @preview="handlePreview"
       @change="handleChange"
     >
-
       <div v-if="fileList.length < 3">
         <a-icon type="plus" />
         <div class="ant-upload-text">
@@ -61,7 +60,7 @@ export default {
     },
     handleCancel() {
       this.previewVisible = false;
-      this.updateImageIds()
+      this.updateImageIds();
     },
     async handlePreview(file) {
       if (!file.url && !file.preview) {
@@ -72,19 +71,16 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-      this.updateImageIds()
+      this.updateImageIds();
     },
     updateImageIds() {
-      
       let pictures_ids = this.fileList.map(object => {
         if (object.status === "done") {
           return object.response.id;
-
         } else {
           return object.id;
         }
       });
-
       this.$emit("updatePicturesList", pictures_ids);
     }
   }
