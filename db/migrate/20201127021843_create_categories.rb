@@ -3,7 +3,6 @@ class CreateCategories < ActiveRecord::Migration[6.0]
     create_table :categories do |t|
       t.text :name
       t.datetime :deleted_at
-
       t.timestamps
     end
   end

@@ -73,7 +73,6 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-
       this.$emit("uploadDtb", this.fileList);
     }
   }

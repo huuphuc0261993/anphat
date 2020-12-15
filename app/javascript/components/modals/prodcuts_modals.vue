@@ -4,8 +4,10 @@
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12">
-            <upload @uploadDtb="uploadfile"/>
-           
+            <product-image
+              :product_pictures="editedItem.pictures_attributes"
+              @updatePicturesList="updatePicturesList"
+            />
           </a-col>
           <a-col :xs="12">
             <a-form-model-item label="Tên sản phẩm" prop="name">
@@ -64,7 +66,7 @@
             </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
-                <a-button type="primary" @click="saveModal('editedItem')" :methods="uploadfile">
+                <a-button type="primary" @click="saveModal('editedItem')">
                   Lưu
                 </a-button>
               </a-form-model-item>
@@ -76,9 +78,10 @@
   </div>
 </template>
 <script>
-import upload from "../modals/uploadProducts";
 import axios from "axios";
 import news from "../../pages/news";
+import productImage from "../../pages/product/product_image";
+
 export default {
   props: {
     changShow: Boolean
@@ -112,18 +115,10 @@ export default {
       dataNews: [],
       visible: false,
       editedIndex: -1,
-      editedItem: {
-        name: "",
-        price: "",
-        description: "",
-        discount: "",
-        price_sale: "",
-        category_id: ""
-      },
-      pictures:[],
+      editedItem: {},
       empty: [],
       defaultItem: {
-        name: ""
+        pictures_attributes: []
       }
     };
   },
@@ -131,8 +126,8 @@ export default {
     this.categories();
   },
   methods: {
-    uploadfile(fileList){ 
-      this.pictures = fileList;
+    updatePicturesList(pictures_ids) {
+      this.editedItem.pictures_ids = pictures_ids;
     },
     discountedPrice() {
       this.editedItem.price_sale =
@@ -153,9 +148,11 @@ export default {
       }, 300);
     },
     saveModal(item) {
+      console.log("day la edit item");
+      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
-          this.$emit("saveDtb", this.editedItem, this.editedIndex, this.pictures);
+          this.$emit("saveDtb", this.editedItem, this.editedIndex);
         } else {
           console.log("error submit!!");
           return false;
@@ -179,7 +176,7 @@ export default {
     }
   },
   components: {
-    upload
+    productImage
   },
   computed: {
     formTitle() {

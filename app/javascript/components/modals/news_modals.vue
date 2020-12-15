@@ -69,19 +69,20 @@ export default {
       item: [
         {
           uid: "-1",
-          name: "image.png",
+          id:"",
+          name: "Screenshot_from_2020-11-26_11-51-48.png",
           status: "",
           url: "",
-          image:""
+    
         }
       ],
       item1: [
         {
           uid: "-1",
-          name: "image.png",
+          name: "Screenshot_from_2020-11-26_11-51-48.png",
           status: "",
           url: "",
-          image:""
+        
         }
       ],
       defaultItem: {
@@ -134,7 +135,8 @@ export default {
       console.log(item)
       this.item = this.item1
       this.item[0].url=item.image.url
-      this.item[0].image = item.image
+      this.item[0].id = item.id
+      this.item[0].uid = item.id
       this.visible= true
     }
   },

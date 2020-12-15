@@ -61,5 +61,4 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # config.asset_host = 'http://dev-server:3000'
   # config.asset_host = 'http://localhost:3000'
-  
 end

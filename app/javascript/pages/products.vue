@@ -33,9 +33,13 @@
       :columns="columns"
       :row-key="record => record.id"
     >
+      <template slot="picture" slot-scope="picture">
+        <a-avatar :src="picture" />
+      </template>
+
       <template slot="action" slot-scope="text, record">
         <a-button
-          @click="editNews(record)"
+          @click="editProduct(record)"
           class="editButton"
           :type="'primary'"
           style="width:100px"
@@ -60,49 +64,22 @@
 <script>
 import productsModals from "../components/modals/prodcuts_modals";
 import axios from "axios";
-
+import { ProductColumns } from "../utils/columns/product";
+import { URLS } from "../utils/url";
 export default {
   data() {
     return {
       dataNews: [],
       categories: [],
       search: "",
-      editedItem: {
-        name: "",
-        price: "",
-        description: "",
-        discount: "",
-        price_sale: "",
-        category_id: ""
-      },
-      columns: [
+      picture_attributes: [
         {
-          title: "Tên sản phẩm",
-          dataIndex: "name",
-          className: "name",
-          width: "30%"
-        },
-        {
-          title: "Giá ",
-          dataIndex: "price",
-          className: "price",
-          width: "20%"
-        },
-        {
-          title: "Loại sản phẩm ",
-          dataIndex: "category.name",
-          className: "category",
-          width: "30%"
-        },
-        {
-          title: "Action",
-          dataIndex: "",
-          key: "x",
-          scopedSlots: { customRender: "action" },
-          width: "20%",
-          align: "center"
+          id: "",
+          url: ""
         }
-      ]
+      ],
+      editedItem: {},
+      columns: ProductColumns.cols
     };
   },
   mounted() {
@@ -113,25 +90,11 @@ export default {
     show() {
       this.$refs.child.showModal();
     },
-    save(item, index,image) {
-    
+    save(product, index) {
       if (index == -1) {
-        let formData = new FormData();
-        formData.append("product[name]", item.name);
-        formData.append("product[price]", item.price);
-        formData.append("product[description]", item.description);
-        formData.append("product[discount]", item.discount);
-        formData.append("product[price_sale]", item.price_sale);
-        formData.append("product[category_id]", item.category_id);
-        image.forEach((element,index) => {
-          formData.append("pictures[title][]", element.originFileObj);
-        });
-        
         axios
-          .post(`http://localhost:3000/api/products`, formData, {
-            headers: {
-              "Content-Type": "application/json"
-            }
+          .post(`http://localhost:3000/api/products`, {
+            product: product
           })
           .then(response => {
             console.log("Created!");
@@ -143,30 +106,21 @@ export default {
             console.log(error);
           });
       } else {
-        let formData = new FormData();
-        formData.append("product[name]", item.name);
-        formData.append("product[price]", item.price);
-        formData.append("product[description]", item.description);
-        formData.append("product[discount]", item.discount);
-        formData.append("product[price_sale]", item.price_sale);
-        formData.append("product[category_id]", item.category_id);
         axios
-          .put(`http://localhost:3000/api/products/${item.id}`, formData, {
-            headers: {
-              "Content-Type": "application/json"
-            }
+          .put(`http://localhost:3000/api/products/${product.id}`, {
+            product: product
           })
           .then(response => {
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Cập nhật category thành công");
+            this.$message.success("Cập nhật bài viết thành công");
           })
           .catch(error => {
             console.log(error);
           });
       }
     },
-    editNews(item) {
+    editProduct(item) {
       this.$refs.child.edit(item);
     },
     initialize() {
