@@ -1,7 +1,5 @@
 <template>
   <div class="clearfix">
-    {{ this.item }}
-    {{ this.editedIndex }}
     <a-upload
       :before-upload="beforeUpload"
       list-type="picture-card"
