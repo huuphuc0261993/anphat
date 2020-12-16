@@ -32,7 +32,7 @@ function getBase64(file) {
 import { URLS } from "../../utils/url";
 export default {
   watch: {
-    product_pictures: {
+    banner_pictures: {
       handler: function() {
         this.initFileList();
       }
@@ -50,13 +50,13 @@ export default {
     };
   },
   props: {
-    product_pictures: {
+    banner_pictures: {
       type: Array
     }
   },
   methods: {
     initFileList() {
-      this.fileList = JSON.parse(JSON.stringify(this.$props.product_pictures));
+      this.fileList = JSON.parse(JSON.stringify(this.$props.banner_pictures));
     },
     handleCancel() {
       this.previewVisible = false;

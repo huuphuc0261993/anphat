@@ -18,13 +18,11 @@
 <script>
 import bannersModals from "../components/modals/banners_modals";
 import axios from "axios";
-import { ProductColumns } from "../utils/columns/product";
 import { URLS } from "../utils/url";
 export default {
   data() {
     return {
       dataNews: [],
-      categories: [],
       search: "",
       picture_attributes: [
         {
@@ -33,7 +31,6 @@ export default {
         }
       ],
       editedItem: {},
-      columns: ProductColumns.cols
     };
   },
   mounted() {
@@ -44,30 +41,31 @@ export default {
     show() {
       this.$refs.child.showModal();
     },
-    save(product, index) {
+    save(banner, index) {
+      console.log(banner)
       if (index == -1) {
         axios
-          .post(URLS.PRODUCTS(), {
-            product: product
+          .post(URLS.BANNERS(), {
+            banner: banner
           })
           .then(response => {
             console.log("Created!");
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Tạo sản phẩm thành công");
+            this.$message.success("Tạo banner thành công");
           })
           .catch(error => {
             console.log(error);
           });
       } else {
         axios 
-          .put(URLS.PRODUCT(product.id), {
-            product: product
+          .put(URLS.BANNER(banner.id), {
+            banner: banner
           })
           .then(response => {
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Cập nhật bài viết thành công");
+            this.$message.success("Cập nhật banner thành công");
           })
           .catch(error => {
             console.log(error);
@@ -79,7 +77,7 @@ export default {
     },
     initialize() {
       return axios
-        .get(URLS.PRODUCTS())
+        .get(URLS.BANNERS())
         .then(response => {
           this.dataNews = response.data;
         })
@@ -90,7 +88,7 @@ export default {
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(URLS.PRODUCT(id))
+        .delete(URLS.BANNER(id))
         .then(response => {
           this.initialize();
         })

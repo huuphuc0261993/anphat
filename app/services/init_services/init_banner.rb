@@ -10,14 +10,14 @@ module InitServices
     def perform
       return if @banners_ids.blank?
 
-      current_pictures = @banner.banners.pluck(:id)
-      Picture.where(id: current_pictures - @banners_ids).destroy_all
-      banners = Picture.where(id: @banners_ids - current_pictures)
+      current_banners = @banner.banners.pluck(:id)
+      Banner.where(id: current_banners - @banners_ids).destroy_all
+      banners = Banner.where(id: @banners_ids - current_banners)
       return if banners.blank?
 
-      banners.each do |picture|
-        picture.banner = @banner
-        picture.save
+      banners.each do |banner|
+        banner.banner = @banner
+        banner.save
       end
     end
   end

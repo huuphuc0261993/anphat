@@ -69,10 +69,11 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   create_table "pictures", force: :cascade do |t|
     t.text "image"
     t.datetime "deleted_at"
-    t.integer "product_id"
+    t.string "imageable_type"
+    t.integer "imageable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_pictures_on_product_id"
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
   create_table "products", force: :cascade do |t|
