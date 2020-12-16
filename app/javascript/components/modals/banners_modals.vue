@@ -112,6 +112,7 @@ export default {
     edit(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
+      console.log(this.editedItem)
       this.visible = true;
     }
   },

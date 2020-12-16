@@ -6,42 +6,42 @@ module Api
     end
   
     def create
-      @banners = Banner.new(products_params)
-      if @banners.save
-        InitServices::InitProduct.new(@banners, params[:banner][:pictures_ids]).perform
-        render json: @banners
+      @banner = Banner.new(banner_params)
+      if @banner.save
+        InitServices::InitProduct.new(@banner, params[:banner][:pictures_ids]).perform
+        render json: @banner
       else
         render status: 403
       end
     end
   
     def show
-      @banners = Banner.find(params[:id])
-      render json: { data: @banners, status: :ok, message: 'Success' }
+      @banner = Banner.find(params[:id])
+      render json: { data: @banner, status: :ok, message: 'Success' }
     end
   
     def update
-      @banners = Banner.find(params[:id])
-      if @banners&.update(products_params)
-        InitServices::InitProduct.new(@banners, params[:banner][:pictures_ids]).perform
-        render json: @banners, status: 200
+      @banner = Banner.find(params[:id])
+      if @banner&.update(banner_params)
+        InitServices::InitProduct.new(@banner, params[:banner][:pictures_ids]).perform
+        render json: @banner, status: 200
       else
-        render json: { json: @banners.error, status: :unprocessable_entity }
+        render json: { json: @banner.error, status: :unprocessable_entity }
       end
     end
   
     def destroy
-      @banners = Banner.find(params[:id])
-      if @banners.destroy
+      @banner = Banner.find(params[:id])
+      if @banner.destroy
         render json: { json: 'Banner was successfully deleted.' }
       else
-        render json
+        render json: {}
       end
     end
   
     private
   
-    def products_params
+    def banner_params
       params.require(:banner).permit(:banner_type)
     end
   end

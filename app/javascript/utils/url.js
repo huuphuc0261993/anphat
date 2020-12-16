@@ -1,8 +1,9 @@
 export const getBaseUrl = () => {
-  return "/api/";
+  return "/api";
 };
 export const URLS = {
   IMAGES: () => `${getBaseUrl()}/pictures`,
+  IMAGE: (id) => `${getBaseUrl()}/pictures/${id}`,
 
   PRODUCTS: () => `${getBaseUrl()}/products`,
   PRODUCT: (id) => `${getBaseUrl()}/products/${id}`,

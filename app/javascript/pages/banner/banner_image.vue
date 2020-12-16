@@ -1,14 +1,13 @@
 <template>
   <div class="clearfix">
     <a-upload
-      :multiple="true"
       :action="imageUploadUrl"
       list-type="picture-card"
       :file-list="fileList"
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div v-if="fileList.length < 3">
+      <div v-if="fileList.length < 1">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           Upload

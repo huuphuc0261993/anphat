@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :customers
     resources :products
     resources :categories
-    resources :pictures, only: %w[create]
+    resources :pictures, only: %w[create destroy]
   end
   match '/*path', to: 'welcome#index', format: false, via: :get
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
