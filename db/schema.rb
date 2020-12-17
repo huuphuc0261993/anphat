@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_022020) do
+ActiveRecord::Schema.define(version: 2020_12_16_113748) do
 
   create_table "banners", force: :cascade do |t|
     t.text "name"
@@ -30,10 +30,17 @@ ActiveRecord::Schema.define(version: 2020_11_27_022020) do
   create_table "customers", force: :cascade do |t|
     t.text "name"
     t.integer "phone"
-    t.text "email"
+    t.text "email", null: false
+    t.text "password_digest", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jwt_denylists", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "expired_at", null: false
+    t.index ["jti"], name: "index_jwt_denylists_on_jti"
   end
 
   create_table "news", force: :cascade do |t|

@@ -22,7 +22,7 @@
           >
             <a-avatar :size="100" :src="element.url" shape="square" />
             <div>
-              <a-icon type="edit" @click="editBanner(banner.id)"/>
+              <a-icon type="edit" @click="editBanner(banner.id)" />
               <a-icon type="delete" @click="softdelted(banner.id)" />
             </div>
           </div>
@@ -36,7 +36,7 @@
           >
             <a-avatar :size="100" :src="element.url" shape="square" />
             <div>
-              <a-icon type="edit" @click="editBanner(banner.id)"/>
+              <a-icon type="edit" @click="editBanner(banner.id)" />
               <a-icon type="delete" @click="softdelted(banner.id)" />
             </div>
           </div>
@@ -105,8 +105,8 @@ export default {
     },
     editBanner(item) {
       this.dataNews.forEach(element => {
-        if(element.id ==item){
-          item = element
+        if (element.id == item) {
+          item = element;
         }
       });
       this.$refs.child.edit(item);
@@ -150,7 +150,7 @@ export default {
 .banner_two {
   display: flex;
 }
-.col-8{
+.col-8 {
   padding-right: 2%;
 }
 </style>
