@@ -19,11 +19,13 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'active_model_serializers'
 gem 'carrierwave'
+gem 'devise'
+gem 'devise_token_auth'
+gem 'devise-jwt'
 gem 'foreman'
 gem 'jbuilder', '~> 2.7'
 gem 'mini_magick'
 gem 'paranoia', '~> 2.2'
-
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -46,10 +48,10 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pry-rails'
   gem 'rubocop-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-rails'
 end
 
 group :test do

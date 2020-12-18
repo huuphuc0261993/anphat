@@ -10,4 +10,6 @@ export const URLS = {
 
   BANNERS: () => `${getBaseUrl()}/banners`,
   BANNER: (id) => `${getBaseUrl()}/banners/${id}`,
+
+  LOGIN: () => `${getBaseUrl()}/login`,
 };

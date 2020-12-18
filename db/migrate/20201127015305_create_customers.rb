@@ -4,7 +4,7 @@ class CreateCustomers < ActiveRecord::Migration[6.0]
       t.text :name
       t.integer :phone
       t.text :email
-      t.text :password_digest
+      t.text :encrypted_password
       t.datetime :deleted_at
 
       t.timestamps

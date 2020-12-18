@@ -1,6 +1,5 @@
 class Api::NewsController < ApplicationController
   def index
-    # @news = News.where(deleted_at: nil)
     @news = News.all
     # render json: @news
   end

@@ -40,7 +40,7 @@ module Api
     private
 
     def customer_params
-      params.require(:customer).permit(:name, :phone, :email)
+      params.require(:customer).permit(:name, :phone, :email, :password_digest)
     end
   end
 end
