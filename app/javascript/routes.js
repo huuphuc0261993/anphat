@@ -19,6 +19,7 @@ const routes = [
         path: '/news',
         name: 'News',
         component: News,
+        
     },
     {
         path: '/products',

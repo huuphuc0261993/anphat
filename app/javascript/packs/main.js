@@ -25,9 +25,10 @@ const router = new VueRouter(
 )
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem(JWT_KEY) == null) {
-    if (to.name == 'Login'&&!to.matched.some(record => record.meta.guest)) {
+    if (to.name !== 'Login' && !to.matched.some(record => record.meta.guest)) {
       router.push('/login')
-    } else if(to.name !== 'Login'&&!to.matched.some(record => record.meta.guest)){
+    }
+    else if(to.name !== 'Login' && to.matched.some(record => record.meta.guest)) {
       next()
     }
   } else {
