@@ -12,4 +12,6 @@ export const URLS = {
   BANNER: (id) => `${getBaseUrl()}/banners/${id}`,
 
   LOGIN: () => `${getBaseUrl()}/login`,
+  
+  LOGOUT: () => `${getBaseUrl()}/logout`,
 };

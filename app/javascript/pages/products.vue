@@ -18,9 +18,6 @@
               <a-button type="primary" @click="show" :method="save">{{
                 "Thêm mới sản phẩm"
               }}</a-button>
-              <a-button type="default" class="yellow-btn">
-                <a-icon type="reload"></a-icon>
-              </a-button>
             </a-col>
           </a-row>
         </div>

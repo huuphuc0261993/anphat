@@ -12,6 +12,7 @@ import VueRouter from 'vue-router'
 import routes from '../routes'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+import {JWT_KEY} from "../utils/constant"
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -22,6 +23,20 @@ const router = new VueRouter(
     routes: routes
   }
 )
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem(JWT_KEY) == null) {
+    if (to.name == 'Login'&&!to.matched.some(record => record.meta.guest)) {
+      router.push('/login')
+    } else if(to.name !== 'Login'&&!to.matched.some(record => record.meta.guest)){
+      next()
+    }
+  } else {
+    if (to.name == '' && to.matched.some(record => record.meta.guest)) {
+      router.push('/')
+    } 
+  }
+  next()
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
