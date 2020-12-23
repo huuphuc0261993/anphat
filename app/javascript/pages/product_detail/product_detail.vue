@@ -115,6 +115,20 @@
                       <b-tab title="Mô tả">
                         <b-card-text>{{ datalist.description }}</b-card-text>
                       </b-tab>
+
+                       <b-tab title="Video">
+                        <b-card-text>
+                          <div class="mt-3 text-center">
+                            <iframe
+                              width="560"
+                              height="315"
+                              src="https://www.youtube.com/embed/BUWzX78Ye_8"
+                              allow="autoplay; encrypted-media"
+                              allowfullscreen
+                            ></iframe>
+                          </div>
+                        </b-card-text>
+                      </b-tab>
                     </b-tabs>
                   </div>
                 </div>
@@ -149,13 +163,13 @@ export default {
       counter: 1
     };
   },
-  watch: {
-    datalist: {
-      handler: function() {
-        this.initializes();
-      }
-    }
-  },
+  // watch: {
+  //   datalist: {
+  //     handler: function() {
+  //       this.initializes();
+  //     }
+  //   }
+  // },
   mounted() {
     this.initializes();
   },
