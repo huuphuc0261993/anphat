@@ -3,18 +3,19 @@
     <categoriesModals ref="child" @saveDtb="save" />
     <a-row>
       <a-col :xs="12" >
-        <div class="col-4">
+        <div >
           <a-button type="primary" @click="show" :method="save">
             Thêm mới
           </a-button>
         </div>
       </a-col>
       <a-col :xs="12">
-        <div class="col-8">
+        <div >
           <a-input-search
             placeholder="input search text"
             size="large"
             v-model="search"
+        
           />
         </div>
       </a-col>

@@ -16,7 +16,7 @@ class Api::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    render json: { data: @product, status: :ok, message: 'Success' }
+    render json: @product
   end
 
   def update

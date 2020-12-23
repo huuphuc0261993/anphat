@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <h1 class="text-center">Đăng nhập</h1>
+    <h1 class="text-center" style="font-size: 20px"> Đăng nhập</h1>
     <a-alert
       v-show="isShowError"
       type="error"
@@ -14,7 +14,11 @@
       @submit.native.prevent
     >
       <a-form-model-item>
-        <a-input v-model="formInline.email" placeholder="Username" style="width:200%">
+        <a-input
+          v-model="formInline.email"
+          placeholder="Username"
+          style="width:200%"
+        >
           <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
         </a-input>
       </a-form-model-item>
@@ -83,6 +87,6 @@ export default {
 </script>
 <style>
 button.ant-btn.ant-btn-primary {
-    margin-top: 10px;   
+  margin-top: 10px;
 }
 </style>

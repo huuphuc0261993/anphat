@@ -42,7 +42,7 @@ module Api
     private
   
     def banner_params
-      params.require(:banner).permit(:banner_type)
+      params.require(:banner).permit(:banner_type, :name)
     end
   end
 end

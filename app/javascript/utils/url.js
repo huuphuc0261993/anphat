@@ -11,6 +11,8 @@ export const URLS = {
   BANNERS: () => `${getBaseUrl()}/banners`,
   BANNER: (id) => `${getBaseUrl()}/banners/${id}`,
 
+  CATEGORIES: () => `${getBaseUrl()}/categories`,
+
   LOGIN: () => `${getBaseUrl()}/login`,
   
   LOGOUT: () => `${getBaseUrl()}/logout`,

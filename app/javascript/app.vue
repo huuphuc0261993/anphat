@@ -3,6 +3,12 @@
     <div v-if="layout == 'Login'">
       <router-view />
     </div>
+    <div v-else-if="layout=='Home'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Product_Details'">
+      <router-view />
+    </div>
     <div v-else>
       <a-layout id="components-layout-demo-custom-trigger">
         <leftMenu></leftMenu>
@@ -13,17 +19,21 @@
               :type="collapsed ? 'menu-unfold' : 'menu-fold'"
               @click="() => (collapsed = !collapsed)"
             />
-            <a-row class="float-right" >
+            <a-row class="float-right">
               <a-popover placement="bottomRight">
                 <template slot="content">
                   <div>
                     <a href="#" @click="logout">
-                      <a-icon type="poweroff" style="color: orangered"
-                              class="mr-2"/>
-                      Đăng xuất</a>
+                      <a-icon
+                        type="poweroff"
+                        style="color: orangered"
+                        class="mr-2"
+                      />
+                      Đăng xuất</a
+                    >
                   </div>
                 </template>
-                <a-avatar style="backgroundColor:#87d068" icon="user"/>
+                <a-avatar style="backgroundColor:#87d068" icon="user" />
               </a-popover>
             </a-row>
           </a-layout-header>
@@ -43,8 +53,10 @@
   </div>
 </template>
 <script>
+
 import leftMenu from "./components/leftMenu.vue";
 import Login from "./pages/guest/Login";
+import Home from "./pages/home";
 import { URLS } from "./utils/url";
 import axios from "axios";
 export default {
@@ -57,20 +69,16 @@ export default {
     leftMenu,
     Login
   },
-  methods: { 
+  methods: {
     logout() {
-      localStorage.clear()
+      localStorage.clear();
       axios
-      .delete(URLS.LOGOUT(), {
-      })
-      .then(response => {
-      })
-      .catch(error => {
-        console.log(error);
-      });     
-        this.$router.push({ name: "Login" });
-     
-     
+        .delete(URLS.LOGOUT(), {})
+        .then(response => {})
+        .catch(error => {
+          console.log(error);
+        });
+      this.$router.push({ name: "Login" });
     }
   },
   computed: {
@@ -102,7 +110,7 @@ export default {
 #components-layout-demo-custom-trigger {
   height: 100vh;
 }
-.float-right.ant-row{
-margin-right: 1%
+.float-right.ant-row {
+  margin-right: 1%;
 }
 </style>

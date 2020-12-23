@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     resources :banners
     resources :customers
     resources :products
-    resources :categories
+    resources :categories 
+    # do
+    #   member do
+    #     get :products
+    #   end
+    # end
     resources :pictures, only: %w[create destroy]
   end
 

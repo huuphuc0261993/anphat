@@ -7,19 +7,30 @@ import Home from './pages/home'
 import Login from './pages/guest/Login'
 import ForgetPassword from './pages/guest/ForgetPassword'
 import SignUp from './pages/guest/SignUp'
-
+import Product_Details from './pages/product_detail/product_detail'
 
 const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/product_details/:id',
+        name: 'Product_Details',
+        component: Product_Details,
+        meta: {
+            guest: true
+        }
     },
     {
         path: '/news',
         name: 'News',
         component: News,
-        
+
     },
     {
         path: '/products',
@@ -66,16 +77,5 @@ const routes = [
         }
     }
 ]
-
-
-//   routes.afterEach((to, from) => {
-//     // set active menu
-//     store.commit('menu/SET_SELECTED_KEYS', to.name)
-//     if (to.meta.openKey) {
-//       store.commit('menu/SET_OPEN_KEYS', to.meta.openKey)
-//     } else {
-//       store.commit('menu/SET_OPEN_KEYS', '')
-//     }
-//   })
 
 export default routes

@@ -14,6 +14,18 @@ class Api::CategoriesController < ApplicationController
     end
   end
 
+  # def products
+  #   @categories = Category.find(params[:id])
+  #   @products = @categories.products
+  #   render json: @products, status: 200
+  # end
+
+  # def products_all
+  #   binding.pry
+  #   @categories = Category.includes(:product).all
+  #   render json: @categories, status: 200
+  # end
+  
   def show
     @categories = Category.find(params[:id])
     render json: { data: @categories, status: :ok, message: 'Success' }
