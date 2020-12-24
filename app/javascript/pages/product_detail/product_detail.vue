@@ -114,8 +114,8 @@
                         <b-card-text>
                           <div class="mt-3 text-center">
                             <iframe
-                              width="560"
-                              height="315"
+                              width="600"
+                              height="400"
                               src="https://www.youtube.com/embed/BUWzX78Ye_8"
                               allow="autoplay; encrypted-media"
                               allowfullscreen
