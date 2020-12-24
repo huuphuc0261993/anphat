@@ -8,7 +8,6 @@
               <li>Chào mừng bạn đến với công ty An Phát </li>
               <li>
                 <i class="fa fa-phone" aria-hidden="true"></i>Hotline: +8482 83 84 175 
-                - 7890
               </li>
             </ul>
           </div>

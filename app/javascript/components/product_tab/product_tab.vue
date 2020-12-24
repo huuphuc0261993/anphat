@@ -65,7 +65,6 @@ export default {
         .get(URLS.CATEGORIES(), {})
         .then(response => {
           this.categories = response.data;
-          console.log(this.categories);
         })
         .catch(error => {
           console.log(error);

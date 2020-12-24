@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid layout-8">
     <Header />
-    <section class="section-b-space">
+    <Breadcrumbs :title="datalist.name" />
+    <section class="section-b-space" style="padding-top: 4%">
       <div class="collection-wrapper">
         <div class="container">
           <div class="row">
@@ -66,24 +67,20 @@
                           </div>
                         </div>
                       </div>
-
+                      <div class="border-product">
+                        <h4 class="product-title">Tổng tiền: {{ formatPrice(datalist.price_sale * counter) }}đ</h4>
+                      </div>
                       <div class="product-buttons">
                         <button class="btn btn-solid" title="buy now">
                           Để lại thông tin để được tư vấn
                         </button>
                       </div>
                       <div class="border-product">
-                        <!-- <h6 class="product-title">Thông tin sản phẩm</h6>
-                        <p>
-                          {{ datalist.description.substring(0, 200) + "...." }}
-                        </p> -->
                         <input
                           type="text"
                           class="form-control"
                           name="EMAIL"
-                          id="mce-EMAIL"
                           placeholder="Họ và tên"
-                          required="required"
                         />
                         <input
                           style="margin-top: 1%"
@@ -92,16 +89,13 @@
                           name="EMAIL"
                           id="mce-EMAIL"
                           placeholder="Email"
-                          required="required"
                         />
                         <input
                           style="margin-top: 1%"
                           type="text"
                           class="form-control"
-                          name="EMAIL"
-                          id="mce-EMAIL"
+                          name="SDT"
                           placeholder="Số điện thoại"
-                          required="required"
                         />
                       </div>
                     </div>
@@ -116,7 +110,7 @@
                         <b-card-text>{{ datalist.description }}</b-card-text>
                       </b-tab>
 
-                       <b-tab title="Video">
+                      <b-tab title="Video">
                         <b-card-text>
                           <div class="mt-3 text-center">
                             <iframe
@@ -140,11 +134,7 @@
           </div>
         </div>
       </div>
-      <!-- <relatedProduct :productTYpe="productTYpe" :productId="productId" /> -->
-      <!-- <b-modal id="modal-1" size="md" centered hide-footer>
-        <template v-slot:modal-title>{{datalist.name}}</template>
-        <img src="/uploads/assets/images/4.jpg" alt="size-chart" class="img-fluid" />
-        </b-modal> -->
+      <relatedProduct :productslist="productslist" />
     </section>
     <Footer />
   </div>
@@ -154,22 +144,25 @@
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer1";
 import productSidebar from "../../components/widgets/product-sidebar";
+import relatedProduct from "../../components/widgets/related-products";
+import Breadcrumbs from "../../components/widgets/breadcrumbs";
 import axios from "axios";
 import { URLS } from "../../utils/url";
 export default {
   data() {
     return {
       datalist: "",
+      productslist: [],
       counter: 1
     };
   },
-  // watch: {
-  //   datalist: {
-  //     handler: function() {
-  //       this.initializes();
-  //     }
-  //   }
-  // },
+  watch: {
+    datalist: {
+      handler: function() {
+        this.initializes();
+      }
+    }
+  },
   mounted() {
     this.initializes();
   },
@@ -190,6 +183,10 @@ export default {
         .get(URLS.PRODUCT(id), {})
         .then(response => {
           this.datalist = response.data;
+          let id = this.datalist.category_id;
+          axios.get(URLS.CATEGORY_PRODUCTS(id), {}).then(response => {
+            this.productslist = response.data;
+          });
         })
         .catch(error => {});
     }
@@ -197,7 +194,9 @@ export default {
   components: {
     Header,
     Footer,
-    productSidebar
+    productSidebar,
+    relatedProduct,
+    Breadcrumbs
   }
 };
 </script>

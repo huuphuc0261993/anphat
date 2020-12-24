@@ -16,4 +16,6 @@ export const URLS = {
   LOGIN: () => `${getBaseUrl()}/login`,
   
   LOGOUT: () => `${getBaseUrl()}/logout`,
+
+  CATEGORY_PRODUCTS: (id) => `${getBaseUrl()}/categories/${id}/products`,
 };

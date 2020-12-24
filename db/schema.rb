@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_012313) do
+ActiveRecord::Schema.define(version: 2020_12_24_030016) do
 
   create_table "banners", force: :cascade do |t|
     t.text "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_012313) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "subtitle"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_012313) do
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "youtube"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
