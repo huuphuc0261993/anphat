@@ -4,17 +4,20 @@
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12">
-            <product-image
-              :product_pictures="editedItem.pictures_attributes"
+            <banner-image
+              :banner_pictures="editedItem.pictures_attributes"
               @updatePicturesList="updatePicturesList"
             />
           </a-col>
           <a-col :xs="12">
-            <a-form-model-item label="Loại Banner" prop="category_id">
+            <a-form-model-item label="Title" prop="name">
+              <a-input placeholder="Nhập title cho banner" v-model="editedItem.name" />
+            </a-form-model-item>
+            <a-form-model-item label="Loại Banner" prop="banner_type">
               <a-select
                 default-value="--/--"
                 style="width: 100%"
-                v-model="editedItem.category_id"
+                v-model="editedItem.banner_type"
               >
                 <a-select-option v-for="banner in banner_type" :key="banner.id">
                   {{ banner.name }}
@@ -37,7 +40,7 @@
 <script>
 import axios from "axios";
 import news from "../../pages/news";
-import productImage from "../../pages/product/product_image";
+import bannerImage from "../../pages/banner/banner_image";
 
 export default {
   props: {
@@ -46,7 +49,7 @@ export default {
   data() {
     return {
       rules: {
-        category_id: [
+        banner_type: [
           {
             required: true,
             message: "Không được để trống",
@@ -54,7 +57,6 @@ export default {
           }
         ]
       },
-      categoriesChild: [],
       banner_type: [
         {
           id: 1,
@@ -113,11 +115,12 @@ export default {
     edit(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
+      console.log(this.editedItem)
       this.visible = true;
     }
   },
   components: {
-    productImage
+    bannerImage
   },
   computed: {
    

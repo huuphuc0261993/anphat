@@ -9,14 +9,14 @@ module InitServices
 
     def perform
       return if @pictures_ids.blank?
-
+      
       current_pictures = @product.pictures.pluck(:id)
       Picture.where(id: current_pictures - @pictures_ids).destroy_all
       pictures = Picture.where(id: @pictures_ids - current_pictures)
       return if pictures.blank?
 
       pictures.each do |picture|
-        picture.product = @product
+        picture.imageable = @product
         picture.save
       end
     end

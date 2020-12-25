@@ -6,41 +6,41 @@ module Api
     end
 
     def create
-      @customers = Customer.new(customers_params)
-      if @customers.save
-        render json: @customers
+      @customer = Customer.new(customer_params)
+      if @customer.save
+        render json: @customer
       else
-        render json: { json: @customers.errors, status: :unprocessable_entity }
+        render json: { json: @customer.errors, status: :unprocessable_entity }
       end
     end
 
     def show
-      @customers = Customer.find(params[:id])
-      render json: { data: @customers, status: :ok, message: 'Success' }
+      @customer = Customer.find(params[:id])
+      render json: { data: @customer, status: :ok, message: 'Success' }
     end
 
     def update
       @customers = Customer.find(params[:id])
-      if @customers.update(customers_params)
+      if @customer.update(customers_params)
         render json: { status: :ok, message: 'Success' }
       else
-        render json: { json: @customers.error, status: :unprocessable_entity }
+        render json: { json: @customer.error, status: :unprocessable_entity }
       end
     end
 
     def destroy
-      @customers = Customer.find(params[:id])
-      if @customers.destroy
+      @customer = Customer.find(params[:id])
+      if @customer.destroy
         render json: { json: 'Customer was successfully deleted.' }
       else
-        render json: { json: @news.errors, status: :unprocessable_entity }
+        render json: { json: @customer.errors, status: :unprocessable_entity }
       end
     end
 
     private
 
-    def customers_params
-      params.require(:customer).permit(:name, :phone, :email)
+    def customer_params
+      params.require(:customer).permit(:name, :phone, :email, :password_digest)
     end
   end
 end

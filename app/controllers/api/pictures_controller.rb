@@ -4,7 +4,17 @@ class Api::PicturesController < ApplicationController
     if @picture.save
       render json: @picture, status: 200
     else
-      render json: { message: full_error(@image) }, status: 422
+      render json: { message: full_error(@picture) }, status: 422
+    end
+  end
+
+  def destroy
+    @picture = Picture.find_by(id: params[:id])
+    if @picture.destroy
+      @picture.errors.full_messages
+      render json: { json: 'Banner was successfully deleted.' }
+    else
+      render json: {}
     end
   end
 end
