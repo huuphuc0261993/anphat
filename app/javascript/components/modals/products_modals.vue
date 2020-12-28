@@ -64,6 +64,9 @@
                 </a-select-option>
               </a-select>
             </a-form-model-item>
+            <a-form-model-item label="Link youtube:" prop="youtube">
+              <a-input placeholder="Link youtube:" v-model="editedItem.youtube" />
+            </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
                 <a-button type="primary" @click="saveModal('editedItem')">

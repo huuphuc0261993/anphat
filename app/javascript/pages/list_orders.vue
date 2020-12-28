@@ -1,170 +1,100 @@
 <template>
   <div>
-    <table class="min-w-full table-auto">
-      <thead class="justify-between">
-        <tr class="bg-gray-800">
-          <th class="px-16 py-2">
-            <span class="text-gray-300"></span>
-          </th>
-          <th class="px-16 py-2">
-            <span class="text-gray-300">Name</span>
-          </th>
-          <th class="px-16 py-2">
-            <span class="text-gray-300">Invitation</span>
-          </th>
-          <th class="px-16 py-2">
-            <span class="text-gray-300">Date</span>
-          </th>
+    <a-row>
+      <a-col :xs="12">
+        <div >
+          <a-input-search
+            placeholder="input search text"
+            size="large"
+            v-model="search"
+            class="search_list_order"
+          />
+        </div>
+      </a-col>
+    </a-row>
+    <a-table
+      bordered
+      :data-source="onsearch"
+      :columns="columns"
+      :row-key="record => record.id"
+    >
 
-          <th class="px-16 py-2">
-            <span class="text-gray-300">Time</span>
-          </th>
-
-          <th class="px-16 py-2">
-            <span class="text-gray-300">Status</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-gray-200">
-        <tr class="bg-white border-4 border-gray-200">
-          <td class="px-16 py-2 flex flex-row items-center">
-            <img
-              class="h-8 w-8 rounded-full object-cover "
-              src="https://randomuser.me/api/portraits/men/30.jpg"
-              alt=""
-            />
-          </td>
-          <td>
-            <span class="text-center ml-2 font-semibold">Dean Lynch</span>
-          </td>
-          <td class="px-16 py-2">
-            <button
-              class="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black "
-            >
-              Open Link
-            </button>
-          </td>
-          <td class="px-16 py-2">
-            <span>05/06/2020</span>
-          </td>
-          <td class="px-16 py-2">
-            <span>10:00</span>
-          </td>
-
-          <td class="px-16 py-2">
-            <span class="text-green-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h5 "
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#2c3e50"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M5 12l5 5l10 -10" />
-              </svg>
-            </span>
-          </td>
-        </tr>
-        <tr class="bg-white border-4 border-gray-200">
-          <td class="px-16 py-2 flex flex-row items-center">
-            <img
-              class="h-8 w-8 rounded-full object-cover "
-              src="https://randomuser.me/api/portraits/men/76.jpg"
-              alt=""
-            />
-          </td>
-          <td>
-            <span class="text-center ml-2 font-semibold">Ralph Barnes</span>
-          </td>
-          <td class="px-16 py-2">
-            <button
-              class="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black "
-            >
-              Open Link
-            </button>
-          </td>
-          <td class="px-16 py-2">
-            <span>05/06/2020</span>
-          </td>
-          <td class="px-16 py-2">
-            <span>12:15</span>
-          </td>
-
-          <td class="px-16 py-2">
-            <span class="text-yellow-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#2c3e50"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <circle cx="12" cy="12" r="9" />
-                <polyline points="12 7 12 12 15 15" />
-              </svg>
-            </span>
-          </td>
-        </tr>
-        <tr class="bg-white border-4 border-gray-200">
-          <td class="px-16 py-2 flex flex-row items-center">
-            <img
-              class="h-8 w-8 rounded-full object-cover "
-              src="https://randomuser.me/api/portraits/men/38.jpg"
-              alt=""
-            />
-          </td>
-          <td>
-            <span class="text-center ml-2 font-semibold">Brett Castillo</span>
-          </td>
-          <td class="px-16 py-2">
-            <button
-              class="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black "
-            >
-              Open Link
-            </button>
-          </td>
-          <td class="px-16 py-2">
-            <span>05/06/2020</span>
-          </td>
-          <td class="px-16 py-2">
-            <span>08:35</span>
-          </td>
-
-          <td class="px-16 py-2">
-            <span class="text-yellow-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#2c3e50"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <template slot="picture" slot-scope="picture">
+        <a-avatar :src="picture" />
+      </template>
+    </a-table>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import { ProductColumns } from "../utils/columns/list_order";
+import { URLS } from "../utils/url";
+export default {
+  data() {
+    return {
+      dataNews: [],
+      categories: [],
+      search: "",    
+      editedItem: {},
+      columns: ProductColumns.cols
+    };
+  },
+  mounted() {
+    this.initialize();
+  },
+  methods: {
+    initialize() {
+      return axios
+        .get(URLS.ORDER_ITEMS())
+        .then(response => {
+          this.dataNews = response.data;
+          this.dataNews.reverse()
+          console.log(this.dataNews)
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+  },
+  components: {
+  },
+  computed: {
+    onsearch() {
+      if (this.search) {
+        return this.dataNews.filter(item => {
+          return (
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.order.customer.name.toLowerCase().includes(v)) ||
+              this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.order.customer.created_at.toLowerCase().includes(v)) ||
+              this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.product.name.toLowerCase().includes(v)) ||
+              this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.order.customer.email.toLowerCase().includes(v))
+          );
+        });
+      } else {
+        return this.dataNews;
+      }
+    }
+  }
+};
 </script>
-
-<style>
+<style scoped>
+.highlight {
+  background-color: rgb(255, 192, 105);
+  padding: 0px;
+}
+.search_list_order{
+  margin-bottom: 2%
+}
 </style>

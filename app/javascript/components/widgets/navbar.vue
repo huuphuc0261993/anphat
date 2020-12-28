@@ -18,7 +18,8 @@
             </div>
           </li>
           <li v-for="(menuItem, index) in menulist" :key="index">
-            <router-link
+        
+            <router-link v-if="menuItem.title === 'TRANG CHỦ'"
               :to="{ name: 'Home' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
@@ -26,7 +27,25 @@
               {{ menuItem.title }}
               <span
                 class="sub-arrow"
-                v-if="menuItem.children || menuItem.megamenu"
+                v-if="menuItem.children"
+              ></span>
+            </router-link>
+            <router-link v-else-if="menuItem.title === 'TIN TỨC'"
+              :to="{ name: 'Blog' }"
+              class="nav-link"
+              @click="setActive(menuItem.title)"
+            >
+              {{ menuItem.title }}
+            </router-link>
+            <router-link v-else
+              :to="{ name: 'Home' }"
+              class="nav-link"
+              @click="setActive(menuItem.title)"
+            >
+              {{ menuItem.title }}
+              <span
+                class="sub-arrow"
+                v-if="menuItem.children"
               ></span>
             </router-link>
             <ul
@@ -76,17 +95,17 @@ export default {
     return {
       openmobilenav: false,
       subnav: false,
-      activeItem: "home",
+      activeItem: "",
       activeChildItem: "fashion 1",
       activemegaChild: "portfolio",
       menulist: [
         {
-          title: "Trang chủ",
+          title: "TRANG CHỦ",
           type: "sub",
           path: ""
         },
         {
-          title: "Products",
+          title: "SẢN PHẨM",
           type: "sub",
           active: false,
           children: [
@@ -99,16 +118,10 @@ export default {
           ]
         },
         {
-          title: "Blog",
+          title: "TIN TỨC",
           type: "sub",
           active: false,
-          children: [
-            {
-              path: "/blog/blog-leftsidebar",
-              title: "Left Sidebar",
-              type: "link"
-            }
-          ]
+          path: "/blog"
         }
       ]
     };
@@ -122,6 +135,7 @@ export default {
         .get(URLS.CATEGORIES(), {})
         .then(response => {
           this.menulist[1].children = response.data;
+          console.log(this.menulist)
         })
         .catch(error => {
           console.log(error);
@@ -135,8 +149,8 @@ export default {
     },
     setActive(menuItem) {
       if (this.activeItem === menuItem) {
-        this.activeItem = "";
-      } else {
+        this.activeItem = "Home";
+      }else {
         this.activeItem = menuItem;
       }
     },

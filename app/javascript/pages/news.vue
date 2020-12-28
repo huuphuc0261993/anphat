@@ -202,12 +202,12 @@ export default {
     editNews(item) {
       this.$refs.child.edit(item);
     },
-
     initialize() {
       return axios
         .get("http://localhost:3000/api/news")
         .then(response => {
           this.dataNews = response.data;
+          console.log(this.dataNews);
           this.dataNews = JSON.parse(JSON.stringify(this.dataNews));
         })
         .catch(e => {

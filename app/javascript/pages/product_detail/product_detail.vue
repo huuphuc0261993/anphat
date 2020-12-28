@@ -68,11 +68,18 @@
                         </div>
                       </div>
                       <div class="border-product">
-                        <h4 class="product-title">Tổng tiền: {{ formatPrice(datalist.price_sale * counter) }}đ</h4>
+                        <h4 class="product-title">
+                          Tổng tiền:
+                          {{ formatPrice(datalist.price_sale * counter) }}đ
+                        </h4>
                       </div>
                       <div class="product-buttons">
-                        <button class="btn btn-solid" title="buy now">
-                          Để lại thông tin để được tư vấn
+                        <button
+                          class="btn btn-solid"
+                          title="buy now"
+                          @click="save(order_items)"
+                        >
+                          Liên hệ ngay
                         </button>
                       </div>
                       <div class="border-product">
@@ -81,6 +88,7 @@
                           class="form-control"
                           name="EMAIL"
                           placeholder="Họ và tên"
+                          v-model="order_items.name"
                         />
                         <input
                           style="margin-top: 1%"
@@ -89,6 +97,7 @@
                           name="EMAIL"
                           id="mce-EMAIL"
                           placeholder="Email"
+                          v-model="order_items.email"
                         />
                         <input
                           style="margin-top: 1%"
@@ -96,6 +105,7 @@
                           class="form-control"
                           name="SDT"
                           placeholder="Số điện thoại"
+                          v-model="order_items.phone"
                         />
                       </div>
                     </div>
@@ -116,7 +126,7 @@
                             <iframe
                               width="600"
                               height="400"
-                              src="https://www.youtube.com/embed/BUWzX78Ye_8"
+                              :src='"https://www.youtube.com/embed/"+datalist.youtube'
                               allow="autoplay; encrypted-media"
                               allowfullscreen
                             ></iframe>
@@ -151,22 +161,75 @@ import { URLS } from "../../utils/url";
 export default {
   data() {
     return {
+      order_items: {
+        name: "",
+        phone: "",
+        email: "",
+        total: "",
+        customer_id: "",
+        price: "",
+        product_id: "",
+        order_id: "",
+        quantity:""
+      },
       datalist: "",
       productslist: [],
       counter: 1
     };
   },
-  watch: {
-    datalist: {
-      handler: function() {
-        this.initializes();
-      }
-    }
-  },
+  // watch: {
+  //   datalist: {
+  //     handler: function() {
+  //       this.initializes();
+  //     }
+  //   }
+  // },
   mounted() {
     this.initializes();
   },
   methods: {
+    save(customer) {
+      axios
+        .post(URLS.CUSTOMERS(), {
+          customer: customer
+        })
+        .then(response => {
+          this.order_items.customer_id = response.data.id;
+          this.order_items.quantity = this.counter
+          this.save_order(this.order_items);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    save_order(order) {
+      axios
+        .post(URLS.ORDERS(), {
+          order: order
+        })
+        .then(response => {
+          this.order_items.order_id = response.data.id;
+          this.order_items.product_id = this.datalist.id;
+          this.order_items.price = this.datalist.price_sale;
+          this.save_order_items(this.order_items);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    save_order_items(order_item) {
+      console.log(order_item);
+      axios
+        .post(URLS.ORDER_ITEMS(), {
+          order_item: order_item
+        })
+        .then(response => {
+          this.$router.push({ name: "Order_Success", params: {status: "success"}});
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     increment() {
       this.counter++;
     },
@@ -174,11 +237,13 @@ export default {
       if (this.counter > 1) this.counter--;
     },
     formatPrice(value) {
+      this.order_items.total = value;
       let val = (value / 1).toFixed(0).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     initializes() {
       let id = this.$route.params.id;
+      console.log(id)
       axios
         .get(URLS.PRODUCT(id), {})
         .then(response => {

@@ -9,6 +9,15 @@
     <div v-else-if="layout=='Product_Details'">
       <router-view />
     </div>
+    <div v-else-if="layout=='Order_Success'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Blog'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Blog_Detail'">
+      <router-view />
+    </div>
     <div v-else>
       <a-layout id="components-layout-demo-custom-trigger">
         <leftMenu></leftMenu>

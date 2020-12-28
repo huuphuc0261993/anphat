@@ -30,12 +30,21 @@ function getBase64(file) {
   });
 }
 export default {
-  mounted() {},
+  watch: {
+    item: {
+      handler: function() {
+        this.initFileList();
+      }
+    }
+  },
+  mounted() {
+    this.initFileList()
+  },
   data() {
     return {
       previewVisible: false,
       previewImage: "",
-      fileList: this.$props.item,
+      fileList: [],
       empty: []
     };
   },
@@ -50,7 +59,12 @@ export default {
       type: Boolean
     }
   },
+  computed:{
+  },
   methods: {
+    initFileList(){
+    return this.fileList = this.$props.item
+    },
     handleCancel() {
       this.previewVisible = false;
     },

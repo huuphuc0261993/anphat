@@ -64,22 +64,12 @@
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fa fa-google-plus" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
                         <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-rss" aria-hidden="true"></i>
                       </a>
                     </li>
                   </ul>
@@ -224,7 +214,6 @@ export default {
         .get(URLS.CATEGORIES(), {})
         .then(response => {
           this.categories = response.data;
-          console.log(this.categories);
         })
         .catch(error => {
           console.log(error);

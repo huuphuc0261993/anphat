@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :banners
     resources :customers
     resources :products
+    resources :orders
+    resources :order_items
     resources :categories do
       member do
         get :products
