@@ -24,7 +24,6 @@
             <div>
               <a-icon type="edit" @click="editBanner(banner.id)"/>
               <a-icon type="delete" @click="softdelted(banner.id)" />
-              <a-icon type="arrow-down" :hreft="element.url"/>
             </div>
           </div>
         </div>
@@ -39,7 +38,6 @@
             <div>
               <a-icon type="edit" @click="editBanner(banner.id)"/>
               <a-icon type="delete" @click="softdelted(banner.id)" />
-              <a-icon type="arrow-down" :hreft="element.url"/>
             </div>
           </div>
         </div>
