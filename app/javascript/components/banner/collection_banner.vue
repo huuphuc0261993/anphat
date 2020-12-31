@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row partition3">
           <div class="col-md-4" v-for="(item, index) in items" :key="index">
-            <a href="#" v-if="item.banner_type == 2">
+            <a v-if="item.banner_type == 2">
               <div class="collection-banner p-left text-center">
                 <div class="img-part">
                   <img
