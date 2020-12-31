@@ -2,6 +2,9 @@ export const getBaseUrl = () => {
   return "/api";
 };
 export const URLS = {
+  NEWS: () => `${getBaseUrl()}/news`,
+  NEW: (id) => `${getBaseUrl()}/news/${id}`,
+
   IMAGES: () => `${getBaseUrl()}/pictures`,
   IMAGE: (id) => `${getBaseUrl()}/pictures/${id}`,
 
