@@ -27,6 +27,7 @@ export const URLS = {
   ORDER_ITEM: (id) => `${getBaseUrl()}/order_items/${id}`,
 
   CATEGORIES: () => `${getBaseUrl()}/categories`,
+  CATEGORY: (id) => `${getBaseUrl()}/categories/${id}`,
 
   LOGIN: () => `${getBaseUrl()}/login`,
   
