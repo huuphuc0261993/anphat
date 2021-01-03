@@ -235,12 +235,12 @@ export default {
         name: "",
         phone: "",
         email: "",
-        total: "",
+        total: "0",
         customer_id: "",
-        price: "",
-        product_id: "0",
+        price: "0",
+        product_id: "1",
         order_id: "",
-        quantity: ""
+        quantity: "0"
       },
       categories: []
     };
@@ -262,6 +262,7 @@ export default {
           customer: customer
         })
         .then(response => {
+          
           this.order_items.customer_id = response.data.id;
           this.save_order(this.order_items);
         })
@@ -275,6 +276,9 @@ export default {
           order: order
         })
         .then(response => {
+          console.log("day la data")
+        console.log(response.data)
+        this.order_items.order_id = response.data.id
           this.save_order_items(this.order_items);
         })
         .catch(error => {
@@ -282,7 +286,7 @@ export default {
         });
     },
     save_order_items(order_item) {
-      console.log(order_item);
+  
       axios
         .post(URLS.ORDER_ITEMS(), {
           order_item: order_item

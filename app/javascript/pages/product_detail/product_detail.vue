@@ -177,13 +177,13 @@ export default {
       counter: 1
     };
   },
-  watch: {
-    datalist: {
-      handler: function() {
-        this.initializes();
-      }
-    }
-  },
+  // watch: {
+  //   datalist: {
+  //     handler: function() {
+  //       this.initializes();
+  //     }
+  //   }
+  // },
   mounted() {
     this.initializes();
   },

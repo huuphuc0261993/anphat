@@ -1,6 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
   host = '103.221.220.21' #replace with your own url
   config.action_mailer.default_url_options =  { :host => '103.221.220.21', protocol: 'http' }
   
