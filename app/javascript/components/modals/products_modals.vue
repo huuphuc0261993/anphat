@@ -84,7 +84,7 @@
 import axios from "axios";
 import news from "../../pages/news";
 import productImage from "../../pages/product/product_image";
-
+import { URLS } from "../../utils/url";
 export default {
   props: {
     changShow: Boolean
@@ -169,7 +169,7 @@ export default {
     },
     categories() {
       return axios
-        .get("http://localhost:3000/api/categories")
+        .get(URLS.CATEGORIES())
         .then(response => {
           this.categoriesChild = response.data;
         })
