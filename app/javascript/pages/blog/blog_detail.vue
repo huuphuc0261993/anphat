@@ -61,6 +61,9 @@ export default {
     },
   }
 };
+window.onpopstate = function () {
+    location.reload()
+};
 </script>
 <style scoped>
 .paragraph{

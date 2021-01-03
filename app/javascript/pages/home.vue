@@ -17,7 +17,9 @@
      
 </template>
 <script>
-
+window.onpopstate = function () {
+    location.reload()
+};
 import Header from "../components/header/header";
 import Slider from "../components/banner/slider";
 import CollectionBanner from "../components/banner/collection_banner";
@@ -68,5 +70,6 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 </style>

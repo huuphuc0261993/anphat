@@ -18,9 +18,9 @@
         <i class="fa fa-star"></i>
         <i class="fa fa-star"></i>
       </div>
-      <a>
+      <router-link :to="'/product_details/'+product.id">
         <h6>{{ product.name }}</h6>
-      </a>
+      </router-link>
       <h4>
         {{ formatPrice(product.price_sale) }}đ<del>{{ product.price }}</del>
       </h4>

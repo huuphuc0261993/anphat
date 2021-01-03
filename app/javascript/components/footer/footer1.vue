@@ -8,33 +8,55 @@
               <div class="col-lg-6">
                 <div class="subscribe">
                   <div>
-                    <h4>NHẬP EMAIL ĐỂ NHẬN BÁO GIÁ</h4>
+                    <h4>NHẬP THÔNG TIN ĐỂ NHẬN BÁO GIÁ</h4>
                     <p>Chúng tôi sẽ gửi báo giá cho bạn trong vòng 30 phút</p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6">
-                <form
+                <div
                   class="form-inline subscribe-form auth-form needs-validation"
                   method="post"
                   id="mc-embedded-subscribe-form"
                   name="mc-embedded-subscribe-form"
                   target="_blank"
                 >
-                  <div class="form-group mx-sm-3">
+                  <div >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="EMAIL"
+                      placeholder="Họ và tên"
+                      v-model="order_items.name"
+                      style="width:25%"
+                    />
                     <input
                       type="text"
                       class="form-control"
                       name="EMAIL"
                       id="mce-EMAIL"
-                      placeholder="Vui lòng nhập email"
-                      required="required"
+                      placeholder="Email"
+                      v-model="order_items.email"
+                      style="width:25%"
                     />
-                  </div>
-                  <button type="submit" class="btn btn-solid" id="mc-submit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="SDT"
+                      placeholder="Số điện thoại"
+                      v-model="order_items.phone"
+                      style="width:25%"
+                    />
+                     <button
+                    class="btn btn-solid"
+
+                    @click="save(order_items)"
+                    style="width:20%"
+                  >
                     Gửi
                   </button>
-                </form>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -49,7 +71,12 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <!-- <img src='/uploads/assets/images/icon/logo.png' alt="logo" /> -->
+                  <img
+                    src="/uploads/assets/images/logos/anphat.png"
+                    style="width:20%"
+                    class="img-fluid"
+                    alt
+                  />
                 </div>
                 <p>
                   Lĩnh vực: Bán lẻ đồ điện gia dụng, giường, tủ, bàn, ghế và đồ
@@ -82,10 +109,9 @@
                   <h4>SẢN PHẨM</h4>
                 </div>
                 <div class="footer-contant">
-                  <ul  v-for="(e, index) in categories"
-                  :key="index">
+                  <ul v-for="(e, index) in categories" :key="index">
                     <li>
-                      <a href="#">{{e.name}}</a>
+                      <a href="#">{{ e.name }}</a>
                     </li>
                   </ul>
                 </div>
@@ -205,6 +231,17 @@ export default {
   },
   data() {
     return {
+      order_items: {
+        name: "",
+        phone: "",
+        email: "",
+        total: "",
+        customer_id: "",
+        price: "",
+        product_id: "0",
+        order_id: "",
+        quantity: ""
+      },
       categories: []
     };
   },
@@ -218,7 +255,45 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+     save(customer) {
+      axios
+        .post(URLS.CUSTOMERS(), {
+          customer: customer
+        })
+        .then(response => {
+          this.order_items.customer_id = response.data.id;
+          this.save_order(this.order_items);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    save_order(order) {
+      axios
+        .post(URLS.ORDERS(), {
+          order: order
+        })
+        .then(response => {
+          this.save_order_items(this.order_items);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    save_order_items(order_item) {
+      console.log(order_item);
+      axios
+        .post(URLS.ORDER_ITEMS(), {
+          order_item: order_item
+        })
+        .then(response => {
+          this.$router.push({ name: "Order_Success", params: {status: "success"}});
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
   }
 };
 </script>

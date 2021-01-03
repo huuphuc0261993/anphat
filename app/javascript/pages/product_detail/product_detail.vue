@@ -264,6 +264,9 @@ export default {
     Breadcrumbs
   }
 };
+window.onpopstate = function () {
+    location.reload()
+}; 
 </script>
 
 <style>

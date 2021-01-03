@@ -232,6 +232,9 @@ export default {
   },
   computed: {}
 };
+window.onpopstate = function () {
+    location.reload()
+};
 </script>
 <style scoped>
 .highlight {

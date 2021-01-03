@@ -17,7 +17,7 @@
         <div class="blog-right">
           <div>
             <h6>{{ blog.created_at }}</h6>
-            <router-link :to="{ path: '/blog/blog-detail'}">
+            <router-link :to="{ path: '/blog_detail/'+blog.id}">
               <h4>{{blog.title}}</h4>
             </router-link>
             <ul class="post-social">
