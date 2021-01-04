@@ -84,6 +84,9 @@ export default {
     }
   }
 };
+window.onpopstate = function () {
+    location.reload()
+};
 </script>
 <style>
 button.ant-btn.ant-btn-primary {

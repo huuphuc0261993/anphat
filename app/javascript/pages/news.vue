@@ -123,7 +123,7 @@ export default {
         formData.append("news[content]", item.content);
         formData.append("news[image]", item.image.originFileObj);
         axios
-          .post(`http://localhost:3000/api/news`, formData, {
+          .post(URLS.NEWS(), formData, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -162,7 +162,7 @@ export default {
             formData.append("news[content]", item.content);
             formData.append("news[image]", fileData);
             axios
-              .put(`http://localhost:3000/api/news/${item.id}`, formData, {
+              .put(URLS.NEW(item.id), formData, {
                 headers: {
                   "Content-Type": "application/json"
                 }
@@ -183,7 +183,7 @@ export default {
           formData.append("news[content]", item.content);
           formData.append("news[image]", item.image.originFileObj);
           axios
-            .put(`http://localhost:3000/api/news/${item.id}`, formData, {
+            .put(URLS.NEW(item.id), formData, {
               headers: {
                 "Content-Type": "application/json"
               }
@@ -202,12 +202,12 @@ export default {
     editNews(item) {
       this.$refs.child.edit(item);
     },
-
     initialize() {
       return axios
-        .get("http://localhost:3000/api/news")
+        .get(URLS.NEWS())
         .then(response => {
           this.dataNews = response.data;
+          console.log(this.dataNews);
           this.dataNews = JSON.parse(JSON.stringify(this.dataNews));
         })
         .catch(e => {
@@ -217,7 +217,7 @@ export default {
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(`http://localhost:3000/api/news/` + id)
+        .delete(URLS.NEW(id))
         .then(response => {
           this.initialize();
         })
@@ -231,6 +231,9 @@ export default {
     newsModals
   },
   computed: {}
+};
+window.onpopstate = function () {
+    location.reload()
 };
 </script>
 <style scoped>

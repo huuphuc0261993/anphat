@@ -15,7 +15,7 @@ class Api::NewsController < ApplicationController
 
   def show
     @news = News.find(params[:id])
-    render json: { data: @news, status: :ok, message: 'Success' }
+    render json:  @news
   end
 
   def update

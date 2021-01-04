@@ -54,7 +54,7 @@
 <script>
 import categoriesModals from "../components/modals/categories_modals";
 import axios from "axios";
-
+import { URLS } from "../utils/url";
 export default {
   data() {
     return {
@@ -97,7 +97,7 @@ export default {
         let formData = new FormData();
         formData.append("category[name]", item.name);
         axios
-          .post(`http://localhost:3000/api/categories`, formData, {
+          .post(URLS.CATEGORIES(), formData, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -115,7 +115,7 @@ export default {
         let formData = new FormData();
         formData.append("category[name]", item.name);
         axios
-          .put(`http://localhost:3000/api/categories/${item.id}`, formData, {
+          .put(URLS.CATEGORY(item.id), formData, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -136,7 +136,7 @@ export default {
 
     initialize() {
       return axios
-        .get("http://localhost:3000/api/categories")
+        .get(URLS.CATEGORIES())
         .then(response => {
           this.dataNews = response.data;
         })
@@ -147,7 +147,7 @@ export default {
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(`http://localhost:3000/api/categories/` + id)
+        .delete(URLS.CATEGORY(id))
         .then(response => {
           this.initialize();
         })

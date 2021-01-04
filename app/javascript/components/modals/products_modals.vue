@@ -64,6 +64,9 @@
                 </a-select-option>
               </a-select>
             </a-form-model-item>
+            <a-form-model-item label="Link youtube:" prop="youtube">
+              <a-input placeholder="Link youtube:" v-model="editedItem.youtube" />
+            </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
                 <a-button type="primary" @click="saveModal('editedItem')">
@@ -81,7 +84,7 @@
 import axios from "axios";
 import news from "../../pages/news";
 import productImage from "../../pages/product/product_image";
-
+import { URLS } from "../../utils/url";
 export default {
   props: {
     changShow: Boolean
@@ -166,7 +169,7 @@ export default {
     },
     categories() {
       return axios
-        .get("http://localhost:3000/api/categories")
+        .get(URLS.CATEGORIES())
         .then(response => {
           this.categoriesChild = response.data;
         })

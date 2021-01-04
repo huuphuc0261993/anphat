@@ -68,7 +68,7 @@ export default {
         {
           uid: "-1",
           id: "",
-          name: "Screenshot_from_2020-11-26_11-51-48.png",
+          name: "",
           status: "",
           url: ""
         }
@@ -76,7 +76,7 @@ export default {
       item1: [
         {
           uid: "-1",
-          name: "Screenshot_from_2020-11-26_11-51-48.png",
+          name: "",
           status: "",
           url: ""
         }

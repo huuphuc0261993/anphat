@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_030016) do
+ActiveRecord::Schema.define(version: 2020_12_27_074419) do
 
   create_table "banners", force: :cascade do |t|
     t.text "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_030016) do
     t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end

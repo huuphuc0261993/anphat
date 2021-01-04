@@ -6,7 +6,6 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
-import '../assets/css/tailwind.min.css' 
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
 import '../assets/scss/app.scss'

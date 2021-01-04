@@ -19,6 +19,9 @@
                     @closeVal="closeBarValFromChild"
                   />
                 </div>
+                <div class="brand-logo">
+                    <img src='/uploads/assets/images/logos/anphat.png' style="width:20%" class="img-fluid" alt />                  
+                </div>
                 <div class="brand-logo"></div>
               </div>
               <div class="menu-right pull-right">
