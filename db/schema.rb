@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_12_27_074419) do
     t.text "name"
     t.integer "phone"
     t.text "email", null: false
-    t.text "password_digest", null: false
+    t.text "encrypted_password", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
