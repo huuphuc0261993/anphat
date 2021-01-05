@@ -3,7 +3,7 @@
     <productsModals ref="child" @saveDtb="save" />
     <a-row>
       <a-col :xs="12">
-        <div class="col-8">
+        <div >
           <a-input-search
             placeholder="input search text"
             size="large"
@@ -12,15 +12,12 @@
         </div>
       </a-col>
       <a-col :xs="12">
-        <div class="col-4">
+        <div >
           <a-row class="table-buttons">
             <a-col :span="24" class="text-right">
               <a-button type="primary" @click="show" :method="save">{{
                 "Thêm mới sản phẩm"
               }}</a-button>
-              <a-button type="default" class="yellow-btn">
-                <a-icon type="reload"></a-icon>
-              </a-button>
             </a-col>
           </a-row>
         </div>

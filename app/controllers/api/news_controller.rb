@@ -1,6 +1,5 @@
 class Api::NewsController < ApplicationController
   def index
-    # @news = News.where(deleted_at: nil)
     @news = News.all
     # render json: @news
   end
@@ -16,7 +15,7 @@ class Api::NewsController < ApplicationController
 
   def show
     @news = News.find(params[:id])
-    render json: { data: @news, status: :ok, message: 'Success' }
+    render json:  @news
   end
 
   def update

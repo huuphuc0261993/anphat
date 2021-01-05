@@ -4,4 +4,5 @@ json.array! @news do |new|
   json.content new.content
   json.image new.image
   json.description new.description
+  json.created_at new.created_at
 end

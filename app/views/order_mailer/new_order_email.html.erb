@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You got a new order from <%= @customer.email%>!</p>
+    <p>
+    Order details<br>
+    --------------------------
+    </p>
+    Name: <%= @customer.name %> <br>
+    Email: <%= @customer.email %><br>
+    SDT: <%= @customer.phone %><br>
+    So luong: <%= @order_item.quantity %><br>
+    Tong tien: <%= @order.total %><br>
+    <p>
+    Message:<br>
+    ----------
+    </p>
+
+  </body>
+</html>

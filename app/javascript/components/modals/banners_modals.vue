@@ -10,6 +10,9 @@
             />
           </a-col>
           <a-col :xs="12">
+            <a-form-model-item label="Title" prop="name">
+              <a-input placeholder="Nhập title cho banner" v-model="editedItem.name" />
+            </a-form-model-item>
             <a-form-model-item label="Loại Banner" prop="banner_type">
               <a-select
                 default-value="--/--"
