@@ -235,13 +235,14 @@ export default {
         name: "",
         phone: "",
         email: "",
-        total: "0",
+        total: "",
         customer_id: "",
-        price: "0",
+        price: "",
         product_id: "1",
         order_id: "",
-        quantity: "0"
-      },
+        quantity:"",
+         encrypted_password:""
+              },
       categories: []
     };
   },

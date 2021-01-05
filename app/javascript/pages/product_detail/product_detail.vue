@@ -170,7 +170,8 @@ export default {
         price: "",
         product_id: "",
         order_id: "",
-        quantity:""
+        quantity:"",
+        encrypted_password:""
       },
       datalist: "",
       productslist: [],
@@ -194,6 +195,7 @@ export default {
           customer: customer
         })
         .then(response => {
+          console.log("id:"+response.data.id)
           this.order_items.customer_id = response.data.id;
           this.order_items.quantity = this.counter
           this.save_order(this.order_items);
