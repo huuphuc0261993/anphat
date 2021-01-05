@@ -2,13 +2,13 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  host = '103.221.220.21' #replace with your own url
-  config.action_mailer.default_url_options =  { :host => '103.221.220.21', protocol: 'http' }
+  host = 'anphathue.vn' #replace with your own url
+  config.action_mailer.default_url_options =  { :host => 'anphathue.vn', protocol: 'https' }
   
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
-    :port                 => 587,
+    :port                 => 80,
     :user_name            => "customer.aphue@gmail.com",
     :password             => "awwepqryiimhsuhr",
     :authentication       => "plain",
@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
