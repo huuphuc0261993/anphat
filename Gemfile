@@ -19,13 +19,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'active_model_serializers'
 gem 'carrierwave'
-<<<<<<< HEAD
-gem 'devise'
-=======
 gem "passenger"
 gem 'devise'
 gem 'devise_token_auth'
->>>>>>> c2ff7ba02c218a99822901daf4afd3b7d3aebccd
 gem 'devise-jwt'
 gem 'foreman'
 gem 'jbuilder', '~> 2.7'
