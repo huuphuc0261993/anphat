@@ -59,8 +59,6 @@ export default {
       }, 300);
     },
     saveModal(item) {
-      console.log("day la editItem");
-      console.log(this.editedItem);
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);

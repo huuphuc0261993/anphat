@@ -9,6 +9,7 @@ import ForgetPassword from './pages/guest/ForgetPassword'
 import SignUp from './pages/guest/SignUp'
 import Product_Details from './pages/product_detail/product_detail'
 import Order_Success from './components/order_success/order_success'
+// import Editor from './components/editor/editor'
 import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
 

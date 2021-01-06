@@ -195,7 +195,6 @@ export default {
           customer: customer
         })
         .then(response => {
-          console.log("id:"+response.data.id)
           this.order_items.customer_id = response.data.id;
           this.order_items.quantity = this.counter
           this.save_order(this.order_items);
@@ -220,7 +219,6 @@ export default {
         });
     },
     save_order_items(order_item) {
-      console.log(order_item);
       axios
         .post(URLS.ORDER_ITEMS(), {
           order_item: order_item
@@ -245,7 +243,6 @@ export default {
     },
     initializes() {
       let id = this.$route.params.id;
-      console.log(id)
       axios
         .get(URLS.PRODUCT(id), {})
         .then(response => {

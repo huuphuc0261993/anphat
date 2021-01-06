@@ -50,12 +50,10 @@ export default {
   methods: {
     initializes() {
       let id = this.$route.params.id;
-      console.log(id)
       axios
         .get(URLS.BLOG(id), {})
         .then(response => {
           this.datalist = response.data
-          console.log(this.datalist)
         })
         .catch(error => {});
     },

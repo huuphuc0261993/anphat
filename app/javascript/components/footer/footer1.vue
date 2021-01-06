@@ -277,8 +277,6 @@ export default {
           order: order
         })
         .then(response => {
-          console.log("day la data")
-        console.log(response.data)
         this.order_items.order_id = response.data.id
           this.save_order_items(this.order_items);
         })

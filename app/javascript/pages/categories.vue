@@ -91,8 +91,6 @@ export default {
       this.$refs.child.showModal();
     },
     save(item, index) {
-      console.log("day la item name");
-      console.log(item.name);
       if (index == -1) {
         let formData = new FormData();
         formData.append("category[name]", item.name);

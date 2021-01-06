@@ -73,7 +73,7 @@ export default {
       this.$refs.child.showModal();
     },
     save(banner, index) {
-      console.log(banner);
+
       if (index == -1) {
         axios
           .post(URLS.BANNERS(), {
@@ -116,15 +116,12 @@ export default {
         .get(URLS.BANNERS())
         .then(response => {
           this.dataNews = response.data;
-          console.log(this.dataNews);
         })
         .catch(e => {
           console.log(e);
         });
     },
     softdelted(item) {
-      console.log("day la id");
-      console.log(item);
       axios
         .delete(URLS.BANNER(item))
         .then(response => {

@@ -135,7 +135,6 @@ export default {
         .get(URLS.CATEGORIES(), {})
         .then(response => {
           this.menulist[1].children = response.data;
-          console.log(this.menulist)
         })
         .catch(error => {
           console.log(error);
@@ -158,7 +157,6 @@ export default {
       return this.activeChildItem === menuChildItem;
     },
     setActiveChild(menuChildItem) {
-      console.log(menuChildItem);
       if (this.activeChildItem === menuChildItem) {
         this.activeChildItem = "";
       } else {
