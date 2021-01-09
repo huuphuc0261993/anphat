@@ -1,7 +1,7 @@
 <template>
   <div>
     <footer class="footer-light">
-      <div class="light-layout">
+      <!-- <div class="light-layout">
         <div class="container">
           <section class="small-section border-section border-top-0">
             <div class="row">
@@ -21,47 +21,13 @@
                   name="mc-embedded-subscribe-form"
                   target="_blank"
                 >
-                  <div >
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="EMAIL"
-                      placeholder="Họ và tên"
-                      v-model="order_items.name"
-                      style="width:25%"
-                    />
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="EMAIL"
-                      id="mce-EMAIL"
-                      placeholder="Email"
-                      v-model="order_items.email"
-                      style="width:25%"
-                    />
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="SDT"
-                      placeholder="Số điện thoại"
-                      v-model="order_items.phone"
-                      style="width:25%"
-                    />
-                     <button
-                    class="btn btn-solid"
-
-                    @click="save(order_items)"
-                    style="width:20%"
-                  >
-                    Gửi
-                  </button>
-                  </div>
+                  
                 </div>
               </div>
             </div>
           </section>
         </div>
-      </div>
+      </div> -->
       <section class="section-b-space light-layout" style="padding-top:70px">
         <div class="container">
           <div class="row footer-theme partition-f">
@@ -78,10 +44,25 @@
                     alt
                   />
                 </div>
-                <p>
-                  Lĩnh vực: Bán lẻ đồ điện gia dụng, giường, tủ, bàn, ghế và đồ
-                  nội thất tương tự, đèn và bộ đèn điện, đồ dùng gia dụng khác
-                </p>
+                <div class="sub-title">
+                  <div class="footer-contant">
+                    <ul class="contact-list">
+                      <b>LIÊN HỆ VỚI CHÚNG TÔI</b>
+                      <li>
+                        <i class="fa fa-map-marker"></i>1/78 Nguyễn Hữu Dật,
+                        Phường Hương Long, Thành phố Huế, Tỉnh Thừa Thiên Huế
+                      </li>
+                      <li>
+                        <i class="fa fa-phone"></i>HotLine: +8482 83 84 175
+                      </li>
+                      <li>
+                        <i class="fa fa-envelope-o"></i>Email Us:
+                        <a href="#">anpat.apa@gmail.com</a>
+                      </li>
+                      <li><i class="fa fa-building"></i>MST: 3301684366</li>
+                    </ul>
+                  </div>
+                </div>
                 <div class="footer-social">
                   <ul>
                     <li>
@@ -120,49 +101,61 @@
             <div class="col">
               <div class="sub-title">
                 <div class="footer-title">
-                  <h4>THÔNG TIN KHÁC</h4>
+                  <h4>CHÍNH SÁCH</h4>
                 </div>
                 <div class="footer-contant">
                   <ul>
                     <li>
-                      <a href="#">................</a>
+                      <a href="#">Chính sách bảo hành</a>
                     </li>
                     <li>
-                      <a href="#">................</a>
+                      <a href="#">Chính sách thanh toán</a>
                     </li>
                     <li>
-                      <a href="#">................</a>
-                    </li>
-                    <li>
-                      <a href="#">................</a>
-                    </li>
-                    <li>
-                      <a href="#">................</a>
+                      <a href="#">chính sách đổi trả</a>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="sub-title">
-                <div class="footer-title">
-                  <h4>VỀ CHÚNG TÔI</h4>
+            <div class="col sub-title">
+              <div class="footer-title">
+                  <h4 style="line-height: 140% ; margin-bottom: 4%">NHẬN BÁO GIÁ VÀ TƯ VẤN MIỄN PHÍ 24/7</h4>
                 </div>
-                <div class="footer-contant">
-                  <ul class="contact-list">
-                    <li>
-                      <i class="fa fa-map-marker"></i>1/78 Nguyễn Hữu Dật,
-                      Phường Hương Long, Thành phố Huế, Tỉnh Thừa Thiên Huế
-                    </li>
-                    <li><i class="fa fa-phone"></i>HotLine: +8482 83 84 175</li>
-                    <li>
-                      <i class="fa fa-envelope-o"></i>Email Us:
-                      <a href="#">anpat.apa@gmail.com</a>
-                    </li>
-                    <li><i class="fa fa-building"></i>MST: 3301684366</li>
-                  </ul>
-                </div>
-              </div>
+              <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="EMAIL"
+                      placeholder="Họ và tên"
+                      v-model="order_items.name"
+                      style="margin-bottom: 2%"
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="EMAIL"
+                      id="mce-EMAIL"
+                      placeholder="Email"
+                      v-model="order_items.email"
+                     style="margin-bottom: 2%"
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="SDT"
+                      placeholder="Số điện thoại"
+                      v-model="order_items.phone"
+                      style="margin-bottom: 2%"
+                    />
+                    <button
+                      class="btn btn-solid"
+                      @click="save(order_items)"
+                      style="width:100%"
+                    >
+                      Gửi
+                    </button>
+                  </div>
             </div>
           </div>
         </div>
@@ -238,11 +231,11 @@ export default {
         total: "",
         customer_id: "",
         price: "",
-        product_id: "1",
+        product_id: "3",
         order_id: "",
-        quantity:"",
-         encrypted_password:""
-              },
+        quantity: "",
+        encrypted_password: ""
+      },
       categories: []
     };
   },
@@ -257,13 +250,12 @@ export default {
           console.log(error);
         });
     },
-     save(customer) {
+    save(customer) {
       axios
         .post(URLS.CUSTOMERS(), {
           customer: customer
         })
         .then(response => {
-          
           this.order_items.customer_id = response.data.id;
           this.save_order(this.order_items);
         })
@@ -277,7 +269,7 @@ export default {
           order: order
         })
         .then(response => {
-        this.order_items.order_id = response.data.id
+          this.order_items.order_id = response.data.id;
           this.save_order_items(this.order_items);
         })
         .catch(error => {
@@ -285,18 +277,20 @@ export default {
         });
     },
     save_order_items(order_item) {
-  
       axios
         .post(URLS.ORDER_ITEMS(), {
           order_item: order_item
         })
         .then(response => {
-          this.$router.push({ name: "Order_Success", params: {status: "success"}});
+          this.$router.push({
+            name: "Order_Success",
+            params: { status: "success" }
+          });
         })
         .catch(error => {
           console.log(error);
         });
-    },
+    }
   }
 };
 </script>
