@@ -18,7 +18,6 @@
             </div>
           </li>
           <li v-for="(menuItem, index) in menulist" :key="index">
-        
             <router-link v-if="menuItem.title === 'TRANG CHỦ'"
               :to="{ name: 'Home' }"
               class="nav-link"

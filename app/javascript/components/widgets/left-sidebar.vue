@@ -11,11 +11,12 @@
       <ul id="sub-menu" class="sidebar-menu" >
         <li v-for="(menuItem, index) in datalist"
             :key="index">
-          <a href="javascript:void(0)" @click="setActive('bags')"
+          <a href="javascript:void(0)" @click="setActive(menuItem.name)"
             >{{menuItem.name}}
             <span class="sub-arrow"></span>
           </a>
-          <ul v-if="menuItem.products!=''">
+          
+          <ul v-if="menuItem.products!=''" class="mega-menu clothing-menu" :class="{ opensidesubmenu: isActive(menuItem.name  ) }">
             <li v-for="e in menuItem.products"
             v-bind:key="e.id">
               <router-link :to="'/product_details/'+e.id">{{e.name}}</router-link >
