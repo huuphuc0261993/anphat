@@ -104,6 +104,11 @@ export default {
           type: "sub",
           path: ""
         },
+        // {
+        //   title: "GIỚI THIỆU",
+        //   type: "sub",
+        //   path: ""
+        // },
         {
           title: "SẢN PHẨM",
           type: "sub",
@@ -122,7 +127,12 @@ export default {
           type: "sub",
           active: false,
           path: "/blog"
-        }
+        },
+        // {
+        //   title: "LIÊN HỆ",
+        //   type: "sub",
+        //   path: ""
+        // },
       ]
     };
   },

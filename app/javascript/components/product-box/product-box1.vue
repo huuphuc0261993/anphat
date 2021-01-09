@@ -21,8 +21,11 @@
       <router-link :to="'/product_details/'+product.id">
         <h6>{{ product.name }}</h6>
       </router-link>
-      <h4>
+      <h4 v-if="product.price_sale >=0">
         {{ formatPrice(product.price_sale) }}đ<del>{{ product.price }}</del>
+      </h4>
+      <h4 v-else>
+        {{ product.price_sale }}
       </h4>
     </div>
   </div>

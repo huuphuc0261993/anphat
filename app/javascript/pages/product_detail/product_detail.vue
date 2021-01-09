@@ -26,12 +26,18 @@
                         <b>{{ datalist.name }}</b>
                       </h2>
 
-                      <h4 v-if="datalist.discount">
+                      <h4 v-if="datalist.discount != null & datalist.price >0">
                         <del>{{ formatPrice(datalist.price) }}đ</del>
                         <span>{{ datalist.discount }}% off</span>
                         <h3>{{ formatPrice(datalist.price_sale) }}đ</h3>
                       </h4>
-
+                      <h4 v-if="datalist.discount != null & datalist.price <=0">
+                        <span>{{ datalist.discount }}% off</span>
+                        <h3><b>Giá</b>: {{ datalist.price_sale}}</h3>
+                      </h4>
+                      <h4 v-else>
+                        <h3><b>Giá</b>: {{ datalist.price_sale}}</h3>
+                      </h4>
                       <div class="product-description border-product">
                         <h6 class="product-title">Số lượng</h6>
                         <div class="qty-box">
@@ -67,7 +73,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="border-product">
+                      <div class="border-product"  v-if="datalist.discount != null & datalist.price >0">
                         <h4 class="product-title">
                           Tổng tiền:
                           {{ formatPrice(datalist.price_sale * counter) }}đ

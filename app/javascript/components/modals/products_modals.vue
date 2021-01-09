@@ -26,7 +26,7 @@
                 min="0"
                 v-model="editedItem.price"
               >
-                {{ discountedPrice() }}
+             
                 <span slot="addonAfter">VNĐ</span>
               </a-input>
             </a-form-model-item>
@@ -43,8 +43,6 @@
             <a-form-model-item label="Giá sau khi giảm" prop="price_sale">
               <a-input
                 placeholder="Giá sau khi giảm"
-                type="number"
-                min="0"
                 v-model="editedItem.price_sale"
               >
                 <span slot="addonAfter">VNĐ</span>
@@ -99,13 +97,13 @@ export default {
             trigger: "blur"
           }
         ],
-        price: [
-          {
-            required: true,
-            message: "Không được để trống giá",
-            trigger: "blur"
-          }
-        ],
+        // price: [
+        //   {
+        //     required: true,
+        //     message: "Không được để trống giá",
+        //     trigger: "blur"
+        //   }
+        // ],
         category_id: [
           {
             required: true,
