@@ -17,7 +17,7 @@
               <i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
             </div>
           </li>
-          <li v-for="(menuItem, index) in menulist" :key="index">
+          <li v-for="(menuItem, index) in menulist" :key="index" >
             <router-link v-if="menuItem.title === 'TRANG CHỦ'"
               :to="{ name: 'Home' }"
               class="nav-link"
@@ -29,8 +29,22 @@
                 v-if="menuItem.children"
               ></span>
             </router-link>
+            <router-link v-else-if="menuItem.title === 'GIỚI THIỆU'"
+              :to="{ name: 'Introduce' }"
+              class="nav-link"
+              @click="setActive(menuItem.title)"
+            >
+              {{ menuItem.title }}
+            </router-link>
             <router-link v-else-if="menuItem.title === 'TIN TỨC'"
               :to="{ name: 'Blog' }"
+              class="nav-link"
+              @click="setActive(menuItem.title)"
+            >
+              {{ menuItem.title }}
+            </router-link>
+            <router-link v-else-if="menuItem.title === 'LIÊN HỆ'"
+              :to="{ name: 'About' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
@@ -103,13 +117,14 @@ export default {
           type: "sub",
           path: ""
         },
-        // {
-        //   title: "GIỚI THIỆU",
-        //   type: "sub",
-        //   path: ""
-        // },
+        {
+          title: "GIỚI THIỆU",
+          type: "sub",
+          path: "/introduce"
+        },
         {
           title: "SẢN PHẨM",
+          megamenu: true,
           type: "sub",
           active: false,
           children: [
@@ -127,11 +142,11 @@ export default {
           active: false,
           path: "/blog"
         },
-        // {
-        //   title: "LIÊN HỆ",
-        //   type: "sub",
-        //   path: ""
-        // },
+        {
+          title: "LIÊN HỆ",
+          type: "sub",
+          path: "/about"
+        },
       ]
     };
   },
@@ -143,7 +158,7 @@ export default {
       axios
         .get(URLS.CATEGORIES(), {})
         .then(response => {
-          this.menulist[1].children = response.data;
+          this.menulist[2].children = response.data;
         })
         .catch(error => {
           console.log(error);

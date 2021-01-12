@@ -18,6 +18,12 @@
     <div v-else-if="layout=='Blog_Detail'">
       <router-view />
     </div>
+    <div v-else-if="layout=='About'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Introduce'">
+      <router-view />
+    </div>
     <div v-else>
       <a-layout id="components-layout-demo-custom-trigger">
         <leftMenu></leftMenu>

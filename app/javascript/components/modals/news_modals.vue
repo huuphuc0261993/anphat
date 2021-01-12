@@ -13,7 +13,7 @@
         <a-form-model-item has-feedback label="Nội dung" prop="content">
           <a-textarea placeholder="Nội dung" v-model="editedItem.content" />
         </a-form-model-item>
-
+      
         <a-button
           type="primary"
           @click="saveModal('editedItem')"
@@ -37,6 +37,8 @@
 import upload from "../modals/upload";
 import axios from "axios";
 import news from "../../pages/news";
+// import ClassicEditor from "../../../../build/ckeditor"
+
 export default {
   props: {
     changShow: Boolean

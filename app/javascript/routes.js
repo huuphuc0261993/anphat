@@ -12,12 +12,30 @@ import Order_Success from './components/order_success/order_success'
 // import Editor from './components/editor/editor'
 import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
+import About from './pages/about/about'
+import Introduce from './pages/introduce/introduce'
 
 const routes = [
     {
         path: '/',
         name: 'Home',
         component: Home,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: About,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/introduce',
+        name: 'Introduce',
+        component: Introduce,
         meta: {
             guest: true
         }
