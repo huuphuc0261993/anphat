@@ -1,4 +1,5 @@
 import News from './pages/news'
+import Info from './pages/information'
 import Products from './pages/products'
 import Banners from './pages/banners'
 import Categories from './pages/categories'
@@ -9,6 +10,7 @@ import ForgetPassword from './pages/guest/ForgetPassword'
 import SignUp from './pages/guest/SignUp'
 import Product_Details from './pages/product_detail/product_detail'
 import Order_Success from './components/order_success/order_success'
+import Info_Detail from './components/info/info'
 // import Editor from './components/editor/editor'
 import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
@@ -76,6 +78,18 @@ const routes = [
         path: '/news',
         name: 'News',
         component: News,
+
+    },
+    {
+        path: '/info_detail',
+        name: 'Info_Detail',
+        component: Info_Detail,
+
+    },
+    {
+        path: '/info',
+        name: 'Info',
+        component: Info,
 
     },
     {

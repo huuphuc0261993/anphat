@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :products
     resources :orders
     resources :order_items
+    resources :order_items
+    resources :informations
     resources :categories do
       member do
         get :products

@@ -29,6 +29,9 @@ export const URLS = {
   CATEGORIES: () => `${getBaseUrl()}/categories`,
   CATEGORY: (id) => `${getBaseUrl()}/categories/${id}`,
 
+  INFORMATIONS: () => `${getBaseUrl()}/informations`,
+  INFORMATION: (id) => `${getBaseUrl()}/informations/${id}`,
+
   LOGIN: () => `${getBaseUrl()}/login`,
   
   LOGOUT: () => `${getBaseUrl()}/logout`,
