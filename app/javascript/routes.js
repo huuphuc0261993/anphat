@@ -16,6 +16,9 @@ import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
 import About from './pages/about/about'
 import Introduce from './pages/introduce/introduce'
+import Change from './pages/policy/change'
+import Protect from './pages/policy/protect'
+import Payment from './pages/policy/payment'
 
 const routes = [
     {
@@ -30,6 +33,30 @@ const routes = [
         path: '/about',
         name: 'About',
         component: About,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/change',
+        name: 'Change',
+        component: Change,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/protect',
+        name: 'Protect',
+        component: Protect,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/payment',
+        name: 'Payment',
+        component: Payment,
         meta: {
             guest: true
         }

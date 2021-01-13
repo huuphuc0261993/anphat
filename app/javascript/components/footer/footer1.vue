@@ -1,33 +1,6 @@
 <template>
   <div>
     <footer class="footer-light">
-      <!-- <div class="light-layout">
-        <div class="container">
-          <section class="small-section border-section border-top-0">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="subscribe">
-                  <div>
-                    <h4>NHẬP THÔNG TIN ĐỂ NHẬN BÁO GIÁ</h4>
-                    <p>Chúng tôi sẽ gửi báo giá cho bạn trong vòng 30 phút</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div
-                  class="form-inline subscribe-form auth-form needs-validation"
-                  method="post"
-                  id="mc-embedded-subscribe-form"
-                  name="mc-embedded-subscribe-form"
-                  target="_blank"
-                >
-                  
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div> -->
       <section class="section-b-space light-layout" style="padding-top:70px">
         <div class="container">
           <div class="row footer-theme partition-f">
@@ -106,13 +79,13 @@
                 <div class="footer-contant">
                   <ul>
                     <li>
-                      <a href="#">Chính sách bảo hành</a>
+                      <router-link :to="{ name: 'Protect' }">Chính sách bảo hành</router-link>
                     </li>
                     <li>
-                      <a href="#">Chính sách thanh toán</a>
+                      <router-link :to="{ name: 'Payment' }">Chính sách thanh toán</router-link>
                     </li>
                     <li>
-                      <a href="#">chính sách đổi trả</a>
+                      <router-link :to="{ name: 'Change' }">chính sách đổi trả</router-link>
                     </li>
                   </ul>
                 </div>

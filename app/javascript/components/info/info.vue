@@ -14,10 +14,9 @@
           v-model="editedItem.description"
           size="large"
         />
-        <p>{{editedItem}}</p>
       </a-form-model-item>
       <a-form-model-item label="Nội dung" prop="content">
-        <a-input placeholder=" Nội dung" v-model="editedItem.content" />
+        <editor/>
       </a-form-model-item>
       <a-row>
         <a-col :xs="12">
@@ -54,6 +53,7 @@
   </div>
 </template>
 <script>
+import editor from "../editor/editor"
 import axios from "axios";
 import { URLS } from "../../utils/url";
 export default {
@@ -84,7 +84,7 @@ export default {
       ]
     };
   },
-  components: {},
+  components: {editor},
   computed: {},
   mounted() {},
   methods: {

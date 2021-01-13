@@ -12,7 +12,9 @@ import '../assets/scss/app.scss'
 // import '../../../node_modules/swiper/dist/css/swiper.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import { BootstrapVue } from 'bootstrap-vue';
+import CKEditor from 'ckeditor4-vue';
 
+Vue.use( CKEditor );
 import App from '../app.vue'
 import VueRouter from 'vue-router'
 import routes from '../routes'

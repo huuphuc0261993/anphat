@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal v-model="visible" @ok="close" v-bind:name="formTitle">
+    <a-modal v-model="visible" @ok="close" v-bind:name="formTitle" width=40%>
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12">

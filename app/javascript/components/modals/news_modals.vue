@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close">
+    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close" width=60%>
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-form-model-item has-feedback label="Tiêu đề bài viết " prop="title">
           <a-input placeholder="Tiêu đề bài viết" v-model="editedItem.title" />
@@ -11,7 +11,8 @@
         </a-form-model-item>
 
         <a-form-model-item has-feedback label="Nội dung" prop="content">
-          <a-textarea placeholder="Nội dung" v-model="editedItem.content" />
+          <editor/>
+          <!-- <a-textarea placeholder="Nội dung" v-model="editedItem.content" /> -->
         </a-form-model-item>
       
         <a-button
@@ -34,10 +35,10 @@
   </div>
 </template>
 <script>
+import editor from "../editor/editor"
 import upload from "../modals/upload";
 import axios from "axios";
 import news from "../../pages/news";
-// import ClassicEditor from "../../../../build/ckeditor"
 
 export default {
   props: {
@@ -136,7 +137,8 @@ export default {
     }
   },
   components: {
-    upload
+    upload,
+    editor
   },
   computed: {
     formTitle() {

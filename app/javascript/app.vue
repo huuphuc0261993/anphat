@@ -24,6 +24,15 @@
     <div v-else-if="layout=='Introduce'">
       <router-view />
     </div>
+    <div v-else-if="layout=='Protect'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Payment'">
+      <router-view />
+    </div>
+    <div v-else-if="layout=='Change'">
+      <router-view />
+    </div>
     <div v-else>
       <a-layout id="components-layout-demo-custom-trigger">
         <leftMenu></leftMenu>
