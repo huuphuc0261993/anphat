@@ -15,9 +15,8 @@
               <li>Posted By : Admin</li>
             </ul>
             <b class="description">{{datalist.description}}</b>
-            <p class="paragraph">
-              {{datalist.content}}
-            </p>
+            <div v-html="datalist.content">
+            </div>
           </div>
         </div>
         <div class="row section-b-space blog-advance">

@@ -10,7 +10,7 @@
         name: 'app',
         data() {
             return {
-                editorData: '<p>Content of the editor.</p>',
+                editorData: '',
                 editorConfig: {
                     toolbar: [
 						[ 'Source' ],
@@ -22,6 +22,6 @@
 					]
                 }
             };
-        }
+        },
     }
 </script>

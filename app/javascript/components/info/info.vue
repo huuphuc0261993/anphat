@@ -16,7 +16,7 @@
         />
       </a-form-model-item>
       <a-form-model-item label="Nội dung" prop="content">
-        <editor/>
+        <editor ref="child" />
       </a-form-model-item>
       <a-row>
         <a-col :xs="12">
@@ -92,6 +92,7 @@ export default {
       console.log(value);
     },
     save(){
+     
         let information = this.editedItem
          axios
           .post(URLS.INFORMATIONS(), {

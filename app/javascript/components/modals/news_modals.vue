@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close" width=60%>
+    <a-modal v-model="visible" v-bind:title="formTitle" @ok="close" width="60%">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-form-model-item has-feedback label="Tiêu đề bài viết " prop="title">
           <a-input placeholder="Tiêu đề bài viết" v-model="editedItem.title" />
@@ -11,10 +11,12 @@
         </a-form-model-item>
 
         <a-form-model-item has-feedback label="Nội dung" prop="content">
-          <editor/>
+          <div>
+            <ckeditor v-model="editorData" :config="editorConfig"></ckeditor>
+          </div>
           <!-- <a-textarea placeholder="Nội dung" v-model="editedItem.content" /> -->
         </a-form-model-item>
-      
+
         <a-button
           type="primary"
           @click="saveModal('editedItem')"
@@ -35,7 +37,7 @@
   </div>
 </template>
 <script>
-import editor from "../editor/editor"
+import editor from "../editor/editor";
 import upload from "../modals/upload";
 import axios from "axios";
 import news from "../../pages/news";
@@ -46,15 +48,23 @@ export default {
   },
   data() {
     return {
+      editorData: "",
+      editorConfig: {
+        toolbar: [
+          ["Source"],
+          ["Styles", "Format", "Font", "FontSize"],
+          ["Bold", "Italic"],
+          ["Undo", "Redo"],
+          ["Table"],
+          ["Image"]
+        ]
+      },
       rules: {
         title: [
           { required: true, message: "Vui lòng nhập tiêu đề", trigger: "blur" }
         ],
         description: [
           { required: true, message: "Vui lòng nhập mô tả", trigger: "blur" }
-        ],
-        content: [
-          { required: true, message: "Vui lòng nhập nội dung", trigger: "blur" }
         ]
       },
       dataNews: [],
@@ -117,6 +127,8 @@ export default {
       }, 300);
     },
     saveModal(item) {
+      this.editedItem.content = this.editorData;
+      // console.log(this.editedItem)
       this.$refs[item].validate(valid => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
@@ -127,6 +139,7 @@ export default {
       });
     },
     edit(item) {
+      this.editorData = item.content
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
       this.item = this.item1;
