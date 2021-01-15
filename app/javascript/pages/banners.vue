@@ -2,47 +2,62 @@
   <div>
     <bannersModals ref="child" @saveDtb="save" />
     <a-row>
-      <div class="col-4">
-        <a-row class="table-buttons">
-          <a-col :span="24" class="text-left">
-            <a-button type="primary" @click="show" :method="save">{{
-              "Thêm mới banner"
-            }}</a-button>
-          </a-col>
-        </a-row>
-      </div>
-    </a-row>
-    <a-row style="display:flex">
-      <div v-for="banner in dataNews" :key="banner.id" style="padding-right:2%">
-        <div v-if="banner.banner_type == 1">
-          <div
-            class="col-8"
-            v-for="element in banner.pictures"
-            :key="element.id"
-          >
-            <a-avatar :size="100" :src="element.url" shape="square" />
-            <div>
-              <a-icon type="edit" @click="editBanner(banner.id)" />
-              <a-icon type="delete" @click="softdelted(banner.id)" />
-            </div>
-          </div>
+      <a-col :xs="12">
+        <div >
+          <a-row class="table-buttons">
+            <a-col :span="24" class="text-left">
+              <a-button type="primary" @click="show" :method="save">{{
+                "Thêm mới banner"
+              }}</a-button>
+            </a-col>
+          </a-row>
         </div>
+      </a-col>
+      <a-col :xs="12">
+        <div>
+          <a-input-search
+            placeholder="input search text"
+            size="large"
+            v-model="search"
+            class="search_list_order"
+          />
+        </div>
+      </a-col>
+    </a-row>
 
-        <div v-if="banner.banner_type == 2" class="banner_two">
-          <div
-            class="col-8"
-            v-for="element in banner.pictures"
-            :key="element.id"
-          >
-            <a-avatar :size="100" :src="element.url" shape="square" />
-            <div>
-              <a-icon type="edit" @click="editBanner(banner.id)" />
-              <a-icon type="delete" @click="softdelted(banner.id)" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </a-row>
+    <a-table
+      bordered
+      :data-source="onsearch"
+      :columns="columns"
+      :row-key="record => record.id"
+    >
+      <template slot="image" slot-scope="image">
+        <span>
+          <a-avatar shape="square" :size="60" :src="image.url" />
+        </span>
+      </template>
+
+      <template slot="action" slot-scope="text, record">
+        <a-button
+          @click="editBanner(record)"
+          class="editButton"
+          :type="'primary'"
+          style="width:60px"
+          ><a-icon type="edit"
+        /></a-button>
+
+        <a-popconfirm
+          title="Bạn muốn xoá News này?"
+          ok-text="Xác nhận"
+          cancel-text="Huỷ"
+          @confirm="softdelted(record)"
+        >
+          <a-button size="small" type="danger" style="width:60px"
+            ><a-icon type="delete"
+          /></a-button>
+        </a-popconfirm>
+      </template>
+    </a-table>
   </div>
 </template>
 
@@ -53,6 +68,7 @@ import { URLS } from "../utils/url";
 export default {
   data() {
     return {
+      search: "",
       dataNews: [],
       search: "",
       picture_attributes: [
@@ -61,7 +77,42 @@ export default {
           url: ""
         }
       ],
-      editedItem: {}
+      editedItem: {},
+      columns: [
+        {
+          title: "Tên hình ảnh",
+          dataIndex: "name",
+          className: "name",
+          width: "20%",
+          align: "center"
+        },
+        {
+          title: "Hình ảnh",
+          dataIndex: "pictures_attributes[0]",
+          scopedSlots: { customRender: "image" },
+          width: "10%",
+          align: "center"
+        },
+        {
+          title: "link",
+          dataIndex: "pictures_attributes[0].url",
+          width: "40%"
+        },
+        ,
+        {
+          title: "Ngày tạo",
+          dataIndex: "created_at",
+          width: "10%"
+        },
+        {
+          title: "Action",
+          dataIndex: "",
+          key: "x",
+          scopedSlots: { customRender: "action" },
+          width: "20%",
+          align: "center"
+        }
+      ]
     };
   },
   mounted() {
@@ -73,7 +124,6 @@ export default {
       this.$refs.child.showModal();
     },
     save(banner, index) {
-
       if (index == -1) {
         axios
           .post(URLS.BANNERS(), {
@@ -123,7 +173,7 @@ export default {
     },
     softdelted(item) {
       axios
-        .delete(URLS.BANNER(item))
+        .delete(URLS.BANNER(item.id))
         .then(response => {
           this.initialize();
         })
@@ -136,7 +186,27 @@ export default {
   components: {
     bannersModals
   },
-  computed: {}
+  computed: {
+    onsearch() {
+      if (this.search) {
+        return this.dataNews.filter(item => {
+          return (
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.created_at.toLowerCase().includes(v)) ||
+            this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v => item.name.toLowerCase().includes(v))
+            
+          );
+        });
+      } else {
+        return this.dataNews;
+      }
+    }
+  }
 };
 </script>
 <style scoped>
@@ -150,4 +220,5 @@ export default {
 .col-8 {
   padding-right: 2%;
 }
+
 </style>

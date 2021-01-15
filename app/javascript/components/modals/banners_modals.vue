@@ -65,6 +65,10 @@ export default {
         {
           id: 2,
           name: "Banner phụ"
+        },
+        {
+          id: 3,
+          name: "Upload"
         }
       ],
       dataNews: [],
