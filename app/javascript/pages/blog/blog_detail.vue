@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <Breadcrumbs title="Blog" />
+    <Breadcrumbs title="TIN TỨC" />
     <section class="blog-detail-page section-b-space ratio2_3">
       <div class="container">
         <div class="row">

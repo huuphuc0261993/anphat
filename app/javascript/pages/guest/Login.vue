@@ -38,7 +38,7 @@
           type="primary"
           html-type="submit"
           :disabled="formInline.email === '' || formInline.password === ''"
-          style="width: 442px; border-radius: 8px"
+          style=" border-radius: 8px"
         >
           Log in
         </a-button>

@@ -199,7 +199,6 @@ export default {
               .toLowerCase()
               .split(" ")
               .every(v => item.name.toLowerCase().includes(v))
-            
           );
         });
       } else {

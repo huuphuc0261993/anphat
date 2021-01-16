@@ -1,6 +1,5 @@
 <template>
   <div>
-    <categoriesModals ref="child" @saveDtb="save" />
     <a-row>
       <a-col :xs="12" >
         <div >
@@ -15,7 +14,6 @@
             placeholder="input search text"
             size="large"
             v-model="search"
-        
           />
         </div>
       </a-col>
@@ -37,7 +35,7 @@
         /></a-button>
 
         <a-popconfirm
-          title="Bạn muốn xoá category này?"
+          title="Bạn muốn xoá?"
           ok-text="Xác nhận"
           cancel-text="Huỷ"
           @confirm="softdelted(record)"
@@ -52,7 +50,7 @@
 </template>
 
 <script>
-import categoriesModals from "../components/modals/categories_modals";
+import info from "../components/info/info";
 import axios from "axios";
 import { URLS } from "../utils/url";
 export default {
@@ -66,8 +64,8 @@ export default {
       columns: [
         {
           title: "Tiêu đề ",
-          dataIndex: "name",
-          className: "name",
+          dataIndex: "title",
+          className: "title",
           width: "30%"
         },
         {
@@ -100,7 +98,7 @@ export default {
         let formData = new FormData();
         formData.append("category[name]", item.name);
         axios
-          .post(URLS.CATEGORIES(), formData, {
+          .post(URLS.INFORMATIONS(), formData, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -109,16 +107,15 @@ export default {
             console.log("Created!");
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Tạo category thành công");
+            this.$message.success("Tạo thành công");
           })
           .catch(error => {
-            console.log(error);
           });
       } else {
         let formData = new FormData();
         formData.append("category[name]", item.name);
         axios
-          .put(URLS.CATEGORY(item.id), formData, {
+          .put(URLS.INFORMATION(item.id), formData, {
             headers: {
               "Content-Type": "application/json"
             }
@@ -126,7 +123,7 @@ export default {
           .then(response => {
             this.initialize();
             this.$refs.child.close();
-            this.$message.success("Cập nhật category thành công");
+            this.$message.success("Cập nhật thành công");
           })
           .catch(error => {
             console.log(error);
@@ -134,34 +131,32 @@ export default {
       }
     },
     editNews(item) {
-      this.$refs.child.edit(item);
+      let idItem = item.id
+      this.$router.push({ name: "Info_Detail", params: {id: idItem}});
     },
-
     initialize() {
       return axios
-        .get(URLS.CATEGORIES())
+        .get(URLS.INFORMATIONS())
         .then(response => {
           this.dataNews = response.data;
         })
         .catch(e => {
-          console.log(e);
         });
     },
     softdelted(item) {
       var id = item.id;
       axios
-        .delete(URLS.CATEGORY(id))
+        .delete(URLS.INFORMATION(id))
         .then(response => {
           this.initialize();
         })
         .catch(error => {
-          console.log(error);
         });
       this.dataNews.splice(item, 1);
     }
   },
   components: {
-    categoriesModals
+    info
   },
   computed: {
     onsearch() {
@@ -170,13 +165,16 @@ export default {
           return this.search
             .toLowerCase()
             .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+            .every(v => item.title.toLowerCase().includes(v));
         });
       } else {
         return this.dataNews;
       }
     }
   }
+};
+window.onpopstate = function () {
+    location.reload()
 };
 </script>
 <style scoped>

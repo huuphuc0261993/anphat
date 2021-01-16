@@ -16,7 +16,10 @@
         />
       </a-form-model-item>
       <a-form-model-item label="Nội dung" prop="content">
-        <editor ref="child" />
+        <ckeditor
+          v-model="editedItem.content"
+          :config="editorConfig"
+        ></ckeditor>
       </a-form-model-item>
       <a-row>
         <a-col :xs="12">
@@ -31,7 +34,7 @@
               size="large"
               v-model="editedItem.info"
             >
-              <a-select-option v-for="e in info" :key="e.id"  >
+              <a-select-option v-for="e in info" :key="e.id">
                 {{ e.name }}
               </a-select-option>
             </a-select>
@@ -53,12 +56,23 @@
   </div>
 </template>
 <script>
-import editor from "../editor/editor"
+import editor from "../editor/editor";
 import axios from "axios";
 import { URLS } from "../../utils/url";
 export default {
   data() {
     return {
+      editorData: "",
+      editorConfig: {
+        toolbar: [
+          ["Source"],
+          ["Styles", "Format", "Font", "FontSize"],
+          ["Bold", "Italic"],
+          ["Undo", "Redo"],
+          ["Table"],
+          ["Image"]
+        ]
+      },
       editedItem: {},
       info: [
         {
@@ -84,28 +98,53 @@ export default {
       ]
     };
   },
-  components: {editor},
+  components: { editor },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.initialize();
+  },
   methods: {
     handleChange(value) {
       console.log(value);
     },
-    save(){
-     
-        let information = this.editedItem
-         axios
+    initialize() {
+      let id = this.$route.params.id;
+      if(id != undefined){
+      return axios
+        .get(URLS.INFORMATION(id))
+        .then(response => {
+          this.editedItem = response.data;
+        })
+        .catch(e => {
+        });
+        }
+    },
+    save() {
+      let id = this.editedItem.id;
+      let information = this.editedItem
+      if (id == undefined) {
+        axios
           .post(URLS.INFORMATIONS(), {
             information: information
           })
           .then(response => {
-            console.log("Created!");
             this.$message.success("Khởi tạo thành công");
-            this.$router.push({ name: "Info" })
+            this.$router.push({ name: "Info" });
           })
           .catch(error => {
-            console.log(error);
           });
+      } else {
+        axios
+          .put(URLS.INFORMATION(id), {
+            information: information
+          })
+          .then(response => {
+            this.$message.success("Update thành công");
+            this.$router.push({ name: "Info" });
+          })
+          .catch(error => {
+          });
+      }
     }
   }
 };
