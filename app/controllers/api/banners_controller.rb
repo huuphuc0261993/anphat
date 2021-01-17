@@ -4,7 +4,7 @@ module Api
       @banners = Banner.all
       render json: @banners
     end
-  
+
     def create
       @banner = Banner.new(banner_params)
       if @banner.save
@@ -14,12 +14,12 @@ module Api
         render status: 403
       end
     end
-  
+
     def show
       @banner = Banner.find(params[:id])
       render json: { data: @banner, status: :ok, message: 'Success' }
     end
-  
+
     def update
       @banner = Banner.find(params[:id])
       if @banner&.update(banner_params)
@@ -29,7 +29,7 @@ module Api
         render json: { json: @banner.error, status: :unprocessable_entity }
       end
     end
-  
+
     def destroy
       @banner = Banner.find(params[:id])
       if @banner.destroy
@@ -38,11 +38,11 @@ module Api
         render json: {}
       end
     end
-  
+
     private
-  
+
     def banner_params
-      params.require(:banner).permit(:banner_type, :name)
+      params.require(:banner).permit(:banner_type, :name, :fullname, :work, :position, :description)
     end
   end
 end

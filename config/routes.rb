@@ -3,18 +3,21 @@ Rails.application.routes.draw do
   namespace 'api' do
     mount_devise_token_auth_for "Customer", at: 'auth'
     resources :news
-    resources :banners
+
+    resources :banners 
     resources :customers
     resources :products
     resources :orders
     resources :order_items
     resources :order_items
     resources :informations
+
     resources :categories do
       member do
         get :products
       end
     end
+    
     resources :pictures, only: %w[create destroy]
   end
 

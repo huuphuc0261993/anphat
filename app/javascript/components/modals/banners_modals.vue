@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal v-model="visible" @ok="close">
+    <a-modal v-model="visible" @ok="close"  width="60%">
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12">
@@ -11,7 +11,10 @@
           </a-col>
           <a-col :xs="12">
             <a-form-model-item label="Title" prop="name">
-              <a-input placeholder="Nhập title cho banner" v-model="editedItem.name" />
+              <a-input
+                placeholder="Nhập title cho banner"
+                v-model="editedItem.name"
+              />
             </a-form-model-item>
             <a-form-model-item label="Loại Banner" prop="banner_type">
               <a-select
@@ -23,6 +26,19 @@
                   {{ banner.name }}
                 </a-select-option>
               </a-select>
+              <a-collapse default-active-key="1" class="mb-3" v-if="editedItem.banner_type == 4">
+                <a-collapse-panel key="1" header="Danh sách quản lý">
+                  <a-row>
+                    <a-form-model-item>
+                      <a-input  v-model="editedItem.fullname" placeholder="Họ và tên"></a-input>
+                      <a-input v-model="editedItem.position" placeholder="Chức vụ"> </a-input>
+                      <a-input v-model="editedItem.work" placeholder="Công việc"> </a-input>
+                      <a-input v-model="editedItem.description"  placeholder="Mô tả"> </a-input>
+                    </a-form-model-item>
+                  </a-row>
+                </a-collapse-panel>
+              </a-collapse>
+              
             </a-form-model-item>
             <a-row>
               <a-form-model-item class="float-right">
@@ -48,6 +64,7 @@ export default {
   },
   data() {
     return {
+      key:"",
       rules: {
         banner_type: [
           {
@@ -69,6 +86,10 @@ export default {
         {
           id: 3,
           name: "Upload"
+        },
+        {
+          id: 4,
+          name: "Giới thiệu"
         }
       ],
       dataNews: [],
@@ -81,9 +102,7 @@ export default {
       }
     };
   },
-  mounted() {
-  
-  },
+  mounted() {},
   methods: {
     updatePicturesList(pictures_ids) {
       this.editedItem.pictures_ids = pictures_ids;
@@ -125,9 +144,7 @@ export default {
   components: {
     bannerImage
   },
-  computed: {
-   
-  }
+  computed: {}
 };
 </script>
 <style>

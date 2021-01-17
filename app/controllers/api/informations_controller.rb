@@ -39,6 +39,6 @@ class Api::InformationsController < ApplicationController
   private
 
   def information_params
-    params.require(:information).permit(:id, :title, :description, :content, :info)
+    params.require(:information).permit(:id, :title, :description, :content, :info, :url)
   end
 end

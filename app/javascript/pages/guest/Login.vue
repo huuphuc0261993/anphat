@@ -38,7 +38,7 @@
           type="primary"
           html-type="submit"
           :disabled="formInline.email === '' || formInline.password === ''"
-          style=" border-radius: 8px"
+          style=" width: 200px; border-radius: 8px"
         >
           Log in
         </a-button>
@@ -89,7 +89,5 @@ window.onpopstate = function () {
 };
 </script>
 <style>
-button.ant-btn.ant-btn-primary {
-  margin-top: 10px;
-}
+
 </style>

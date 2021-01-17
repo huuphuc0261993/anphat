@@ -12,7 +12,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-6 text-right">
+        <!-- <div class="col-lg-6 text-right">
           <ul class="header-dropdown">
             <li class="mobile-wishlist"></li>
             <li class="onhover-dropdown mobile-account">
@@ -24,7 +24,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

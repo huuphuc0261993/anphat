@@ -15,16 +15,18 @@
           size="large"
         />
       </a-form-model-item>
-      <a-form-model-item label="Nội dung" prop="content">
-        <ckeditor
-          v-model="editedItem.content"
-          :config="editorConfig"
-        ></ckeditor>
-      </a-form-model-item>
       <a-row>
         <a-col :xs="12">
           <a-col :xs="3">
-            <a-form-model-item label="Loại bài viết"></a-form-model-item>
+            <a-form-model-item label="URL" prop="url"></a-form-model-item>
+          </a-col>
+          <a-col :xs="9">
+            <a-input placeholder="url " v-model="editedItem.url" size="large" />
+          </a-col>
+        </a-col>
+        <a-col :xs="12">
+          <a-col :xs="3" class="mr-5">
+            <a-form-model-item label="Loại bài viết: "></a-form-model-item>
           </a-col>
           <a-col :xs="9">
             <a-select
@@ -40,6 +42,15 @@
             </a-select>
           </a-col>
         </a-col>
+      </a-row>
+      <a-form-model-item label="Nội dung" prop="content">
+        <ckeditor
+          v-model="editedItem.content"
+          :config="editorConfig"
+        ></ckeditor>
+      </a-form-model-item>
+      <a-row>
+        <a-col :xs="12"> </a-col>
         <a-col :xs="12">
           <a-form-model-item class="float-right">
             <a-button
@@ -109,19 +120,18 @@ export default {
     },
     initialize() {
       let id = this.$route.params.id;
-      if(id != undefined){
-      return axios
-        .get(URLS.INFORMATION(id))
-        .then(response => {
-          this.editedItem = response.data;
-        })
-        .catch(e => {
-        });
-        }
+      if (id != undefined) {
+        return axios
+          .get(URLS.INFORMATION(id))
+          .then(response => {
+            this.editedItem = response.data;
+          })
+          .catch(e => {});
+      }
     },
     save() {
       let id = this.editedItem.id;
-      let information = this.editedItem
+      let information = this.editedItem;
       if (id == undefined) {
         axios
           .post(URLS.INFORMATIONS(), {
@@ -131,8 +141,7 @@ export default {
             this.$message.success("Khởi tạo thành công");
             this.$router.push({ name: "Info" });
           })
-          .catch(error => {
-          });
+          .catch(error => {});
       } else {
         axios
           .put(URLS.INFORMATION(id), {
@@ -142,8 +151,7 @@ export default {
             this.$message.success("Update thành công");
             this.$router.push({ name: "Info" });
           })
-          .catch(error => {
-          });
+          .catch(error => {});
       }
     }
   }

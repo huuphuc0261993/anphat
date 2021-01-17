@@ -4,15 +4,14 @@
 // to the head of your layout file,
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
-
 import Vue from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '../assets/scss/app.scss'
-// import '../../../node_modules/swiper/dist/css/swiper.css'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper.scss'
 import { BootstrapVue } from 'bootstrap-vue';
 import CKEditor from 'ckeditor4-vue';
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.use( CKEditor );
 import App from '../app.vue'
