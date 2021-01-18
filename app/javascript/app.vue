@@ -18,7 +18,7 @@
     <div v-else-if="layout=='Blog_Detail'">
       <router-view />
     </div>
-    <div v-else-if="layout=='About'">
+    <div v-else-if="layout=='Contact'">
       <router-view />
     </div>
     <div v-else-if="layout=='Introduce'">

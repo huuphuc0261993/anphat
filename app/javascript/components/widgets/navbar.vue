@@ -44,7 +44,7 @@
               {{ menuItem.title }}
             </router-link>
             <router-link v-else-if="menuItem.title === 'LIÊN HỆ'"
-              :to="{ name: 'About' }"
+              :to="{ name: 'Contact' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
@@ -145,7 +145,7 @@ export default {
         {
           title: "LIÊN HỆ",
           type: "sub",
-          path: "/about"
+          path: "/contact"
         },
       ]
     };

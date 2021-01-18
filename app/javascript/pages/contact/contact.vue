@@ -2,28 +2,61 @@
   <div>
     <Header />
     <Breadcrumbs title="LIÊN HỆ" />
-    <section class="blog-detail-page section-b-space ratio2_3">
+  <section class="contact-page section-b-space" style="margin-top:3%">
       <div class="container">
-        <div class="row" v-for="(item, index) in datalist" :key="index">
-          <div class="col-sm-12 blog-detail" v-if="item.info==4" >
-            <br>
-            <h3>
-              {{item.title}}
-            </h3>
-            <ul class="post-social">
-              <li>{{item.created_at}}</li>
-              <li>Posted By : Admin</li>
-            </ul>
-            <b class="description">{{item.description}}</b>
-            <div v-html="item.content">
+        <div class="row section-b-space">
+          <div class="col-lg-7 map">
+            <iframe
+              src="https://maps.google.com/maps?q=1/78%20Nguy%E1%BB%85n%20H%E1%BB%AFu%20D%E1%BA%ADt,%20Ph%C6%B0%E1%BB%9Dng%20H%C6%B0%C6%A1ng%20Long,%20Th%C3%A0nh%20Ph%E1%BB%91%20Hu%E1%BA%BF,%20T%E1%BB%89nh%20Th%E1%BB%ABa%20Thi%C3%AAn%20Hu%E1%BA%BF&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col-lg-5">
+            <div class="contact-right">
+              <ul>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <h6>Contact Us</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>{{phone1}}</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <h6>Address</h6>
+                  </div>
+                  <div class="media-body">
+                    <p v-html="address"></p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <h6>Email</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>{{email1}}</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                    <h6>Facebook</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>{{face}}</p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="row section-b-space blog-advance">
         </div>
-      </div>
     </section>
-    <slide/>
     <Footer />
   </div>
 </template>
@@ -37,7 +70,13 @@ import { URLS } from "../../utils/url";
 export default {
   data() {
     return {
-      datalist:[]
+      datalist:[],
+      phone1: '+84 82 83 84 175',
+      address: '1/78 Nguyễn Hữu Dật, Phường Hương Long, </br>Thành Phố Huế, Tỉnh Thừa Thiên Huế',
+      email1: 'Anpat.Apa@Gmail.Com',
+      face: 'https://www.facebook.com/anphatHue',
+      errors: [],
+   
     };
   },
   mounted() {
@@ -71,6 +110,10 @@ window.onpopstate = function () {
 }
 .description{
   font-size: 17px;
+}
+iframe {width:100%;height:100%;}
+.section-b-space {
+    padding-bottom: 70px;
 }
 </style>
 

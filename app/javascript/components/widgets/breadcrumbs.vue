@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="breadcrumb-section">
+    <div class="breadcrumb-section" style="padding: 15px">
       <div class="container">
         <div class="row">
           <div class="col-sm-6">

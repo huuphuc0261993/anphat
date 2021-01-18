@@ -14,7 +14,7 @@ import Info_Detail from './components/info/info'
 // import Editor from './components/editor/editor'
 import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
-import About from './pages/about/about'
+import Contact from './pages/contact/contact'
 import Introduce from './pages/introduce/introduce'
 import Change from './pages/policy/change'
 import Protect from './pages/policy/protect'
@@ -30,9 +30,9 @@ const routes = [
         }
     },
     {
-        path: '/about',
-        name: 'About',
-        component: About,
+        path: '/contact',
+        name: 'Contact',
+        component: Contact,
         meta: {
             guest: true
         }
