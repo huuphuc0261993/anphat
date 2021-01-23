@@ -2,10 +2,11 @@
   <div>
     <Header />
     <Breadcrumbs title="TIN TỨC" />
-    <section class="blog-detail-page section-b-space ratio2_3">
+    
+    <section class="blog-detail-page section-b-space ratio2_3" style="padding-top: 2%">
       <div class="container">
         <div class="row">
-          <div class="col-sm-12 blog-detail">
+          <div class="col-xl-9 col-lg-8 col-md-7 blog-detail">
             <br>
             <h3>
               {{datalist.title}}
@@ -18,7 +19,9 @@
             <div v-html="datalist.content">
             </div>
           </div>
-        </div>
+              <BlogSidebar/>
+              <!-- <productSidebar/> -->
+          </div>
         <div class="row section-b-space blog-advance">
         </div>
       </div>
@@ -29,6 +32,8 @@
 <script>
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer1";
+import productSidebar from "../../components/widgets/product-sidebar";
+import BlogSidebar from './widgets/blog-sidebar'
 import Breadcrumbs from "../../components/widgets/breadcrumbs";
 import axios from "axios";
 import { URLS } from "../../utils/url";
@@ -44,7 +49,9 @@ export default {
   components: {
     Header,
     Breadcrumbs,
-    Footer
+    Footer,
+    productSidebar,
+    BlogSidebar
   },
   methods: {
     initializes() {
@@ -69,5 +76,10 @@ window.onpopstate = function () {
 }
 .description{
   font-size: 17px;
+}
+@media (max-width: 1000px) {
+  .theme-card {
+  display: none;
+}
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal v-model="visible" @ok="close" v-bind:name="formTitle" width=40%>
+    <a-modal v-model="visible" @ok="close" v-bind:name="formTitle" width=60%>
       <a-form-model ref="editedItem" :model="editedItem" :rules="rules">
         <a-row>
           <a-col :xs="12">
@@ -8,16 +8,16 @@
               :product_pictures="editedItem.pictures_attributes"
               @updatePicturesList="updatePicturesList"
             />
+            <a-form-model-item label="Mô tả" prop="content">
+              <ckeditor
+                v-model="editedItem.description"
+                :config="editorConfig"
+              ></ckeditor>
+            </a-form-model-item>
           </a-col>
           <a-col :xs="12">
             <a-form-model-item label="Tên sản phẩm" prop="name">
               <a-input placeholder="Tên sản phẩm" v-model="editedItem.name" />
-            </a-form-model-item>
-            <a-form-model-item has-feedback label="Mô tả" prop="description">
-              <a-textarea
-                placeholder="Mô tả"
-                v-model="editedItem.description"
-              />
             </a-form-model-item>
             <a-form-model-item label="Giá nhập" prop="price">
               <a-input
@@ -26,7 +26,6 @@
                 min="0"
                 v-model="editedItem.price"
               >
-             
                 <span slot="addonAfter">VNĐ</span>
               </a-input>
             </a-form-model-item>
@@ -89,6 +88,17 @@ export default {
   },
   data() {
     return {
+       editorData: "",
+      editorConfig: {
+        toolbar: [
+          ["Source"],
+          ["Styles", "Format", "Font", "FontSize"],
+          ["Bold", "Italic"],
+          ["Undo", "Redo"],
+          ["Table"],
+          ["Image"]
+        ]
+      },
       rules: {
         name: [
           {
@@ -199,5 +209,8 @@ button.ant-btn {
 }
 .ant-modal-footer {
   display: none;
+}
+div#cke_editor1{
+  width: 90%;
 }
 </style>

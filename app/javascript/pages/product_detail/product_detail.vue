@@ -123,7 +123,7 @@
                   <div class="col-sm-12 col-lg-12">
                     <b-tabs card>
                       <b-tab title="Mô tả">
-                        <b-card-text>{{ datalist.description }}</b-card-text>
+                        <b-card-text v-html="datalist.description"></b-card-text>
                       </b-tab>
 
                       <b-tab title="Video">

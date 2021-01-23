@@ -91,10 +91,6 @@ export default {
           name: "Giới thiệu"
         },
         {
-          id: 2,
-          name: "Liên hệ"
-        },
-        {
           id: 3,
           name: "Chính sách bảo hành"
         },
