@@ -26,14 +26,14 @@
                         <b>{{ datalist.name }}</b>
                       </h2>
 
-                      <h4 v-if="datalist.discount != null & datalist.price >0">
+                      <h4 v-if="datalist.discount != '' & datalist.price >0">
                         <del>{{ formatPrice(datalist.price) }}đ</del>
                         <span>{{ datalist.discount }}% off</span>
                         <h3>{{ formatPrice(datalist.price_sale) }}đ</h3>
                       </h4>
-                      <h4 v-if="datalist.discount != null & datalist.price <=0">
+                      <h4 v-else-if="datalist.discount != '' & datalist.price <=0">
                         <span>{{ datalist.discount }}% off</span>
-                        <h3><b>Giá</b>: {{ datalist.price_sale}}</h3>
+                         <h3>{{ formatPrice(datalist.price_sale) }}đ</h3>
                       </h4>
                       <h4 v-else>
                         <h3><b>Giá</b>: {{ datalist.price_sale}}</h3>
@@ -184,18 +184,19 @@ export default {
       counter: 1
     };
   },
-  watch: {
-    datalist: {
-      handler: function() {
-        this.initializes();
-      }
-    }
-  },
+  // watch: {
+  //   datalist: {
+  //     handler: function() {
+  //       this.initializes();
+  //     }
+  //   }
+  // },
   mounted() {
     this.initializes();
   },
   methods: {
     save(customer) {
+      if(customer.name != "" &  customer.email != "" & customer.phone != ""){
       axios
         .post(URLS.CUSTOMERS(), {
           customer: customer
@@ -208,6 +209,9 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    } else{
+        this.$message.warning('Bạn cần nhập đủ thông tin bên dưới');
+    }
     },
     save_order(order) {
       axios

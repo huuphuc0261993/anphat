@@ -28,6 +28,7 @@ export const URLS = {
 
   CATEGORIES: () => `${getBaseUrl()}/categories`,
   CATEGORY: (id) => `${getBaseUrl()}/categories/${id}`,
+  CATEGORY_PRODUCTS: (id) => `${getBaseUrl()}/categories/${id}/products`,
 
   INFORMATIONS: () => `${getBaseUrl()}/informations`,
   INFORMATION: (id) => `${getBaseUrl()}/informations/${id}`,

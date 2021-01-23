@@ -73,6 +73,7 @@
                 <a
                   @click="setActiveChild(childrenItem.name)"
                   v-if="childrenItem.products"
+                  :href="'/type_product/'+childrenItem.id"
                 >
                   {{ childrenItem.name }}
                   <span class="sub-arrow" v-if="childrenItem.products"></span>
@@ -81,6 +82,7 @@
                   class="nav-sub-childmenu"
                   :class="{ opensubchild: isActiveChild(childrenItem.name) }"
                   v-if="childrenItem.products"
+                  style="width: 150%; right: -150%"
                 >
                   <li
                     v-for="(childrenSubItem, index) in childrenItem.products"

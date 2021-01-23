@@ -3,34 +3,37 @@
     <div v-if="layout == 'Login'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Home'">
+    <div v-else-if="layout == 'Home'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Product_Details'">
+    <div v-else-if="layout == 'Product_Details'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Order_Success'">
+    <div v-else-if="layout == 'Order_Success'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Blog'">
+    <div v-else-if="layout == 'Blog'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Blog_Detail'">
+    <div v-else-if="layout == 'Blog_Detail'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Contact'">
+    <div v-else-if="layout == 'Contact'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Introduce'">
+    <div v-else-if="layout == 'Introduce'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Protect'">
+    <div v-else-if="layout == 'Protect'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Payment'">
+    <div v-else-if="layout == 'Payment'">
       <router-view />
     </div>
-    <div v-else-if="layout=='Change'">
+    <div v-else-if="layout == 'Type_Product'">
+      <router-view />
+    </div>
+    <div v-else-if="layout == 'Change'">
       <router-view />
     </div>
     <div v-else>
@@ -57,7 +60,7 @@
                     >
                   </div>
                 </template>
-                <a-avatar style="backgroundColor:#87d068" icon="user" />
+                <a-avatar style="backgroundcolor: #87d068" icon="user" />
               </a-popover>
             </a-row>
           </a-layout-header>
@@ -66,7 +69,7 @@
               margin: '24px 16px',
               padding: '24px',
               background: '#fff',
-              minHeight: '280px'
+              minHeight: '280px',
             }"
           >
             <router-view></router-view>
@@ -77,7 +80,6 @@
   </div>
 </template>
 <script>
-
 import leftMenu from "./components/leftMenu.vue";
 import Login from "./pages/guest/Login";
 import Home from "./pages/home";
@@ -86,30 +88,30 @@ import axios from "axios";
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
     };
   },
   components: {
     leftMenu,
-    Login
+    Login,
   },
   methods: {
     logout() {
       localStorage.clear();
       axios
         .delete(URLS.LOGOUT(), {})
-        .then(response => {})
-        .catch(error => {
+        .then((response) => {})
+        .catch((error) => {
           console.log(error);
         });
       this.$router.push({ name: "Login" });
-    }
+    },
   },
   computed: {
     layout() {
       return this.$route.name || "";
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

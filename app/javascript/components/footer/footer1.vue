@@ -99,7 +99,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      name="EMAIL"
+                      name="fullname"
                       placeholder="Họ và tên"
                       v-model="order_items.name"
                       style="margin-bottom: 2%"
@@ -111,7 +111,7 @@
                       id="mce-EMAIL"
                       placeholder="Email"
                       v-model="order_items.email"
-                     style="margin-bottom: 2%"
+                      style="margin-bottom: 2%"
                     />
                     <input
                       type="text"
@@ -224,7 +224,9 @@ export default {
         });
     },
     save(customer) {
-      axios
+      if(customer.name != "" & customer.phone != "" & customer.email !="")
+      {
+        axios
         .post(URLS.CUSTOMERS(), {
           customer: customer
         })
@@ -235,6 +237,10 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      }else{
+        this.$message.warning('Bạn cần nhập đủ thông tin');
+      }
+      
     },
     save_order(order) {
       axios

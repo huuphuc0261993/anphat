@@ -19,7 +19,7 @@ import Introduce from './pages/introduce/introduce'
 import Change from './pages/policy/change'
 import Protect from './pages/policy/protect'
 import Payment from './pages/policy/payment'
-
+import Type_Product from './pages/type_product/type_product'
 const routes = [
     {
         path: '/',
@@ -81,6 +81,14 @@ const routes = [
         path: '/blog_detail/:id',
         name: 'Blog_Detail',
         component: Blog_Detail,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/type_product/:id',
+        name: 'Type_Product',
+        component: Type_Product,
         meta: {
             guest: true
         }
