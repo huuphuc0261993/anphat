@@ -28,7 +28,7 @@
           <div class="col-sm-12">
             <div class="error-section">
               <h1>404</h1>
-              <h2>Trang không tồn tại</h2>
+              <h2>Sản phẩm tìm kiếm không tồn tại</h2>
             </div>
           </div>
         </div>
