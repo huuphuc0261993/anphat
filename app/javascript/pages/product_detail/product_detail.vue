@@ -31,12 +31,12 @@
                         <span>{{ datalist.discount }}% off</span>
                         <h3>{{ formatPrice(datalist.price_sale) }}đ</h3>
                       </h4>
-                      <h4 v-else-if="datalist.discount != '' & datalist.price <=0">
-                        <span>{{ datalist.discount }}% off</span>
-                         <h3>{{ formatPrice(datalist.price_sale) }}đ</h3>
-                      </h4>
+                    
+                      
                       <h4 v-else>
-                        <h3><b>Giá</b>: {{ datalist.price_sale}}</h3>
+
+                        <h3 v-if="datalist.price_sale>0">{{ formatPrice(datalist.price_sale) }}đ</h3>
+                        <h3 v-else><b>Giá</b>: {{ datalist.price_sale}}</h3>
                       </h4>
                       <div class="product-description border-product">
                         <h6 class="product-title">Số lượng</h6>

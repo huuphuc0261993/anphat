@@ -65,7 +65,7 @@
                 <div class="footer-contant">
                   <ul v-for="(e, index) in categories" :key="index">
                     <li>
-                      <a href="#">{{ e.name }}</a>
+                      <a :href="'/type_product/'+e.id">{{ e.name }}</a>
                     </li>
                   </ul>
                 </div>
