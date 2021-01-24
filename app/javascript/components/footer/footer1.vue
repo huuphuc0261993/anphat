@@ -62,8 +62,8 @@
                 <div class="footer-title">
                   <h4>SẢN PHẨM</h4>
                 </div>
-                <div class="footer-contant">
-                  <ul v-for="(e, index) in categories" :key="index">
+                <div class="footer-contant scrollable-menu" >
+                  <ul v-for="(e, index) in categories" :key="index" >
                     <li>
                       <a :href="'/type_product/'+e.id">{{ e.name }}</a>
                     </li>
@@ -273,3 +273,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+</style>
