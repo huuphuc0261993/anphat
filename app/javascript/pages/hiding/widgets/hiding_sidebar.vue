@@ -10,12 +10,12 @@
             style="margin-top: 5%"
           >
             <div class="media">
-              <a :href="'/blog_detail/' + blog.id " >
+              <a :href="'/hiding_detail/' + blog.id " >
                 <img :src="blog.image.url" class="img-fluid" alt />
               </a>
               <div class="media-body align-self-center">
                 <h6>{{ blog.created_at.substring(0, 10) }}</h6>
-                <a :href="'/blog_detail/' + blog.id " >
+                <a :href="'/hiding_detail/' + blog.id " >
                   <p>{{ blog.title.substring(0, 15) }}...</p>
                 </a>
               </div>
@@ -48,7 +48,7 @@ export default {
         .then((response) => {
           this.bloglist = response.data;
            this.bloglist.forEach((element, index) => {
-            if (element.type_post != 1) {
+            if (element.type_post != 2) {
               this.bloglist.splice(index, 1);
             }
           });

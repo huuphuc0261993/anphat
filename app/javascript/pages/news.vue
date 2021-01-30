@@ -89,7 +89,12 @@ export default {
         {
           title: "Mô tả",
           dataIndex: "description",
-          width: "40%"
+          width: "30%"
+        },
+        {
+          title: "Loại bài viết",
+          dataIndex: "type_post",
+          width: "10%"
         },
         {
           title: "Ngày tạo",
@@ -121,6 +126,7 @@ export default {
         formData.append("news[title]", item.title);
         formData.append("news[description]", item.description);
         formData.append("news[content]", item.content);
+        formData.append("news[type_post]", item.type_post);
         formData.append("news[image]", item.image.originFileObj);
         axios
           .post(URLS.NEWS(), formData, {
@@ -160,6 +166,7 @@ export default {
             formData.append("news[title]", item.title);
             formData.append("news[description]", item.description);
             formData.append("news[content]", item.content);
+            formData.append("news[type_post]", item.type_post);
             formData.append("news[image]", fileData);
             axios
               .put(URLS.NEW(item.id), formData, {
@@ -180,6 +187,7 @@ export default {
           let formData = new FormData();
           formData.append("news[title]", item.title);
           formData.append("news[description]", item.description);
+          formData.append("news[type_post]", item.type_post);
           formData.append("news[content]", item.content);
           formData.append("news[image]", item.image.originFileObj);
           axios
@@ -207,7 +215,6 @@ export default {
         .get(URLS.NEWS())
         .then(response => {
           this.dataNews = response.data;
-          console.log(this.dataNews);
           this.dataNews = JSON.parse(JSON.stringify(this.dataNews));
         })
         .catch(e => {

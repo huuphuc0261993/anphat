@@ -43,6 +43,13 @@
             >
               {{ menuItem.title }}
             </router-link>
+            <router-link v-else-if="menuItem.title === 'TUYỂN DỤNG'"
+              :to="{ name: 'Hiding' }"
+              class="nav-link"
+              @click="setActive(menuItem.title)"
+            >
+              {{ menuItem.title }}
+            </router-link>
             <router-link v-else-if="menuItem.title === 'LIÊN HỆ'"
               :to="{ name: 'Contact' }"
               class="nav-link"
@@ -140,6 +147,12 @@ export default {
         },
         {
           title: "TIN TỨC",
+          type: "sub",
+          active: false,
+          path: "/blog"
+        },
+        {
+          title: "TUYỂN DỤNG",
           type: "sub",
           active: false,
           path: "/blog"

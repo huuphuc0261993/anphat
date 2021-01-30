@@ -36,6 +36,12 @@
     <div v-else-if="layout == 'Change'">
       <router-view />
     </div>
+    <div v-else-if="layout == 'Hiding'">
+      <router-view />
+    </div>
+    <div v-else-if="layout == 'Hiding_Detail'">
+      <router-view />
+    </div>
     <div v-else>
       <a-layout id="components-layout-demo-custom-trigger">
         <leftMenu></leftMenu>

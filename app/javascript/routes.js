@@ -14,12 +14,14 @@ import Info_Detail from './components/info/info'
 // import Editor from './components/editor/editor'
 import Blog from './pages/blog/blog_nosidebar'
 import Blog_Detail from './pages/blog/blog_detail'
+import Hiding_Detail from './pages/hiding/hiding_detail'
 import Contact from './pages/contact/contact'
 import Introduce from './pages/introduce/introduce'
 import Change from './pages/policy/change'
 import Protect from './pages/policy/protect'
 import Payment from './pages/policy/payment'
 import Type_Product from './pages/type_product/type_product'
+import Hiding from './pages/hiding/hiding'
 const routes = [
     {
         path: '/',
@@ -54,6 +56,14 @@ const routes = [
         }
     },
     {
+        path: '/hiding',
+        name: 'Hiding',
+        component: Hiding,
+        meta: {
+            guest: true
+        }
+    },
+    {
         path: '/payment',
         name: 'Payment',
         component: Payment,
@@ -81,6 +91,14 @@ const routes = [
         path: '/blog_detail/:id',
         name: 'Blog_Detail',
         component: Blog_Detail,
+        meta: {
+            guest: true
+        }
+    },
+    {
+        path: '/hiding_detail/:id',
+        name: 'Hiding_Detail',
+        component: Hiding_Detail,
         meta: {
             guest: true
         }

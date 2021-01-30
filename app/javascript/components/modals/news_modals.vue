@@ -9,7 +9,16 @@
         <a-form-model-item has-feedback label="Mô tả" prop="description">
           <a-input placeholder="Mô tả" v-model="editedItem.description" />
         </a-form-model-item>
-
+        <a-form-model-item label="Loại bài viết" prop="type_post">
+          <a-select
+            style="width: 100%"
+            v-model="editedItem.type_post"
+          >
+            <a-select-option v-for="type in type_post" :key="type.id">
+              {{ type.name }}
+            </a-select-option>
+          </a-select>
+        </a-form-model-item>
         <a-form-model-item has-feedback label="Nội dung" prop="content">
           <div>
             <ckeditor v-model="editorData" :config="editorConfig"></ckeditor>
@@ -44,10 +53,20 @@ import news from "../../pages/news";
 
 export default {
   props: {
-    changShow: Boolean
+    changShow: Boolean,
   },
   data() {
     return {
+      type_post: [
+        {
+          id: 1,
+          name: "Tin tức",
+        },
+        {
+          id: 2,
+          name: "Tuyển dụng",
+        },
+      ],
       editorData: "",
       editorConfig: {
         toolbar: [
@@ -56,16 +75,16 @@ export default {
           ["Bold", "Italic"],
           ["Undo", "Redo"],
           ["Table"],
-          ["Image"]
-        ]
+          ["Image"],
+        ],
       },
       rules: {
         title: [
-          { required: true, message: "Vui lòng nhập tiêu đề", trigger: "blur" }
+          { required: true, message: "Vui lòng nhập tiêu đề", trigger: "blur" },
         ],
         description: [
-          { required: true, message: "Vui lòng nhập mô tả", trigger: "blur" }
-        ]
+          { required: true, message: "Vui lòng nhập mô tả", trigger: "blur" },
+        ],
       },
       dataNews: [],
       visible: false,
@@ -74,7 +93,8 @@ export default {
         title: "",
         image: "",
         description: "",
-        content: ""
+        content: "",
+        type_post: ""
       },
       empty: [],
       item: [
@@ -83,23 +103,23 @@ export default {
           id: "",
           name: "",
           status: "",
-          url: ""
-        }
+          url: "",
+        },
       ],
       item1: [
         {
           uid: "-1",
           name: "",
           status: "",
-          url: ""
-        }
+          url: "",
+        },
       ],
       defaultItem: {
         title: "",
         image: "",
         description: "",
-        content: ""
-      }
+        content: "",
+      },
     };
   },
   methods: {
@@ -115,6 +135,7 @@ export default {
     },
     showModal() {
       this.editedIndex = -1;
+      
       this.editedItem = Object.assign({}, this.defaultItem);
       this.visible = true;
       this.item = this.empty;
@@ -128,8 +149,7 @@ export default {
     },
     saveModal(item) {
       this.editedItem.content = this.editorData;
-      // console.log(this.editedItem)
-      this.$refs[item].validate(valid => {
+      this.$refs[item].validate((valid) => {
         if (valid) {
           this.$emit("saveDtb", this.editedItem, this.editedIndex);
         } else {
@@ -139,7 +159,7 @@ export default {
       });
     },
     edit(item) {
-      this.editorData = item.content
+      this.editorData = item.content;
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
       this.item = this.item1;
@@ -147,17 +167,17 @@ export default {
       this.item[0].id = item.id;
       this.item[0].uid = item.id;
       this.visible = true;
-    }
+    },
   },
   components: {
     upload,
-    editor
+    editor,
   },
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Thêm mới" : "Sửa tin tức";
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

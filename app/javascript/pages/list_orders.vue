@@ -50,7 +50,6 @@ export default {
         .then(response => {
           this.dataNews = response.data;
           this.dataNews.reverse()
-          console.log(this.dataNews)
         })
         .catch(e => {
           console.log(e);

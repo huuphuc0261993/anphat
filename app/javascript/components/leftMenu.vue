@@ -5,7 +5,7 @@
       <a-menu-item key="1">
         <router-link :to="{ name: 'News' }">
           <a-icon type="sound" />
-          <span>Tin tức</span>
+          <span>Tin tức & Tuyển dụng</span>
         </router-link>
       </a-menu-item>
 

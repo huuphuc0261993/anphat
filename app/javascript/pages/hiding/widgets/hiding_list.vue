@@ -8,7 +8,7 @@
     >
       <div class="col-xl-6">
         <div class="blog-left">
-          <router-link :to="{ path: '/blog_detail/'+blog.id}">
+          <router-link :to="{ path: '/hiding_detail/'+blog.id}">
             <img :src="blog.image.url" class="img-fluid" style="width: 80%" alt />
           </router-link>
         </div>
@@ -17,7 +17,7 @@
         <div class="blog-right">
           <div>
             <h6>{{ blog.created_at }}</h6>
-            <router-link :to="{ path: '/blog_detail/'+blog.id}">
+            <router-link :to="{ path: '/hiding_detail/'+blog.id}">
               <h4>{{blog.title}}</h4>
             </router-link>
             <ul class="post-social">
@@ -96,7 +96,7 @@ export default {
           this.bloglist = response.data
           console.log(this.bloglist)
           this.bloglist.forEach((element, index) => {
-            if (element.type_post != 1) {
+            if (element.type_post != 2) {
               this.bloglist.splice(index, 1);
             }
           });
