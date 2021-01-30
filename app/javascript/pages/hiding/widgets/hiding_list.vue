@@ -2,7 +2,7 @@
 <div>
     <div
       class="row blog-media"
-      v-for="(blog,index) in bloglist"
+      v-for="(blog,index) in hidinglist"
       :key="index"
       v-show="setPaginate(index)"
     >
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="product-pagination border-cls-blog mb-0" v-if="bloglist.length > this.paginate">
+    <div class="product-pagination border-cls-blog mb-0" v-if="hidinglist.length > this.paginate">
       <div class="theme-paggination-block">
         <div class="row">
           <div class="col-sm-12">
@@ -80,7 +80,7 @@ export default {
       paginateRange: 3,
       pages: [],
       paginates: '',
-      bloglist: []
+      hidinglist: []
     }
   },
   mounted() {
@@ -93,19 +93,26 @@ export default {
       axios
         .get(URLS.BLOGS(), {})
         .then(response => {
-          this.bloglist = response.data
-          console.log(this.bloglist)
-          this.bloglist.forEach((element, index) => {
+          this.hidinglist = response.data
+          
+          this.hidinglist.forEach((element, index) => {
             if (element.type_post != 2) {
-              this.bloglist.splice(index, 1);
+              this.hidinglist.splice(index, 1);
             }
           });
-          this.bloglist.reverse()
+          this.hidinglist.reverse()
+          this.hidinglist.forEach((element, index) => {
+            if (element.type_post != 2) {
+              this.hidinglist.splice(index, 1);
+            }
+          });
+          
+       
         })
         .catch(error => {});
     },
     getPaginate() {
-      this.paginates = Math.round(this.bloglist.length / this.paginate)
+      this.paginates = Math.round(this.hidinglist.length / this.paginate)
       this.pages = []
       for (let i = 0; i < this.paginates; i++) {
         this.pages.push(i + 1)

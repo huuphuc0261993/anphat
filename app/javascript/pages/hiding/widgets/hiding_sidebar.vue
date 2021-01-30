@@ -53,6 +53,11 @@ export default {
             }
           });
           this.bloglist.reverse();
+          this.bloglist.forEach((element, index) => {
+            if (element.type_post != 2) {
+              this.bloglist.splice(index, 1);
+            }
+          });
         })
         .catch((error) => {});
     },
