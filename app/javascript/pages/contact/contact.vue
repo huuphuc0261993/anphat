@@ -27,7 +27,7 @@
                 <li>
                   <div class="contact-icon">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    <h6>Address</h6>
+                    <h6>VP đại diện</h6>
                   </div>
                   <div class="media-body">
                     <p v-html="address"></p>
@@ -71,9 +71,9 @@ export default {
   data() {
     return {
       datalist:[],
-      phone1: '+84 82 83 84 175',
-      address: '1/78 Nguyễn Hữu Dật, Phường Hương Long, </br>Thành Phố Huế, Tỉnh Thừa Thiên Huế',
-      email1: 'Anpat.Apa@Gmail.Com',
+      phone1: '+84 82 83 84 175, +84 91 476 2 552',
+      address: '08 Kim Long, Phường Kim Long, TP Huế',
+      email1: 'anphathue.vn@gmail.com',
       face: 'https://www.facebook.com/anphatHue',
       errors: [],
    

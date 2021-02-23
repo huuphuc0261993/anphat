@@ -23,7 +23,7 @@
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
               <span
                 class="sub-arrow"
                 v-if="menuItem.children"
@@ -34,35 +34,35 @@
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
             </router-link>
             <router-link v-else-if="menuItem.title === 'TIN TỨC'"
               :to="{ name: 'Blog' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
             </router-link>
             <router-link v-else-if="menuItem.title === 'TUYỂN DỤNG'"
               :to="{ name: 'Hiding' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
             </router-link>
             <router-link v-else-if="menuItem.title === 'LIÊN HỆ'"
               :to="{ name: 'Contact' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
             </router-link>
             <router-link v-else
               :to="{ name: 'Home' }"
               class="nav-link"
               @click="setActive(menuItem.title)"
             >
-              {{ menuItem.title }}
+              <b>{{ menuItem.title }}</b>
               <span
                 class="sub-arrow"
                 v-if="menuItem.children"

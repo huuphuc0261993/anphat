@@ -22,15 +22,13 @@
                     <ul class="contact-list">
                       <b>LIÊN HỆ VỚI CHÚNG TÔI</b>
                       <li>
-                        <i class="fa fa-map-marker"></i>1/78 Nguyễn Hữu Dật,
-                        Phường Hương Long, Thành phố Huế, Tỉnh Thừa Thiên Huế
+                        <i class="fa fa-map-marker"></i>Văn phòng đại diện: 08 Kim Long, Phường Kim Long, TP Huế                      </li>
+                      <li>
+                        <i class="fa fa-phone"></i>HotLine: +84 82 83 84 175, +84 91 476 2 552
                       </li>
                       <li>
-                        <i class="fa fa-phone"></i>HotLine: +8482 83 84 175
-                      </li>
-                      <li>
-                        <i class="fa fa-envelope-o"></i>Email Us:
-                        <a href="#">anpat.apa@gmail.com</a>
+                        <i class="fa fa-envelope-o"></i>Email: 
+                        <a href="#" style="text-transform: none">anphathue.vn@gmail.com</a>
                       </li>
                       <li><i class="fa fa-building"></i>MST: 3301684366</li>
                     </ul>
