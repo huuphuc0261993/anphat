@@ -22,7 +22,7 @@
                     <ul class="contact-list">
                       <b>LIÊN HỆ VỚI CHÚNG TÔI</b>
                       <li>
-                        <i class="fa fa-map-marker"></i>Văn phòng đại diện: 08 Kim Long, Phường Kim Long, TP Huế                      </li>
+                        <i class="fa fa-map-marker"></i>VP: 220 Điện Biên Phủ, Phường Trường An, TP Huế                      </li>
                       <li>
                         <i class="fa fa-phone"></i>HotLine: +84 82 83 84 175, +84 91 476 2 552
                       </li>
